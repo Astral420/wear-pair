@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
+    <title>Wear & Pair - Create Account</title>
+  </head>
+  <body>
+    <div class="frame" data-model-id="158:126">
+      <div class="landing-page-wrapper">
+        <div class="landing-page">
+          <header class="header">
+            <div class="image">
+              <div class="group">
+                <div class="div-wrapper">
+                  <div class="group-wrapper">
+                    <div class="div-wrapper">
+                      <div class="overlap-group">
+                        <img class="img" src="https://c.animaapp.com/Ms9Ew6Mf/img/group@2x.png" />
+                        <img class="group-2" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-1@2x.png" />
+                        <img class="group-3" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-2@2x.png" />
+                        <img class="group-4" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-3@2x.png" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wear-pair">Wear &amp; Pair</div>
+            <div class="header-menu">
+              <div class="div">
+                <div class="rectangle"></div>
+                <a href="/" class="text-wrapper">home</a>
+              </div>
+              <div class="div-wrapper-2">
+                <a href="/#" class="text-wrapper-2">products</a>
+              </div>
+              <div class="overlap">
+                <div class="custom-wrapper">
+                  <a href="/#" class="custom">outfit generator</a>
+                </div>
+                <div class="custom-wrapper-2">
+                  <a href="/#" class="custom-2">trending styles</a>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-container">
+              <button class="button" id="profileButton">
+                <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                <div class="text-wrapper-3">Profile</div>
+              </button>
+              <div class="dropdown-menu">
+                <!-- Login state menu items will be inserted here by JavaScript -->
+              </div>
+            </div>
+          </header>
+          
+          <div class="auth-content">
+            <div class="auth-box">
+              <h2 class="auth-title">Create Account</h2>
+              <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-checkbox">
+                  <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
+                  <label for="termsCheckbox">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="auth-button signup-button">Create Account</button>
+                <div class="auth-options signup-options">
+                  <div class="already-account">Already have an account? <a href="login.html" class="signin-link">Sign In</a></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Define test credentials (not displayed to user)
+        const TEST_EMAIL = "test@wearpair.com";
+        const TEST_PASSWORD = "fashion2023";
+        
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        // Check if user is already logged in from localStorage
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        // Set dropdown content based on login state
+        if (isLoggedIn) {
+          // User is logged in - show logout option
+          dropdownMenu.innerHTML = `
+            <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
+            <a href="/#" class="dropdown-item">Shopping Cart</a>
+            <a href="/#" class="dropdown-item">Submissions</a>
+          `;
+          
+          // Add logout functionality
+          document.getElementById('logoutLink')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            alert('Logged out successfully');
+            window.location.reload();
+          });
+        } else {
+          // User is not logged in - show login option
+          dropdownMenu.innerHTML = `
+            <a href="login.html" class="dropdown-item">Login</a>
+            <a href="/#" class="dropdown-item">Shopping Cart</a>
+          `;
+        }
+        
+        // Toggle dropdown on button click
+        profileButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking elsewhere on the document
+        document.addEventListener('click', function(e) {
+          if (!profileButton.contains(e.target)) {
+            dropdownMenu.classList.remove('active');
+          }
+        });
+
+        // Signup form handling
+        const signupForm = document.getElementById('signupForm');
+        if (signupForm) {
+          signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Password validation
+            if (password !== confirmPassword) {
+              alert("Passwords don't match!");
+              return;
+            }
+            
+            // Registration simulation - store the test credentials in localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            console.log('Signup successful, setting localStorage:', localStorage.getItem('isLoggedIn'));
+            alert('Account created successfully! Redirecting to home page...');
+            
+            // Redirect to home page after successful signup
+            window.location.href = 'index.html';
+          });
+        }
+      });
+    </script>
+  </body>
+</html> 
