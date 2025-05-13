@@ -1,0 +1,9 @@
+{
+    "liveServer.settings.root": "/",
+    "liveServer.settings.https": {
+      "enable": true,
+      "cert": "/Users/Administrator/localhost.pem",
+      "key": "/Users/Administrator/localhost.key",
+      "passphrase": "Cv250a178!"
+    }
+  }
