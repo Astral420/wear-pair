@@ -228,7 +228,7 @@
   position: absolute;
   width: 161px;
   top: 14px;
-  left: 23px; /* Adjusted for better centering */
+  left: 0; /* Changed from 23px to center text */
   font-family: "Inter", Helvetica;
   font-weight: 400;
   color: #565d6d;
@@ -236,6 +236,8 @@
   letter-spacing: 0;
   line-height: 22px;
   white-space: nowrap;
+  text-align: center; /* Added to center text */
+  width: 100%; /* Set to 100% to allow centering */
 }
 
 .frame .dropdown-container {
