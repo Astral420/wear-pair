@@ -20,7 +20,7 @@
           // User is logged in - show logout option
           dropdownMenu.innerHTML = `
             <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
-            <a href="/#" class="dropdown-item">Shopping Cart</a>
+            <a href="/#" class="dropdown-item">Wishlist</a>
             <a href="/#" class="dropdown-item">Submissions</a>
           `;
           
@@ -87,12 +87,17 @@
               </div>
               <div class="overlap">
                 <div class="custom-wrapper">
-                  <a href="/#" class="custom">outfit generator</a>
+                  <a href="builder.html" class="custom">outfit generator</a>
                 </div>
                 <div class="custom-wrapper-2">
                   <a href="/#" class="custom-2">trending styles</a>
                 </div>
               </div>
+            </div>
+            <div class="search-container">
+              <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search products...">
+              </form>
             </div>
             <div class="dropdown-container">
               <button class="button" id="profileButton">
@@ -105,8 +110,36 @@
             </div>
           </header>
           <div class="build-your-style-box" style="padding-bottom: 56px;">
+            <div class="carousel-wide-box">
+              <div class="fashion-carousel">
+                <div class="carousel-container">
+                  <div class="carousel-track">
+                    <div class="carousel-slide">
+                      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fashion Model Walking" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Street Style Fashion" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                      <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Luxury Fashion" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Casual Fashion" class="carousel-image">
+                    </div>
+                    <div class="carousel-slide">
+                      <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Summer Fashion" class="carousel-image">
+                    </div>
+                  </div>
+                </div>
+                <!-- Fashion inspiration text overlay -->
+                <div class="inspiration-text-overlay">
+                  <div class="inspiration-text-container">
+                    <div class="inspiration-text">STYLE IS A WAY TO SAY WHO YOU ARE WITHOUT SPEAKING</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="container">
-              <div class="bg-grayscale"></div>
               <div class="text-wrapper-4">Build Your Style</div>
               <p class="style-description">
                 Unleash your creativity and design the perfect outfit with our Outfit Builder. Start crafting looks that
@@ -128,49 +161,49 @@
                     <p class="p">White T-shirt paired with ripped denim shorts.</p>
                     <img class="image-3" src="assets/whiteshirt-denim-outfit.png" alt="Summer Casual outfit" />
                     <h3 class="text-wrapper-30">Summer Casual</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.uniqlo.com/ph/en/special-feature/summer-essentials" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-6">
                     <p class="p">Navy blazer with matching trousers for office wear.</p>
                     <img class="image-3" src="assets/formal-chic.png" alt="Formal Chic outfit" />
                     <h3 class="text-wrapper-30">Formal Chic</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.macys.com/shop/sale/mens-sale/mens-clothing-sale/mens-suits-sale/Product_department/Blazers%7CSuits?id=214951#canvas" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-7">
-                    <p class="p">Black leggings with a cropped hoodie for workouts.</p>
+                    <p class="p">Leggings with a cropped hoodie for workouts.</p>
                     <img class="image-3" src="assets/img/cropped-hoodie.png" alt="Sporty Vibes outfit" />
                     <h3 class="text-wrapper-30">Sporty Vibes</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.youngla.com/products/w545?_pos=3&_sid=3d5e616b0&_ss=r&hcUrl=%2Fen-US" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-8">
                     <p class="p">Floral maxi dress paired with a straw hat.</p>
                     <img class="image-3" src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Boho Style outfit" />
                     <h3 class="text-wrapper-30">Boho Style</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.anthropologie.com/dresses-maxi-midi" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-9">
                     <p class="text-wrapper-32">Wool coat with scarf and leather boots.</p>
                     <img class="image-3" src="assets/winter-warmth-outfit.png" alt="Winter Warmth outfit" />
                     <h3 class="text-wrapper-30">Winter Warmth</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.uniqlo.com/ph/en/contents/feature/catalog-2021fw/technology-for-winter/" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-10">
                     <p class="p">Striped swimsuit with a light cover-up.</p>
                     <img class="image-3" src="assets/img/striped-swimsuit.png" alt="Beach Ready outfit" />
                     <h3 class="text-wrapper-30">Beach Ready</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.berlook.com/products/multi-color-striped-cover-up-skirt?currency=USD&variant=46468502356125&stkn=d6af1163d4b8&utm_source=chatgpt.com" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-11">
                     <p class="p">Oversized hoodie with trendy cargo pants.</p>
                     <img class="image-3" src="assets/img/streetwear-hoodie.png" alt="Streetwear Cool outfit" style="object-position: center 30%;" />
                     <h3 class="text-wrapper-30">Streetwear Cool</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www2.hm.com/en_ph/men/shop-by-product/hoodies-sweatshirts/hoodies.html?fits=Oversized&id=m2" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                   <div class="container-12">
                     <p class="p">Orange dress with sleek stilettos.</p>
                     <img class="image-3" src="https://images.unsplash.com/photo-1562137369-1a1a0bc66744?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Evening Glam outfit" />
                     <h3 class="text-wrapper-30">Evening Glam</h3>
-                    <button class="button-4"><span class="text-wrapper-31">Shop Now</span></button>
+                    <a href="https://www.asos.com/us/search/?q=orange+dress" target="_blank" class="button-4"><span class="text-wrapper-31">Shop Now</span></a>
                   </div>
                 </div>
               </div>

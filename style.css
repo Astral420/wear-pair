@@ -14,7 +14,7 @@
 
 .frame .landing-page {
   position: relative;
-  height: 4450px;
+  height: 10000px;
   overflow: hidden;
   box-shadow: 0px 3px 6px #120f281f;
   background-color: #fffaf1;
@@ -274,32 +274,72 @@
   right: 0;
   width: 150px;
   background-color: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   margin-top: 8px;
   z-index: 100;
   overflow: hidden;
   text-align: left;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .frame .dropdown-menu.active {
   display: block;
+  transform: translateY(0);
+  opacity: 1;
+  animation: dropdown-appear 0.3s ease-out forwards;
+}
+
+@keyframes dropdown-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .frame .dropdown-item {
   display: block;
-  padding: 10px 16px;
+  padding: 12px 16px;
   font-family: "Inter", Helvetica;
   font-weight: 400;
   font-size: 14px;
   color: #565d6d;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+  border-left: 0px solid #a17561;
 }
 
 .frame .dropdown-item:hover {
   background-color: #f5efe8;
   color: #a17561;
+  padding-left: 20px;
+  border-left: 3px solid #a17561;
+}
+
+.frame .dropdown-container::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  transform: rotate(45deg);
+  z-index: 99;
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.frame .dropdown-menu.active + .frame .dropdown-container::after {
+  opacity: 1;
 }
 
 .frame .user {
@@ -338,7 +378,7 @@
   position: relative;
   width: 1176px;
   height: 384px;
-  top: 96px;
+  top: 230px;
   left: 132px;
   border-radius: 6px;
   overflow: hidden;
@@ -346,18 +386,7 @@
   background: none;
 }
 
-.frame .bg-grayscale {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(https://c.animaapp.com/Ms9Ew6Mf/img/container-2012-1.png);
-  background-size: cover;
-  background-position: 50% 50%;
-  filter: grayscale(100%);
-  z-index: 0;
-}
+
 
 .frame .text-wrapper-4 {
   position: absolute;
@@ -429,7 +458,7 @@
   position: absolute;
   width: 1441px;
   height: 1256px;
-  top: 750px;
+  top: 900px;
   left: 0;
   background-color: #fffaf1;
   border: 0px none;
@@ -439,6 +468,7 @@
   position: relative;
   width: 1440px;
   height: 1100px;
+  top: 600px;
   background-color: #fffaf1;
   border: 0px none;
   display: flex;
@@ -477,7 +507,7 @@
   left: 132px;
   font-family: "Inter", Helvetica;
   font-weight: 400;
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
   text-align: center;
   letter-spacing: 0;
@@ -709,8 +739,8 @@
 .frame .clothing-categories {
   position: absolute;
   width: 1441px;
-  height: 908px;
-  top: 2448px;
+  height: 1000px;
+  top: 2995px;
   left: 0;
   background-color: #fffaf1;
   border: 0px none;
@@ -1887,6 +1917,10 @@
   overflow: hidden;
   border: 1px solid;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Responsive styles for product cards */
@@ -1895,17 +1929,45 @@
     width: 90%;
     grid-template-columns: repeat(3, 1fr);
   }
+  
+  .frame .search-container {
+    width: 200px;
+    right: 120px;
+  }
 }
 
 @media (max-width: 900px) {
   .frame .container-3 {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .frame .search-container {
+    width: 160px;
+    right: 110px;
+  }
 }
 
 @media (max-width: 600px) {
   .frame .container-3 {
     grid-template-columns: 1fr;
+  }
+  
+  .frame .search-container {
+    position: absolute;
+    top: 56px; /* Position below the header */
+    right: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 20px;
+    background-color: #fffaf1;
+    z-index: 100;
+  }
+  
+  .frame .search-form {
+    max-width: 400px;
+    margin: 0 auto;
   }
   
   .landing-page .textbox-3 {
@@ -1915,11 +1977,6 @@
     top: 0;
     right: auto;
     left: auto;
-  }
-  
-  .landing-page .group-23 {
-    right: 10%;
-    top: 25px;
   }
 }
 
@@ -2014,7 +2071,7 @@
   position: absolute;
   width: 1441px;
   height: 548px;
-  top: 1900px;
+  top: 2450px;
   left: 0;
   background-color: #fffaf1;
   border-radius: 0;
@@ -2117,7 +2174,7 @@
   position: absolute;
   width: 1441px;
   height: 908px;
-  top: 2448px;
+  top: 3145px;
   left: 0;
   background-color: #fffaf1;
   border: 0px none;
@@ -2368,8 +2425,8 @@
 .customer-favorites {
   position: relative;
   width: 1441px;
-  height: 545px;
-  top: 2805px;
+  height: 650px;
+  top: 3445px;
   left: 0;
   background-color: #fffaf1;
   border: 0px none;
@@ -2529,7 +2586,7 @@
   position: relative;
   width: 1441px;
   height: 554px;
-  top: 2805px;
+  top: 3445px;
   left: 0;
   background-color: #fffaf1;
   border: 0px none;
@@ -3095,6 +3152,8 @@
 .frame .custom-wrapper-2:hover::after {
   content: '';
   position: absolute;
+  overflow: visible;
+  text-align: center;
   width: 100%;
   height: 4px;
   bottom: 0;
@@ -3102,6 +3161,7 @@
   background-color: #a17561;
   border-radius: 2px;
   border: 0px none;
+  
 }
 
 .frame .div-wrapper-2:hover .text-wrapper-2,
@@ -3109,6 +3169,7 @@
 .frame .custom-wrapper-2:hover .custom-2 {
   color: #a17561;
   font-weight: 500;
+  
 }
 
 /* Ensure position relative for proper positioning of the after element */
@@ -3117,5 +3178,192 @@
 .frame .custom-wrapper-2 {
   position: relative;
 }
+
+/* Search Bar Styles */
+.frame .search-container {
+  position: absolute;
+  top: 10px;
+  right: 130px; /* Position to the left of the profile button */
+  height: 36px;
+  width: 240px;
+  z-index: 10;
+}
+
+.frame .search-form {
+  display: flex;
+  height: 100%;
+}
+
+.frame .search-input {
+  height: 100%;
+  width: 100%;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  color: #565d6d;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.frame .search-input:focus {
+  border-color: #a17561;
+  box-shadow: 0 0 0 1px rgba(161, 117, 97, 0.2);
+}
+
+.frame .search-button {
+  height: 100%;
+  width: 40px;
+  background-color: #a17561;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.frame .search-button svg {
+  stroke: white;
+}
+
+.frame .search-button:hover {
+  background-color: #8a6354;
+}
+
+.frame .dropdown-container {
+  position: absolute;
+  top: 10px;
+  left: 1318px;
+  width: 97px;
+  z-index: 101;
+}
+
+/* Fashion Image Carousel Styles */
+.carousel-wide-box {
+  width: 90%;
+  max-width: 1200px;
+  top: 100px;
+  margin: 0 auto 40px;
+  border: 1px solid rgba(161, 117, 97, 0.3);
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.fashion-carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 400px;
+  border-radius: 4px;
+}
+
+.carousel-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  width: 500%; /* Back to 5 images, no duplicate needed */
+  height: 100%;
+  position: relative;
+  animation: carousel-scroll 30s linear infinite;
+}
+
+.carousel-slide {
+  width: 20%; /* 100% / 5 images */
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Simplified continuous animation */
+@keyframes carousel-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-80%); /* Move exactly 4 slides left, showing the 5th slide */
+  }
+}
+
+/* Remove pause animation on hover - deleted this rule */
+
+/* Inspiration text overlay styling */
+.inspiration-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none; /* Allows clicks to pass through to carousel */
+}
+
+.inspiration-text-container {
+  max-width: 80%;
+  text-align: center;
+}
+
+.inspiration-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  letter-spacing: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fashion-carousel {
+    height: 300px;
+  }
+  
+  .inspiration-text {
+    font-size: 1.8rem;
+  }
+  
+  .carousel-wide-box {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fashion-carousel {
+    height: 200px;
+  }
+  
+  .inspiration-text {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+  }
+  
+  .carousel-wide-box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+  }
+}
+
 
 

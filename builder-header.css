@@ -1,0 +1,584 @@
+.outfit-builder-page {
+  background-color: rgba(255, 255, 255, 1.0);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.outfit-builder-page .div {
+  background-color: rgba(255, 255, 255, 1.0);
+  background: linear-gradient(
+    180deg,
+    rgba(161, 117, 97, 1) 0%,
+    rgba(161, 161, 99, 1) 100%
+  );
+  width: 1440px;
+  height: 2254px;
+  position: relative;
+}
+
+.outfit-builder-page .container {
+  position: absolute;
+  width: 1440px;
+  height: 56px;
+  top: 0;
+  left: 0;
+  background-color: #fffaf1;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.outfit-builder-page .image {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  top: 10px;
+  left: 24px;
+  border: 0px none;
+}
+
+.outfit-builder-page .group {
+  position: relative;
+  width: 31px;
+  height: 32px;
+  top: 2px;
+  left: 2px;
+}
+
+.outfit-builder-page .div-wrapper {
+  height: 32px;
+}
+
+.outfit-builder-page .group-wrapper {
+  width: 31px;
+  height: 32px;
+}
+
+.outfit-builder-page .overlap-group {
+  position: relative;
+  width: 31px;
+  height: 32px;
+}
+
+.outfit-builder-page .img {
+  position: absolute;
+  width: 31px;
+  height: 16px;
+  top: 0;
+  left: 0;
+}
+
+.outfit-builder-page .group-2 {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 18px;
+  left: 0;
+}
+
+.outfit-builder-page .group-3 {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 18px;
+  left: 16px;
+}
+
+.outfit-builder-page .group-4 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 11px;
+  left: 11px;
+}
+
+.outfit-builder-page .wear-pair {
+  position: absolute;
+  top: 7px;
+  left: 70px;
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 28px;
+  letter-spacing: 0;
+  line-height: 42px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .header-menu {
+  position: absolute;
+  width: 321px;
+  height: 52px;
+  top: 2px;
+  left: 257px;
+}
+
+.outfit-builder-page .frame {
+  position: absolute;
+  width: 117px;
+  height: 52px;
+  top: 0;
+  left: 97px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.outfit-builder-page .text-wrapper {
+  position: absolute;
+  top: 14px;
+  left: 29px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #565d6d;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .frame-2 {
+  width: 97px;
+  left: 0;
+  position: absolute;
+  height: 52px;
+  top: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.outfit-builder-page .frame-3 {
+  width: 143px;
+  left: 214px;
+  position: absolute;
+  height: 52px;
+  top: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.outfit-builder-page .custom {
+  position: absolute;
+  width: 123px;
+  top: 14px;
+  left: 13px;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.outfit-builder-page .rectangle {
+  position: absolute;
+  width: 143px;
+  height: 4px;
+  top: 48px;
+  left: 0;
+  background-color: #a17561;
+  border-radius: 2px;
+  border: 0px none;
+}
+
+.outfit-builder-page .button {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  width: 97px;
+  height: 36px;
+  top: 10px;
+  left: 1318px;
+  background-color: #a17561;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: transparent;
+}
+
+.outfit-builder-page .user {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 10px;
+  left: 15px;
+}
+
+.outfit-builder-page .text-wrapper-2 {
+  position: absolute;
+  top: 6px;
+  left: 39px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .custom-wrapper {
+  width: 145px;
+  left: 614px;
+  position: absolute;
+  height: 52px;
+  top: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.outfit-builder-page .custom-2 {
+  position: absolute;
+  width: 161px;
+  top: 14px;
+  left: 11px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #565d6d;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.outfit-builder-page .container-2 {
+  position: absolute;
+  width: 1440px;
+  height: 1156px;
+  top: 56px;
+  left: 0;
+  background-color: #fffaf1;
+  border: 0px none;
+}
+
+.outfit-builder-page .overlap {
+  position: absolute;
+  width: 1176px;
+  height: 640px;
+  top: 510px;
+  left: 132px;
+  border-radius: 16px;
+}
+
+.outfit-builder-page .button-2 {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  width: 52px;
+  height: 52px;
+  top: 300px;
+  left: 562px;
+  background-color: #ffffff;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: transparent;
+}
+
+.outfit-builder-page .text {
+  position: absolute;
+  top: 11px;
+  left: 38px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #323743;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .button-play {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 14px;
+  left: 14px;
+}
+
+.outfit-builder-page .group-5 {
+  position: relative;
+  width: 13px;
+  height: 17px;
+  top: 3px;
+  left: 6px;
+}
+
+.outfit-builder-page .img-wrapper {
+  position: relative;
+  height: 17px;
+}
+
+.outfit-builder-page .group-6 {
+  position: absolute;
+  width: 16px;
+  height: 21px;
+  top: -2px;
+  left: -1px;
+}
+
+.outfit-builder-page .button-3 {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  height: 52px;
+  top: 368px;
+  left: 510px;
+  background-color: #a17561;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: transparent;
+}
+
+.outfit-builder-page .text-wrapper-3 {
+  position: absolute;
+  top: 11px;
+  left: 49px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .button-4 {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  width: 200px;
+  height: 52px;
+  top: 368px;
+  left: 730px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #a17561;
+}
+
+.outfit-builder-page .text-wrapper-4 {
+  position: absolute;
+  top: 11px;
+  left: 38px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .text-wrapper-5 {
+  position: absolute;
+  width: 776px;
+  top: 96px;
+  left: 332px;
+  font-family: "Archivo", Helvetica;
+  font-weight: 700;
+  color: #171a1f;
+  font-size: 64px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 84px;
+}
+
+.outfit-builder-page .p {
+  position: absolute;
+  width: 776px;
+  top: 276px;
+  left: 332px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #1e2128;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.outfit-builder-page .container-3 {
+  position: absolute;
+  width: 1440px;
+  height: 364px;
+  top: 1212px;
+  left: 0;
+  background-color: #fffaf1;
+  border: 0px none;
+}
+
+.outfit-builder-page .container-4 {
+  position: absolute;
+  width: 383px;
+  height: 48px;
+  top: 96px;
+  left: 528px;
+  border: 0px none;
+}
+
+.outfit-builder-page .text-wrapper-6 {
+  position: absolute;
+  width: 383px;
+  top: 0;
+  left: 0;
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 32px;
+  letter-spacing: 0;
+  line-height: 48px;
+}
+
+.outfit-builder-page .container-5 {
+  position: absolute;
+  width: 1171px;
+  height: 100px;
+  top: 168px;
+  left: 134px;
+}
+
+.outfit-builder-page .container-6 {
+  position: absolute;
+  width: 1440px;
+  height: 678px;
+  top: 1576px;
+  left: 0;
+  background-color: #fffaf1;
+  border: 0px none;
+}
+
+.outfit-builder-page .text-wrapper-7 {
+  position: absolute;
+  width: 424px;
+  top: 96px;
+  left: 508px;
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 48px;
+}
+
+.outfit-builder-page .container-7 {
+  position: absolute;
+  width: 276px;
+  height: 414px;
+  top: 168px;
+  left: 132px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+}
+
+.outfit-builder-page .text-wrapper-8 {
+  position: absolute;
+  width: 276px;
+  top: 318px;
+  left: 0;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.outfit-builder-page .image-2 {
+  position: absolute;
+  width: 276px;
+  height: 276px;
+  top: 0;
+  left: 0;
+}
+
+.outfit-builder-page .text-wrapper-9 {
+  position: absolute;
+  width: 276px;
+  top: 284px;
+  left: 0;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #171a1f;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 26px;
+}
+
+.outfit-builder-page .text-wrapper-10 {
+  position: absolute;
+  width: 276px;
+  top: 348px;
+  left: 0;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.outfit-builder-page .button-5 {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  width: 276px;
+  height: 36px;
+  top: 378px;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #a17561;
+}
+
+.outfit-builder-page .text-wrapper-11 {
+  position: absolute;
+  top: 6px;
+  left: 100px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.outfit-builder-page .container-8 {
+  position: absolute;
+  width: 276px;
+  height: 414px;
+  top: 168px;
+  left: 432px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+}
+
+.outfit-builder-page .container-9 {
+  position: absolute;
+  width: 276px;
+  height: 414px;
+  top: 168px;
+  left: 732px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+}
+
+.outfit-builder-page .container-10 {
+  position: absolute;
+  width: 276px;
+  height: 414px;
+  top: 168px;
+  left: 1032px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+}

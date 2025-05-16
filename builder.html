@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="outfit-builder.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in from localStorage
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
+        
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        // Get current user info if logged in
+        let currentUser = null;
+        if (isLoggedIn) {
+          const currentUserData = localStorage.getItem('currentUser');
+          if (currentUserData) {
+            currentUser = JSON.parse(currentUserData);
+            // Update only the text part of the profile button to show user's name
+            if (currentUser.fullName) {
+              // Find the text element inside the profile button and update only that
+              const textElement = profileButton.querySelector('.text-wrapper-3');
+              if (textElement) {
+                // Just change the text content, keep the original structure
+                textElement.textContent = currentUser.fullName.split(' ')[0];
+              }
+            }
+          }
+        }
+        
+        // Set dropdown content based on login state
+        if (isLoggedIn) {
+          console.log('Setting logged-in dropdown menu');
+          // User is logged in - show logout option and wishlist
+          dropdownMenu.innerHTML = `
+            <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
+            <a href="/#" class="dropdown-item">Wishlist</a>
+            <a href="/#" class="dropdown-item">Submissions</a>
+          `;
+          
+          // Add logout functionality
+          document.getElementById('logoutLink')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            alert('Logged out successfully');
+            window.location.reload();
+          });
+        } else {
+          console.log('Setting logged-out dropdown menu');
+          // User is not logged in - show only login option
+          dropdownMenu.innerHTML = `
+            <a href="login.html" class="dropdown-item">Login</a>
+          `;
+        }
+        
+        // Toggle dropdown on button click
+        profileButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking elsewhere on the document
+        document.addEventListener('click', function(e) {
+          if (!profileButton.contains(e.target)) {
+            dropdownMenu.classList.remove('active');
+          }
+        });
+        
+        // Search functionality
+        const searchForm = document.querySelector('.search-form');
+        const searchInput = document.querySelector('.search-input');
+        
+        if (searchForm) {
+          searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = searchInput.value.trim();
+            
+            if (searchTerm !== '') {
+              // Store search term in localStorage for cross-page consistency
+              localStorage.setItem('lastSearch', searchTerm);
+              
+              // For now, alert the search term since we don't have a search results page
+              alert(`Searching for: ${searchTerm}\nSearch functionality will be implemented in a future update.`);
+              
+              // In a real implementation, redirect to a search results page
+              // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+            }
+          });
+          
+          // Set search input value from localStorage if available
+          const lastSearch = localStorage.getItem('lastSearch');
+          if (lastSearch && searchInput) {
+            searchInput.value = lastSearch;
+          }
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="frame" data-model-id="158:126">
+      <div class="outfit-builder-wrapper">
+        <div class="outfit-builder-page">
+
+          <header class="header">
+            <div class="image">
+              <div class="group">
+                <div class="div-wrapper">
+                  <div class="group-wrapper">
+                    <div class="div-wrapper">
+                      <div class="overlap-group">
+                        <img class="img" src="https://c.animaapp.com/Ms9Ew6Mf/img/group@2x.png" />
+                        <img class="group-2" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-1@2x.png" />
+                        <img class="group-3" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-2@2x.png" />
+                        <img class="group-4" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-3@2x.png" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wear-pair">Wear &amp; Pair</div>
+            <div class="header-menu">
+              <div class="div">
+            
+                <a href="/" class="text-wrapper">home</a>
+              </div>
+              <div class="div-wrapper-2">
+                <a href="products.html" class="text-wrapper-2">products</a>
+              </div>
+              <div class="overlap">
+                <div class="custom-wrapper">
+                  <div class="rectangle"></div>
+                  <a href="builder.html" class="custom">outfit generator</a>
+                </div>
+                <div class="custom-wrapper-2">
+                  <a href="/#" class="custom-2">trending styles</a>
+                </div>
+              </div>
+            </div>
+            <div class="search-container">
+              <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search products...">
+              </form>
+            </div>
+            <div class="dropdown-container">
+              <button class="button" id="profileButton">
+                <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                <div class="text-wrapper-3">Profile</div>
+              </button>
+              <div class="dropdown-menu">
+               
+              </div>
+            </div>
+          </header>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
