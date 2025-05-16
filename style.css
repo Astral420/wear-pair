@@ -3330,6 +3330,11 @@
   color: #ffffff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   letter-spacing: 2px;
+  transition: opacity 1s ease-in-out;
+  display: block;
+  width: 100%;
+  text-align: center;
+  min-height: 3em; /* Keep consistent height for all quotes */
 }
 
 /* Responsive adjustments */

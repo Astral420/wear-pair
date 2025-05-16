@@ -52,6 +52,33 @@
             dropdownMenu.classList.remove('active');
           }
         });
+        
+        // Cycling fashion quotes
+        const fashionQuotes = [
+          "STYLE IS A WAY TO SAY WHO YOU ARE WITHOUT SPEAKING",
+          "FASHION FADES, STYLE IS ETERNAL",
+          "DRESS LIKE YOU'RE ALREADY FAMOUS",
+          "LIFE'S TOO SHORT TO WEAR BORING CLOTHES",
+          "FASHION IS ABOUT DRESSING ACCORDING TO WHAT'S FASHIONABLE, STYLE IS MORE ABOUT BEING YOURSELF",
+          "THE JOY OF DRESSING IS AN ART"
+        ];
+        
+        const cyclingText = document.getElementById('cycling-text');
+        let currentQuoteIndex = 0;
+        
+        function cycleQuotes() {
+          cyclingText.style.opacity = 0;
+          
+          setTimeout(() => {
+            currentQuoteIndex = (currentQuoteIndex + 1) % fashionQuotes.length;
+            cyclingText.textContent = fashionQuotes[currentQuoteIndex];
+            cyclingText.style.opacity = 1;
+          }, 1000);
+        }
+        
+        // Initial setup and interval
+        cyclingText.style.transition = 'opacity 1s ease-in-out';
+        setInterval(cycleQuotes, 5000); // Change quote every 5 seconds
       });
     </script>
   </head>
@@ -134,7 +161,7 @@
                 <!-- Fashion inspiration text overlay -->
                 <div class="inspiration-text-overlay">
                   <div class="inspiration-text-container">
-                    <div class="inspiration-text">STYLE IS A WAY TO SAY WHO YOU ARE WITHOUT SPEAKING</div>
+                    <div class="inspiration-text" id="cycling-text">STYLE IS A WAY TO SAY WHO YOU ARE WITHOUT SPEAKING</div>
                   </div>
                 </div>
               </div>
