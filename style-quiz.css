@@ -1,0 +1,501 @@
+.frame {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+   
+  }
+  
+  .frame .style-quiz-wrapper {
+    width: 1441px;
+    height: 4450px;
+  }
+  
+  .frame .style-quiz-page {
+    position: relative;
+    height: 6000px;
+    overflow: hidden;
+    box-shadow: 0px 3px 6px #120f281f;
+    background-color: #fffaf1;
+    background: linear-gradient(
+      180deg,
+      rgba(50, 55, 67, 1) 0%,
+      rgba(50, 67, 56, 1) 100%
+    );
+  }
+  
+  .frame .header {
+    position: absolute;
+    width: 1442px;
+    height: 56px;
+    top: 0;
+    left: 0;
+    background-color: #fffaf1;
+    border: 0px none;
+    box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+  }
+  
+  
+  .frame .image {
+    width: 36px;
+    height: 36px;
+    top: 10px;
+    left: 27px;
+    position: absolute;
+    border: 0px none;
+  }
+  
+  .frame .group {
+    position: relative;
+    width: 31px;
+    height: 32px;
+    top: 2px;
+    left: 2px;
+  }
+  
+  .frame .div-wrapper {
+    height: 32px;
+  }
+  
+  .frame .group-wrapper {
+    width: 31px;
+    height: 32px;
+  }
+  
+  .frame .overlap-group {
+    position: relative;
+    width: 31px;
+    height: 32px;
+  }
+  
+  .frame .img {
+    position: absolute;
+    width: 31px;
+    height: 16px;
+    top: 0;
+    left: 0;
+  }
+  
+  .frame .group-2 {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 18px;
+    left: 0;
+  }
+  
+  .frame .group-3 {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 18px;
+    left: 16px;
+  }
+  
+  .frame .group-4 {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 11px;
+    left: 11px;
+  }
+  
+  .frame .wear-pair {
+    position: absolute;
+    top: 10px;
+    left: 73px;
+    font-family: "Archivo", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 28px;
+    letter-spacing: 0;
+    line-height: 42px;
+    white-space: nowrap;
+  }
+  
+  .frame .header-menu {
+    position: absolute;
+    width: 650px; /* Increased width to accommodate all menu items */
+    height: 52px;
+    top: 2px;
+    left: 257px;
+  }
+  
+  .frame .div {
+    position: absolute;
+    width: 97px;
+    height: 52px;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .frame .rectangle {
+    position: absolute;
+    width: 100%; /* Full width to match container */
+    height: 4px;
+    bottom: 0; /* Position at the bottom */
+    left: 0;
+    background-color: #a17561;
+    border-radius: 2px;
+    border: 0px none;
+  }
+  
+  .frame .text-wrapper {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #565d6d;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+  
+  .frame .div-wrapper-2 {
+    width: 117px;
+    left: 97px;
+    position: absolute;
+    height: 52px;
+    top: -52px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .frame .text-wrapper-2 {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #565d6d;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+  
+  .frame .overlap {
+    position: absolute;
+    width: 400px; /* Increased width */
+    height: 52px;
+    top: 0;
+    left: 214px;
+    display: flex; /* Using flex for better alignment */
+  }
+  
+  .frame .custom-wrapper {
+    width: 143px;
+    position: relative; /* Changed from absolute */
+    height: 52px;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 9;
+    margin-right: 10px; /* Added margin for spacing */
+  }
+  
+  .frame .custom {
+    position: absolute;
+    width: 130px;
+    top: 14px;
+    left: 18px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #565d6d;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+  
+  .frame .custom-wrapper-2 {
+    width: 166px;
+    position: relative; /* Changed from absolute */
+    height: 52px;
+    top: 0;
+    left: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  .frame .custom-2 {
+    position: absolute;
+    width: 161px;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #565d6d;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
+    text-align: center;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+    width: 100%; /* Set to 100% to allow centering */
+  }
+  
+  .frame .dropdown-container {
+    position: absolute;
+    top: 10px;
+    left: 1318px;
+    width: 97px;
+    z-index: 101;
+  }
+  
+  .frame .button {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    width: 97px;
+    height: 36px;
+    background-color: #a17561;
+    border-radius: 4px;
+    overflow: visible;
+    border: 1px solid;
+    border-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .frame .button:hover {
+    background-color: #8a6354;
+  }
+  
+  .frame .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 8px;
+    z-index: 100;
+    overflow: hidden;
+    text-align: left;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .frame .dropdown-menu.active {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+    animation: dropdown-appear 0.3s ease-out forwards;
+  }
+  
+  @keyframes dropdown-appear {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .frame .dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 14px;
+    color: #565d6d;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+    border-left: 0px solid #a17561;
+  }
+  
+  .frame .dropdown-item:hover {
+    background-color: #f5efe8;
+    color: #a17561;
+    padding-left: 20px;
+    border-left: 3px solid #a17561;
+  }
+  
+  /* Add subtle arrow indicator to dropdown */
+  .frame .dropdown-container::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    transform: rotate(45deg);
+    z-index: 99;
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .frame .dropdown-menu.active + .frame .dropdown-container::after {
+    opacity: 1;
+  }
+  
+  .frame .user {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 10px;
+    left: 15px;
+  }
+  
+  .frame .text-wrapper-3 {
+    position: absolute;
+    top: 6px;
+    left: 39px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+  
+  .frame .search-container {
+    position: absolute;
+    top: 10px;
+    right: 130px; /* Position to the left of the profile button */
+    height: 36px;
+    width: 240px;
+    z-index: 10;
+  }
+  
+  .frame .search-form {
+    display: flex;
+    height: 100%;
+  }
+  
+  .frame .search-input {
+    height: 100%;
+    width: 100%;
+    padding: 0 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    color: #565d6d;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s, width 0.3s ease;
+  }
+  
+  .frame .search-input:focus {
+    border-color: #a17561;
+    box-shadow: 0 0 4px rgba(161, 117, 97, 0.2);
+  }
+  
+  .frame .search-container:hover .search-input {
+    border-color: #cb9a8a;
+  }
+  
+  .frame .search-button {
+    height: 100%;
+    width: 40px;
+    background-color: #a17561;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .frame .search-button svg {
+    stroke: white;
+  }
+  
+  .frame .search-button:hover {
+    background-color: #8a6354;
+  }
+  
+  /* Navigation containers for hover underline effects */
+  .frame .div,           /* home container */
+  .frame .div-wrapper-2,  /* products container */
+  .frame .custom-wrapper-2 {  /* trending styles container */
+    position: relative;
+    overflow: visible;
+    text-align: center; /* Center the text in each container */
+  }
+  
+  /* Underline hover effects - simple appear without animation */
+  .frame .div::after,
+  .frame .div-wrapper-2::after,
+  .frame .custom-wrapper-2::after {
+    content: '';
+    position: absolute;
+    width: 100%; /* Full width immediately */
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #a17561;
+    border-radius: 2px;
+    opacity: 0; /* Hide initially */
+    transition: opacity 0.3s ease; /* Fade in/out effect */
+  }
+  
+  .frame .div:hover::after,
+  .frame .div-wrapper-2:hover::after,
+  .frame .custom-wrapper-2:hover::after {
+    opacity: 1; /* Show on hover */
+  }
+  
+  /* Navigation hover text effects */
+  .frame .text-wrapper:hover,
+  .frame .text-wrapper-2:hover,
+  .frame .custom-2:hover {  
+    color: #a17561;
+    font-weight: 500;
+  }
+  
+  /* Keep outfit generator (active item) styling fixed */
+  .frame .custom {  /* outfit generator text */
+    font-weight: 700;
+    color: #a17561;
+  }
+  
+  /* Profile button and search effects */
+  .frame .button {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    width: 97px;
+    height: 36px;
+    background-color: #a17561;
+    border-radius: 4px;
+    overflow: visible;
+    border: 1px solid;
+    border-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .frame .button:hover {
+    background-color: #8a6354;
+  }
+  
+  .frame .search-input:focus {
+    border-color: #a17561;
+    box-shadow: 0 0 4px rgba(161, 117, 97, 0.2);
+  }
+  
+  
