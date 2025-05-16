@@ -23,7 +23,7 @@
               // Update only the text part of the profile button to show user's name
               if (currentUser.fullName) {
                 // Find the text element inside the profile button and update only that
-                const textElement = profileButton.querySelector('.text-wrapper-3');
+                const textElement = profileButton.querySelector('.text-name');
                 if (textElement) {
                   // Just change the text content, keep the original structure
                   textElement.textContent = currentUser.fullName.split(' ')[0];
@@ -98,6 +98,316 @@
               searchInput.value = lastSearch;
             }
           }
+          
+          // Style Quiz Functionality
+          const styleQuizForm = document.getElementById('styleQuizForm');
+          if (styleQuizForm) {
+            const questions = styleQuizForm.querySelectorAll('.quiz-question');
+            const nextButtons = styleQuizForm.querySelectorAll('.button-next');
+            const submitButton = document.getElementById('quizSubmitButton');
+            let currentStep = 1;
+            
+            // Initialize by showing only the first step
+            updateQuizDisplay();
+            
+            // Add event listeners to all next buttons
+            nextButtons.forEach(button => {
+              button.addEventListener('click', function() {
+                // Get the current question's data-step attribute
+                const currentQuestion = button.closest('.quiz-question');
+                const currentStepNumber = parseInt(currentQuestion.getAttribute('data-step'));
+                
+                // Validate that an option is selected
+                const radioName = getRadioNameForStep(currentStepNumber);
+                const selectedOption = document.querySelector(`input[name="${radioName}"]:checked`);
+                
+                if (!selectedOption) {
+                  alert('Please select an option before continuing.');
+                  return;
+                }
+                
+                // Move to the next step
+                currentStep = currentStepNumber + 1;
+                updateQuizDisplay();
+              });
+            });
+            
+            // Update quiz display based on current step
+            function updateQuizDisplay() {
+              // Hide all questions
+              questions.forEach(question => {
+                question.style.display = 'none';
+              });
+              
+              // Show current question
+              const currentQuestion = styleQuizForm.querySelector(`.quiz-question[data-step="${currentStep}"]`);
+              if (currentQuestion) {
+                currentQuestion.style.display = 'block';
+              }
+              
+              // Show submit button only on the last step
+              if (currentStep === 6) {
+                submitButton.classList.add('show');
+              } else {
+                submitButton.classList.remove('show');
+              }
+            }
+            
+            // Helper function to get radio input name based on step
+            function getRadioNameForStep(step) {
+              switch(step) {
+                case 1: return 'style';
+                case 2: return 'colors';
+                case 3: return 'outfit';
+                case 4: return 'footwear';
+                case 5: return 'icon';
+                case 6: return 'trends';
+                default: return '';
+              }
+            }
+            
+            // Reset quiz to first question
+            function resetQuiz() {
+              currentStep = 1;
+              updateQuizDisplay();
+              
+              // Clear all selected radio buttons
+              const radioInputs = styleQuizForm.querySelectorAll('input[type="radio"]');
+              radioInputs.forEach(input => {
+                input.checked = false;
+              });
+            }
+            
+            // Outfit data - matches images and descriptions with style preferences
+            const outfitData = [
+              {
+                id: "summer-casual",
+                title: "Summer Casual",
+                style: "Casual",
+                colors: "Earth tones",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20.png",
+                description: "Relaxed white tee with denim shorts and comfortable sneakers - perfect for warm days.",
+                details: {
+                  style: "Casual / Relaxed",
+                  colors: "Neutrals with denim blue",
+                  pieces: "White t-shirt, denim shorts, white sneakers",
+                  occasion: "Everyday casual, warm weather outings",
+                  inspiration: "Alexa Chung"
+                }
+              },
+              {
+                id: "modern-chic",
+                title: "Modern Chic",
+                style: "Chic",
+                colors: "Neutrals",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20-1.png",
+                description: "Structured blazer with white satin blouse and high-waist tailored trousers.",
+                details: {
+                  style: "Chic / Minimal",
+                  colors: "Neutrals + Black",
+                  pieces: "Structured blazer, white blouse, tailored trousers",
+                  occasion: "Office, formal events, upscale dining",
+                  inspiration: "Hailey Bieber"
+                }
+              },
+              {
+                id: "bold-creative",
+                title: "Bold Creative",
+                style: "Colorful",
+                colors: "Brights",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20-2.png",
+                description: "Color-blocked oversized jacket with graphic tee and wide-leg pants.",
+                details: {
+                  style: "Colorful / Trendy",
+                  colors: "Bright color palette",
+                  pieces: "Oversized jacket, graphic tee, wide-leg pants",
+                  occasion: "Creative events, casual outings, art shows",
+                  inspiration: "Emma Chamberlain"
+                }
+              },
+              {
+                id: "sport-luxe",
+                title: "Sport Luxe",
+                style: "Sporty",
+                colors: "Dark tones",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20-3.png",
+                description: "Zip-up track jacket with cargo joggers and high-top sneakers.",
+                details: {
+                  style: "Sporty / Streetwear",
+                  colors: "Monochromes, darks",
+                  pieces: "Track jacket, cargo joggers, high-top sneakers",
+                  occasion: "Casual outings, urban settings, active days",
+                  inspiration: "BTS"
+                }
+              },
+              {
+                id: "effortless-elegant",
+                title: "Effortless Elegant",
+                style: "Elegant",
+                colors: "Pastels",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20-4.png",
+                description: "Pleated midi skirt with knit top and low heels, paired with pearl earrings.",
+                details: {
+                  style: "Elegant / Smart Casual",
+                  colors: "Pastels or neutrals",
+                  pieces: "Pleated midi skirt, knit top, low heels",
+                  occasion: "Brunches, dinner dates, semi-formal events",
+                  inspiration: "Zendaya"
+                }
+              },
+              {
+                id: "street-style",
+                title: "Street Style",
+                style: "Streetwear",
+                colors: "Monochromes",
+                image: "https://c.animaapp.com/maqs7d0oT9rk3D/img/image-20-5.png",
+                description: "Oversized hoodie with slim joggers and chunky sneakers for urban appeal.",
+                details: {
+                  style: "Streetwear / Casual",
+                  colors: "Monochrome palette",
+                  pieces: "Oversized hoodie, slim joggers, chunky sneakers",
+                  occasion: "Urban outings, casual hang-outs, streetwear events",
+                  inspiration: "Timothée Chalamet"
+                }
+              }
+            ];
+            
+            // Handle form submission
+            styleQuizForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+              
+              // Collect all form data
+              const formData = {
+                style: document.querySelector('input[name="style"]:checked')?.value,
+                colors: document.querySelector('input[name="colors"]:checked')?.value,
+                outfit: document.querySelector('input[name="outfit"]:checked')?.value,
+                footwear: document.querySelector('input[name="footwear"]:checked')?.value,
+                icon: document.querySelector('input[name="icon"]:checked')?.value,
+                trends: document.querySelector('input[name="trends"]:checked')?.value
+              };
+              
+              // Validate that the last question is answered
+              if (!formData.trends) {
+                alert('Please answer the last question before submitting.');
+                return;
+              }
+              
+              // Save style preferences to localStorage
+              localStorage.setItem('userStylePreferences', JSON.stringify(formData));
+              
+              // Find the best matching outfit based on quiz answers
+              const bestMatch = findBestOutfitMatch(formData);
+              
+              // Update the popup with the best match
+              populateRecommendationPopup(bestMatch);
+              
+              // Show the results popup
+              document.getElementById('resultsOverlay').style.display = 'block';
+              document.getElementById('resultsPopup').style.display = 'block';
+            });
+            
+            // Find the best matching outfit based on user preferences
+            function findBestOutfitMatch(preferences) {
+              // Score each outfit based on how well it matches the preferences
+              const scoredOutfits = outfitData.map(outfit => {
+                let score = 0;
+                
+                // Primary scoring - direct style match
+                if (outfit.style === preferences.style) {
+                  score += 10;
+                }
+                
+                // Score based on color preference
+                if (outfit.colors === preferences.colors) {
+                  score += 5;
+                }
+                
+                // Score based on footwear (if applicable)
+                if (preferences.footwear === "Sneakers" && (outfit.id === "summer-casual" || outfit.id === "sport-luxe" || outfit.id === "street-style")) {
+                  score += 3;
+                } else if (preferences.footwear === "Loafers" && outfit.id === "modern-chic") {
+                  score += 3;
+                } else if (preferences.footwear === "Heels" && outfit.id === "effortless-elegant") {
+                  score += 3;
+                }
+                
+                // Score based on fashion icon inspiration
+                if (preferences.icon === "Hailey Bieber" && outfit.id === "modern-chic") {
+                  score += 3;
+                } else if (preferences.icon === "Emma Chamberlain" && outfit.id === "bold-creative") {
+                  score += 3;
+                } else if (preferences.icon === "BTS" && outfit.id === "sport-luxe") {
+                  score += 3;
+                } else if (preferences.icon === "Alexa Chung" && outfit.id === "summer-casual") {
+                  score += 3;
+                } else if (preferences.icon === "Zendaya" && outfit.id === "effortless-elegant") {
+                  score += 3;
+                } else if (preferences.icon === "Timothée Chalamet" && outfit.id === "street-style") {
+                  score += 3;
+                }
+                
+                return {
+                  ...outfit,
+                  score
+                };
+              });
+              
+              // Sort by score (highest first) and return the best match
+              scoredOutfits.sort((a, b) => b.score - a.score);
+              return scoredOutfits[0];
+            }
+            
+            // Populate the recommendation popup with the best match
+            function populateRecommendationPopup(outfit) {
+              const recommendedOutfit = document.getElementById('recommendedOutfit');
+              
+              // Create HTML for the recommended outfit
+              const outfitHTML = `
+                <img src="${outfit.image}" alt="${outfit.title}" class="outfit-image">
+                <h3 class="outfit-title">${outfit.title}</h3>
+                <p class="outfit-description">${outfit.description}</p>
+                <div class="style-details">
+                  <div class="style-detail-item"><strong>Style:</strong> ${outfit.details.style}</div>
+                  <div class="style-detail-item"><strong>Colors:</strong> ${outfit.details.colors}</div>
+                  <div class="style-detail-item"><strong>Pieces:</strong> ${outfit.details.pieces}</div>
+                  <div class="style-detail-item"><strong>Occasions:</strong> ${outfit.details.occasion}</div>
+                  <div class="style-detail-item"><strong>Inspiration:</strong> ${outfit.details.inspiration}</div>
+                </div>
+                <button class="view-details-button" data-outfit-id="${outfit.id}">View Details</button>
+              `;
+              
+              recommendedOutfit.innerHTML = outfitHTML;
+              
+              // Add click handler to the View Details button
+              const viewDetailsButton = recommendedOutfit.querySelector('.view-details-button');
+              viewDetailsButton.addEventListener('click', function() {
+                // Close the popup
+                document.getElementById('resultsOverlay').style.display = 'none';
+                document.getElementById('resultsPopup').style.display = 'none';
+                
+                // Find matching outfit in the recommended section and scroll to it
+                const outfitTitle = outfit.title;
+                const recommendedOutfits = document.querySelectorAll('.container-32 .text-wrapper-18');
+                recommendedOutfits.forEach(outfitElement => {
+                  if (outfitElement.textContent === outfitTitle) {
+                    outfitElement.closest('[class^="container-"]').scrollIntoView({ behavior: 'smooth' });
+                  }
+                });
+                
+                // Reset the quiz
+                resetQuiz();
+              });
+            }
+            
+            // Handle popup close button
+            document.getElementById('popupClose').addEventListener('click', function() {
+              document.getElementById('resultsOverlay').style.display = 'none';
+              document.getElementById('resultsPopup').style.display = 'none';
+              
+              // Reset the quiz
+              resetQuiz();
+            });
+          }
         });
       </script>
 </head>
@@ -126,16 +436,14 @@
               <div class="wear-pair">Wear &amp; Pair</div>
               <div class="header-menu">
                 <div class="div">
-              
                   <a href="/" class="text-wrapper">home</a>
                 </div>
                 <div class="div-wrapper-2">
                   <a href="products.html" class="text-wrapper-2">products</a>
                 </div>
                 <div class="overlap">
-                  <div class="custom-wrapper">
-                    <div class="rectangle"></div>
-                    <a href="builder.html" class="custom">outfit generator</a>
+                  <div class="custom-wrapper-2">
+                    <a href="builder.html" class="custom-2">outfit generator</a>
                   </div>
                   <div class="custom-wrapper-2">
                     <a href="/#" class="custom-2">trending styles</a>
@@ -150,17 +458,371 @@
               <div class="dropdown-container">
                 <button class="button" id="profileButton">
                   <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
-                  <div class="text-wrapper-3">Profile</div>
+                  <div class="text-name">Profile</div>
                 </button>
                 <div class="dropdown-menu">
                  
                 </div>
               </div>
             </header>
-  
+
+            <div class="style-quiz">
+              <div class="button-wrapper">
+                <button class="button-2">
+                  <div class="text"></div>
+                  <div class="button-play">
+                    <div class="group-5">
+                      <div class="img-wrapper">
+                        <img class="group-6" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-4.png" />
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <button id="quizStartButton" class="request-demo-wrapper"><div class="request-demo">Answer Our Style Quiz</div></button>
+              <div class="text-wrapper-3">Find Your Perfect Style</div>
+              <p class="p">Personalized outfit recommendations tailored to your taste.</p>
+            </div>
+            <div class="overlap-2">
+              <div class="container-2">
+                <div class="text-wrapper-4">How It Works</div>
+                <div class="container-3">
+                  <div class="container-4">
+                    <div class="circle">
+                      <div class="group-7">
+                        <div class="group-8">
+                          <img class="group-9" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-5.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container-5">
+                      <div class="text-wrapper-5">Request your recommendation</div>
+                      <p class="send-us-your">
+                        Answer our questionnaire so that we can tailor the recommendation to your style.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="container-6">
+                    <div class="circle-2">
+                      <div class="group-7">
+                        <div class="group-8">
+                          <img class="group-9" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-6.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container-7">
+                      <div class="text-wrapper-6">We curate your outfits</div>
+                      <p class="text-wrapper-7">
+                        Our team of stylists composes unique outfit selections tailored to your preferences, ensuring a
+                        delightful mix of classics and trendy pieces.
+                      </p>
+                    </div>
+                    <div class="image-2"></div>
+                  </div>
+                  <div class="container-8">
+                    <div class="circle-3">
+                      <div class="group-7">
+                        <div class="group-8">
+                          <img class="group-9" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-7.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container-9">
+                      <p class="text-wrapper-8">Get suggested retailers</p>
+                      <p class="text-wrapper-7">
+                        See where you can shop your curated outfit combos—all 
+                        matched to your vibe.
+                      </p>
+                    </div>
+                    <div class="image-2"></div>
+                </div>
+                <div class="container-8">
+                  <div class="circle-3">
+                    <div class="group-7">
+                      <div class="group-8">
+                        <img class="group-9" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-7.png" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="container-10">
+              <p class="text-wrapper-9">We want to know your style!</p>
+              <div class="overlap-3">
+                <div class="container-11">
+                  <form id="styleQuizForm">
+                    <div class="quiz-section">
+                      <h2 class="quiz-title">👗 Discover Your Style Personality!</h2>
+                      
+                      <!-- Question 1 -->
+                      <div class="quiz-question" data-step="1">
+                        <p class="question-text">1. How would you describe your style?</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-casual" name="style" value="Casual">
+                            <label for="style-casual">Casual</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-chic" name="style" value="Chic">
+                            <label for="style-chic">Chic</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-colorful" name="style" value="Colorful">
+                            <label for="style-colorful">Colorful</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-minimal" name="style" value="Minimal">
+                            <label for="style-minimal">Minimal</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-trendy" name="style" value="Trendy">
+                            <label for="style-trendy">Trendy</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-sporty" name="style" value="Sporty">
+                            <label for="style-sporty">Sporty</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-elegant" name="style" value="Elegant">
+                            <label for="style-elegant">Elegant</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-smart-casual" name="style" value="Smart Casual">
+                            <label for="style-smart-casual">Smart Casual</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="style-streetwear" name="style" value="Streetwear">
+                            <label for="style-streetwear">Streetwear</label>
+                          </div>
+                        </div>
+                        <button type="button" class="button-next">Next</button>
+                      </div>
+                      
+                      <!-- Question 2 -->
+                      <div class="quiz-question" data-step="2" style="display: none;">
+                        <p class="question-text">2. What colors do you gravitate towards?</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="colors-neutrals" name="colors" value="Neutrals">
+                            <label for="colors-neutrals">Neutrals (beige, white, grey, black)</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="colors-earth" name="colors" value="Earth tones">
+                            <label for="colors-earth">Earth tones (olive, rust, terracotta)</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="colors-brights" name="colors" value="Brights">
+                            <label for="colors-brights">Brights (hot pink, electric blue, lime green)</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="colors-pastels" name="colors" value="Pastels">
+                            <label for="colors-pastels">Pastels (lavender, blush, mint)</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="colors-dark" name="colors" value="Dark tones">
+                            <label for="colors-dark">Dark tones (navy, burgundy, charcoal)</label>
+                          </div>
+                        </div>
+                        <button type="button" class="button-next">Next</button>
+                      </div>
+                      
+                      <!-- Question 3 -->
+                      <div class="quiz-question" data-step="3" style="display: none;">
+                        <p class="question-text">3. What's your go-to outfit for a day out?</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-tee-jeans" name="outfit" value="Oversized tee + jeans">
+                            <label for="outfit-tee-jeans">Oversized tee + jeans</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-button-trousers" name="outfit" value="Button-up + trousers">
+                            <label for="outfit-button-trousers">Button-up + trousers</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-athleisure" name="outfit" value="Athleisure set">
+                            <label for="outfit-athleisure">Athleisure set</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-monochrome" name="outfit" value="Monochrome co-ord">
+                            <label for="outfit-monochrome">Monochrome co-ord</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-hoodie-cargo" name="outfit" value="Graphic hoodie + cargo pants">
+                            <label for="outfit-hoodie-cargo">Graphic hoodie + cargo pants</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-blazer-dress" name="outfit" value="Blazer + dress">
+                            <label for="outfit-blazer-dress">Blazer + dress</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="outfit-maxi-knit" name="outfit" value="Maxi skirt + cropped knit">
+                            <label for="outfit-maxi-knit">Maxi skirt + cropped knit</label>
+                          </div>
+                        </div>
+                        <button type="button" class="button-next">Next</button>
+                      </div>
+                      
+                      <!-- Question 4 -->
+                      <div class="quiz-question" data-step="4" style="display: none;">
+                        <p class="question-text">4. Which footwear do you wear the most?</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-sneakers" name="footwear" value="Sneakers">
+                            <label for="footwear-sneakers">Sneakers</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-loafers" name="footwear" value="Loafers">
+                            <label for="footwear-loafers">Loafers</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-boots" name="footwear" value="Combat boots">
+                            <label for="footwear-boots">Combat boots</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-heels" name="footwear" value="Heels">
+                            <label for="footwear-heels">Heels</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-sandals" name="footwear" value="Sandals">
+                            <label for="footwear-sandals">Sandals</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="footwear-running" name="footwear" value="Running shoes">
+                            <label for="footwear-running">Running shoes</label>
+                          </div>
+                        </div>
+                        <button type="button" class="button-next">Next</button>
+                      </div>
+                      
+                      <!-- Question 5 -->
+                      <div class="quiz-question" data-step="5" style="display: none;">
+                        <p class="question-text">5. Pick a fashion icon or inspiration:</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-zendaya" name="icon" value="Zendaya">
+                            <label for="icon-zendaya">Zendaya</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-hailey" name="icon" value="Hailey Bieber">
+                            <label for="icon-hailey">Hailey Bieber</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-bts" name="icon" value="BTS">
+                            <label for="icon-bts">BTS</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-emma" name="icon" value="Emma Chamberlain">
+                            <label for="icon-emma">Emma Chamberlain</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-timothee" name="icon" value="Timothée Chalamet">
+                            <label for="icon-timothee">Timothée Chalamet</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-alexa" name="icon" value="Alexa Chung">
+                            <label for="icon-alexa">Alexa Chung</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="icon-bella" name="icon" value="Bella Hadid">
+                            <label for="icon-bella">Bella Hadid</label>
+                          </div>
+                        </div>
+                        <button type="button" class="button-next">Next</button>
+                      </div>
+                      
+                      <!-- Question 6 -->
+                      <div class="quiz-question" data-step="6" style="display: none;">
+                        <p class="question-text">6. Which statement best describes your attitude toward trends?</p>
+                        <p class="question-subtitle">(Choose one)</p>
+                        
+                        <div class="options-grid">
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="trends-religious" name="trends" value="Follow religiously">
+                            <label for="trends-religious">I follow them religiously</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="trends-mix" name="trends" value="Mix with timeless">
+                            <label for="trends-mix">I mix trends with timeless pieces</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="trends-feels-right" name="trends" value="Wear what feels right">
+                            <label for="trends-feels-right">I wear what feels right, trends or not</label>
+                          </div>
+                          
+                          <div class="option-item custom-radio">
+                            <input type="radio" id="trends-avoid" name="trends" value="Avoid trends">
+                            <label for="trends-avoid">I avoid trends and focus on classic</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="button-3 submit-button" id="quizSubmitButton">
+                      <div class="text-wrapper-17">Submit</div>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
+          
         </div>
       </div>
     
+    <!-- Style Quiz Results Popup -->
+    <div class="overlay" id="resultsOverlay"></div>
+    <div class="popup-container" id="resultsPopup">
+      <div class="popup-close" id="popupClose">&times;</div>
+      <h2 class="popup-title">Your Style Match</h2>
+      <p class="result-message">Based on your quiz answers, we've found your perfect style match!</p>
+      
+      <div class="single-outfit-card" id="recommendedOutfit">
+        <!-- Content will be dynamically populated based on quiz answers -->
+      </div>
+    </div>
+
 </body>
 </html>
