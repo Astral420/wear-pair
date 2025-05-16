@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="style.css" />
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
         // Check if user is logged in from localStorage
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
@@ -14,10 +14,28 @@
         const profileButton = document.getElementById('profileButton');
         const dropdownMenu = document.querySelector('.dropdown-menu');
         
+        // Get current user info if logged in
+        let currentUser = null;
+        if (isLoggedIn) {
+          const currentUserData = localStorage.getItem('currentUser');
+          if (currentUserData) {
+            currentUser = JSON.parse(currentUserData);
+            // Update only the text part of the profile button to show user's name
+            if (currentUser.fullName) {
+              // Find the text element inside the profile button and update only that
+              const textElement = profileButton.querySelector('.text-wrapper-3');
+              if (textElement) {
+                // Just change the text content, keep the original structure
+                textElement.textContent = currentUser.fullName.split(' ')[0];
+              }
+            }
+          }
+        }
+        
         // Set dropdown content based on login state
         if (isLoggedIn) {
           console.log('Setting logged-in dropdown menu');
-          // User is logged in - show logout option
+          // User is logged in - show logout option and wishlist
           dropdownMenu.innerHTML = `
             <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
             <a href="/#" class="dropdown-item">Wishlist</a>
@@ -28,17 +46,18 @@
           document.getElementById('logoutLink')?.addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
             alert('Logged out successfully');
             window.location.reload();
           });
         } else {
           console.log('Setting logged-out dropdown menu');
-          // User is not logged in - show login option
+          // User is not logged in - show only login option
           dropdownMenu.innerHTML = `
             <a href="login.html" class="dropdown-item">Login</a>
-            <a href="/#" class="dropdown-item">Shopping Cart</a>
           `;
         }
+        
         
         // Toggle dropdown on button click
         profileButton.addEventListener('click', function(e) {
