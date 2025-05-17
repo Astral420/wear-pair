@@ -1,0 +1,109 @@
+/* Common Styles shared across all pages */
+
+/* Search container and dropdown styles */
+.search-container {
+  position: relative;
+}
+
+.search-form {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  height: 100%;
+  width: 100%;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  color: #565d6d;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, width 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #a17561;
+  box-shadow: 0 0 4px rgba(161, 117, 97, 0.2);
+}
+
+.search-container:hover .search-input {
+  border-color: #cb9a8a;
+}
+
+/* Search Results Dropdown Styles */
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 280px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border: 1px solid #e0e0e0;
+  margin-top: 5px;
+}
+
+.search-result-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f8f0ea;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.search-result-details {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search-result-name {
+  font-family: "Roboto", Helvetica;
+  font-weight: 500;
+  color: #171a1f;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.search-result-price {
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Highlighted product */
+.highlighted {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3) !important;
+  border: 2px solid #a17561 !important;
+  animation: highlight-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes highlight-pulse {
+  0% { box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3); }
+  50% { box-shadow: 0 8px 25px rgba(161, 117, 97, 0.5); }
+  100% { box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3); }
+} 

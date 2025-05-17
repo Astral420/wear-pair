@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // User is logged in - show logout option and wishlist
       dropdownMenu.innerHTML = `
         <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
-        <a href="/#" class="dropdown-item">Wishlist</a>
+        <a href="wishlist.html" class="dropdown-item">Wishlist</a>
         <a href="/#" class="dropdown-item">Submissions</a>
       `;
       

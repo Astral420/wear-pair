@@ -1,0 +1,185 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user is logged in from localStorage
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
+    
+    const profileButton = document.getElementById('profileButton');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    // Get current user info if logged in
+    let currentUser = null;
+    if (isLoggedIn) {
+      const currentUserData = localStorage.getItem('currentUser');
+      if (currentUserData) {
+        currentUser = JSON.parse(currentUserData);
+        // Update only the text part of the profile button to show user's name
+        if (currentUser.fullName) {
+          // Find the text element inside the profile button and update only that
+          const textElement = profileButton.querySelector('.text-name');
+          if (textElement) {
+            // Just change the text content, keep the original structure
+            textElement.textContent = currentUser.fullName.split(' ')[0];
+          }
+        }
+      }
+    }
+    
+    // Set dropdown content based on login state
+    if (isLoggedIn) {
+      console.log('Setting logged-in dropdown menu');
+      // User is logged in - show logout option and wishlist
+      dropdownMenu.innerHTML = `
+        <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
+        <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+        <a href="/#" class="dropdown-item">Submissions</a>
+      `;
+      
+      // Add logout functionality
+      document.getElementById('logoutLink')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('currentUser');
+        alert('Logged out successfully');
+        window.location.reload();
+      });
+    } else {
+      console.log('Setting logged-out dropdown menu');
+      // User is not logged in - show only login option
+      dropdownMenu.innerHTML = `
+        <a href="login.html" class="dropdown-item">Login</a>
+      `;
+    }
+    
+    
+    // Toggle dropdown on button click
+    profileButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking elsewhere on the document
+    document.addEventListener('click', function(e) {
+      if (!profileButton.contains(e.target)) {
+        dropdownMenu.classList.remove('active');
+      }
+
+      // Also close search results dropdown if clicking outside
+      if (searchInput && searchResultsDropdown && 
+          !searchInput.contains(e.target) && 
+          !searchResultsDropdown.contains(e.target)) {
+        searchResultsDropdown.style.display = 'none';
+      }
+    });
+    
+    // SEARCH FUNCTIONALITY
+    console.log("Setting up search functionality");
+    const searchInput = document.querySelector('.search-input');
+    const searchForm = document.querySelector('.search-form');
+    const searchResultsDropdown = document.querySelector('.search-results-dropdown');
+    
+    if (!searchInput || !searchResultsDropdown) {
+      console.error("Search elements not found in the DOM:", {
+        searchInput: !!searchInput,
+        searchResultsDropdown: !!searchResultsDropdown
+      });
+      return;
+    }
+    
+    console.log("Search elements found, setting up listeners");
+    
+    // Product database with images
+    const products = [
+      { id: 1, name: 'Denim Jacket', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image.png' },
+      { id: 2, name: 'Knitted Sweater', price: '39.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png' },
+      { id: 3, name: 'Slim-Fit Jeans', price: '49.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png' },
+      { id: 4, name: 'White T-Shirt', price: '19.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png' },
+      { id: 5, name: 'Sleeveless Sport Swimsuit', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png' },
+      { id: 6, name: 'Leather Boots', price: '89.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png' },
+      { id: 7, name: 'Adjustable Shoulder Bag', price: '79.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png' },
+      { id: 8, name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png' }
+    ];
+    
+    // Add event listener for search input
+    searchInput.addEventListener('input', function(e) {
+      console.log("Search input event fired");
+      const searchTerm = e.target.value.trim().toLowerCase();
+      
+      // Clear previous results
+      searchResultsDropdown.innerHTML = '';
+      
+      if (searchTerm.length < 2) {
+        searchResultsDropdown.style.display = 'none';
+        return;
+      }
+      
+      // Filter products based on search term
+      const matchingProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm)
+      );
+      
+      console.log(`Found ${matchingProducts.length} matching products for "${searchTerm}"`);
+      
+      if (matchingProducts.length === 0) {
+        searchResultsDropdown.style.display = 'none';
+        return;
+      }
+      
+      // Display matching products in dropdown
+      matchingProducts.forEach(product => {
+        const resultItem = document.createElement('div');
+        resultItem.className = 'search-result-item';
+        resultItem.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="search-result-image">
+          <div class="search-result-details">
+            <div class="search-result-name">${product.name}</div>
+            <div class="search-result-price">$${product.price}</div>
+          </div>
+        `;
+        
+        // Make the result item clickable
+        resultItem.addEventListener('click', function() {
+          console.log(`Clicked on product: ${product.name}`);
+          // For now just highlight the product on the current page
+          // In a real implementation, this could navigate to a product detail page
+          highlightProduct(product.id);
+          searchResultsDropdown.style.display = 'none';
+          searchInput.value = product.name;
+          // Save the search term to localStorage
+          localStorage.setItem('lastSearch', product.name);
+        });
+        
+        searchResultsDropdown.appendChild(resultItem);
+      });
+      
+      // Show dropdown
+      searchResultsDropdown.style.display = 'block';
+    });
+    
+    // Prevent form submission
+    searchForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Function to highlight a product
+    function highlightProduct(productId) {
+      // Remove any existing highlights
+      document.querySelectorAll('.container-3, .container-4, .container-5, .container-6, .container-7, .container-8, .container-9, .container-10, .container-11, .container-12, .container-13, .container-14, .container-15, .container-16, .container-17, .container-18').forEach(container => {
+        container.classList.remove('highlighted');
+      });
+      
+      // Find the container with the matching product ID
+      const productContainer = document.querySelector(`.container-${productId + 2}`);
+      if (productContainer) {
+        productContainer.classList.add('highlighted');
+        // Scroll to the highlighted product
+        productContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+    // Set search input value from localStorage if available
+    const lastSearch = localStorage.getItem('lastSearch');
+    if (lastSearch && searchInput) {
+      searchInput.value = lastSearch;
+    }
+});

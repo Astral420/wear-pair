@@ -3370,5 +3370,127 @@
   }
 }
 
+/* Wishlist heart icon styles */
+.wishlist-heart {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.wishlist-heart:hover {
+  background-color: #ffffff;
+  transform: scale(1.05);
+}
+
+.wishlist-heart svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #a17561;
+  stroke-width: 2;
+  transition: all 0.2s ease;
+}
+
+.wishlist-heart.active svg {
+  fill: #a17561;
+}
+
+.wishlist-heart:hover svg {
+  stroke: #8a6354;
+}
+
+/* Position adjustments for specific containers */
+.container-5 .wishlist-heart,
+.container-6 .wishlist-heart,
+.container-7 .wishlist-heart,
+.container-8 .wishlist-heart,
+.container-9 .wishlist-heart,
+.container-10 .wishlist-heart,
+.container-11 .wishlist-heart,
+.container-12 .wishlist-heart {
+  top: 8px;
+  right: 8px;
+}
+
+.customer-favorites .container .wishlist-heart,
+.customer-favorites .image-wrapper .wishlist-heart,
+.customer-favorites .img-wrapper .wishlist-heart {
+  top: 8px;
+  right: 8px;
+}
+
+/* Search Results Dropdown Styles */
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 280px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  border: 1px solid #e0e0e0;
+  margin-top: 5px;
+}
+
+.search-result-item {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f8f0ea;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.search-result-details {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.search-result-name {
+  font-family: "Roboto", Helvetica;
+  font-weight: 500;
+  color: #171a1f;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.search-result-price {
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 
 

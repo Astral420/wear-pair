@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="products.css"/>
+    <link rel="stylesheet" href="globals.css"/>
+    <link rel="stylesheet" href="wishlist.css"/>
+    <link rel="stylesheet" href="common.css"/>
+    <style>
+      /* Fix for dropdown menu */
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 150px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        margin-top: 8px;
+        z-index: 100;
+        overflow: hidden;
+      }
+      .dropdown-menu.active {
+        display: block !important;
+      }
+      .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        font-family: "Inter", Helvetica;
+        font-weight: 400;
+        font-size: 14px;
+        color: #565d6d;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+      .dropdown-item:hover {
+        background-color: #f5efe8;
+        color: #a17561;
+      }
+    </style>
+    <script src="scripts/common.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+        // Load and display wishlist items
+        loadWishlistItems();
+      });
+
+      // Function to load and display wishlist items
+      function loadWishlistItems() {
+        // Check if user is logged in
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const wishlistContainer = document.getElementById('wishlist-container');
+        
+        if (!isLoggedIn) {
+          wishlistContainer.innerHTML = `
+            <div class="empty-wishlist">
+              <h2>Please log in to view your wishlist</h2>
+              <a href="login.html" class="login-button">Login</a>
+            </div>
+          `;
+          return;
+        }
+        
+        // Get wishlist items from localStorage
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        
+        if (wishlist.length === 0) {
+          wishlistContainer.innerHTML = `
+            <div class="empty-wishlist">
+              <h2>Your wishlist is empty</h2>
+              <p>Add items to your wishlist from the products page</p>
+              <a href="products.html" class="browse-products-button">Browse Products</a>
+            </div>
+          `;
+          return;
+        }
+        
+        // Product images mapping (simplified for demo)
+        const productImages = {
+          1: "https://c.animaapp.com/maskue7rUMC7Hc/img/image.png", // Denim Jacket
+          2: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png", // Knitted Sweater
+          3: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png", // Slim-Fit Jeans
+          4: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png", // White T-Shirt
+          5: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png", // Sleeveless Sport Swimsuit
+          6: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png", // Leather Boots
+          7: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png", // Adjustable Shoulder Bag
+          8: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png", // Men's Fashionable T-Shirt
+          9: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          10: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          11: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          12: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          13: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          14: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          15: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          16: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png"
+        };
+        
+        // Generate HTML for wishlist items
+        let wishlistHTML = '';
+        wishlist.forEach(item => {
+          const imageSrc = productImages[item.id] || "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png";
+          
+          wishlistHTML += `
+            <div class="wishlist-item" data-product-id="${item.id}">
+              <img src="${imageSrc}" alt="${item.name}" class="wishlist-item-image">
+              <div class="wishlist-item-details">
+                <h3>${item.name}</h3>
+                <p class="wishlist-item-price">$${item.price}</p>
+                <button class="remove-from-wishlist" onclick="removeFromWishlist(${item.id})">Remove</button>
+                <button class="add-to-cart">Add to Cart</button>
+              </div>
+            </div>
+          `;
+        });
+        
+        wishlistContainer.innerHTML = wishlistHTML;
+      }
+      
+      // Function to remove item from wishlist
+      function removeFromWishlist(productId) {
+        // Get current wishlist
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        
+        // Remove the item
+        wishlist = wishlist.filter(item => item.id !== productId.toString());
+        
+        // Save updated wishlist
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        
+        // Reload wishlist items
+        loadWishlistItems();
+      }
+    </script>
+</head>
+<body>
+    <div class="frame" data-model-id="158:126">
+        <div class="product-page-wrapper">
+          <div class="product-page">
+            <header class="header">
+              <div class="image">
+                <div class="group">
+                  <div class="div-wrapper">
+                    <div class="group-wrapper">
+                      <div class="div-wrapper">
+                        <div class="overlap-group">
+                          <img class="img" src="https://c.animaapp.com/Ms9Ew6Mf/img/group@2x.png" />
+                          <img class="group-2" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-1@2x.png" />
+                          <img class="group-3" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-2@2x.png" />
+                          <img class="group-4" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-3@2x.png" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="wear-pair">Wear &amp; Pair</div>
+              <div class="header-menu">
+                <div class="div">
+                 
+                  <a href="/" class="text-wrapper">home</a>
+                </div>
+                <div class="div-wrapper-2">
+                  <div class="rectangle"></div>
+                  <a href="products.html" class="text-wrapper-2">products</a>
+                </div>
+                <div class="overlap">
+                  <div class="custom-wrapper">
+                    <a href="builder.html" class="custom">outfit generator</a>
+                  </div>
+                  <div class="custom-wrapper-2">
+                    <a href="/#" class="custom-2">trending styles</a>
+                  </div>
+                </div>
+              </div>
+              <div class="search-container">
+                <form class="search-form">
+                  <input type="text" class="search-input" placeholder="Search products...">
+                </form>
+                <div class="search-results-dropdown" style="display: none;">
+                  <!-- Search results will appear here -->
+                </div>
+              </div>
+              <div class="dropdown-container">
+                <button class="button" id="profileButton">
+                  <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                  <div class="text-name">Profile</div>
+                </button>
+                <div class="dropdown-menu">
+                </div>
+              </div>
+            </header>
+
+            <div class="overlap-2">
+                <div class="container-2">
+                  <div class="text-wrapper-8">My Wishlist</div>
+                  
+                  <div id="wishlist-container" class="wishlist-items-container">
+                    <!-- Wishlist items will be populated here by JavaScript -->
+                  </div>
+                </div>
+
+                <div class="footer">
+                    <div class="newsletter-wrapper">Subscribe to our newsletter</div>
+                    <div class="textbox">
+                      <div class="language">English</div>
+                      <img class="chevron-down-large" src="https://c.animaapp.com/mammlrq5P8khak/img/chevron-down-large.svg" />
+                    </div>
+                    <div class="text-wrapper-2">Sitemap</div>
+                    <div class="text-wrapper-3">•</div>
+                    <div class="text-wrapper-4">© 2024 Brand, Inc.</div>
+                    <div class="text-wrapper-5">Privacy</div>
+                    <div class="text-wrapper-6">Terms</div>
+                    <div class="text-wrapper-7">•</div>
+                    <div class="text-wrapper-8">•</div>
+                    <div class="textbox-2">
+                      <input type="text" placeholder="Input your email" class="email-input">
+                      <img class="mail" src="https://c.animaapp.com/mammlrq5P8khak/img/mail.svg" />
+                    </div>
+                    <button class="button"><div class="text-wrapper-10">Subscribe</div></button>
+                    <div class="logo-youtube"><div class="group"></div></div>
+                    <div class="logo-twitter"><div class="group-2"></div></div>
+                    <div class="logo-facebook"><div class="group-3"></div></div>
+                    <div class="logo-linkedin"><div class="group-4"></div></div>
+                    <div class="plans-pricing">Plans &amp; Pricing</div>
+                    <div class="text-wrapper-11">Personal</div>
+                    <div class="text-wrapper-12">Start up</div>
+                    <div class="text-wrapper-13">Organization</div>
+                    <div class="text-wrapper-14">Company</div>
+                    <div class="text-wrapper-15">About us</div>
+                    <div class="text-wrapper-16">Contact us</div>
+                    <div class="text-wrapper-17">Product</div>
+                    <div class="text-wrapper-18">Features</div>
+                    <div class="text-wrapper-19">Pricing</div>
+                    <div class="text-wrapper-20">Resources</div>
+                    <div class="text-wrapper-21">Blog</div>
+                    <div class="text-wrapper-22">User guides</div>
+                    <div class="text-wrapper-23">Webinars</div>
+                    <div class="image">
+                      <div class="group-wrapper">
+                        <div class="div-wrapper">
+                          <div class="group-5">
+                            <div class="div-wrapper">
+                              <div class="overlap-group">
+                                <img class="img" src="https://c.animaapp.com/mammlrq5P8khak/img/group-4.png" />
+                                <img class="group-6" src="https://c.animaapp.com/mammlrq5P8khak/img/group-5.png" />
+                                <img class="group-7" src="https://c.animaapp.com/mammlrq5P8khak/img/group-6.png" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="wear-pair">Wear &amp; Pair</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

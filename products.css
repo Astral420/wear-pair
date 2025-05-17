@@ -517,10 +517,32 @@
     height: 384px;
     top: 174px;
     left: 132px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .frame .container-3:hover,
+  .frame .container-4:hover,
+  .frame .container-5:hover,
+  .frame .container-6:hover,
+  .frame .container-7:hover,
+  .frame .container-8:hover,
+  .frame .container-9:hover,
+  .frame .container-10:hover,
+  .frame .container-11:hover,
+  .frame .container-12:hover,
+  .frame .container-13:hover,
+  .frame .container-14:hover,
+  .frame .container-15:hover,
+  .frame .container-16:hover,
+  .frame .container-17:hover,
+  .frame .container-18:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
   
   .frame .text-wrapper-4 {
@@ -543,6 +565,7 @@
     top: 44px;
     left: 0;
     object-fit: cover;
+    border-radius: 8px;
   }
   
   .frame .text-wrapper-5 {
@@ -563,10 +586,12 @@
     height: 384px;
     top: 174px;
     left: 432px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-5 {
@@ -574,10 +599,12 @@
     height: 384px;
     top: 174px;
     left: 732px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-6 {
@@ -585,10 +612,12 @@
     height: 384px;
     top: 174px;
     left: 1032px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-7 {
@@ -596,10 +625,12 @@
     height: 384px;
     top: 626px;
     left: 1032px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .text-wrapper-6 {
@@ -622,6 +653,7 @@
     top: 0;
     left: 0;
     object-fit: cover;
+    border-radius: 8px;
   }
   
   .frame .text-wrapper-7 {
@@ -642,10 +674,12 @@
     height: 384px;
     top: 626px;
     left: 132px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-9 {
@@ -653,16 +687,18 @@
     height: 384px;
     top: 626px;
     left: 732px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .text-wrapper-8 {
     position: absolute;
     width: 364px;
-    top: 88px;
+    top: 50px;
     left: 558px;
     font-family: "Archivo", Helvetica;
     font-weight: 400;
@@ -678,10 +714,12 @@
     height: 384px;
     top: 626px;
     left: 432px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-11 {
@@ -689,10 +727,12 @@
     height: 384px;
     top: 1034px;
     left: 132px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-12 {
@@ -700,10 +740,12 @@
     height: 384px;
     top: 1034px;
     left: 432px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-13 {
@@ -711,10 +753,12 @@
     height: 384px;
     top: 1034px;
     left: 732px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-14 {
@@ -722,10 +766,12 @@
     height: 384px;
     top: 1034px;
     left: 1032px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-15 {
@@ -733,10 +779,12 @@
     height: 384px;
     top: 1442px;
     left: 132px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-16 {
@@ -744,10 +792,12 @@
     height: 384px;
     top: 1442px;
     left: 432px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-17 {
@@ -755,10 +805,12 @@
     height: 384px;
     top: 1442px;
     left: 732px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .container-18 {
@@ -766,17 +818,19 @@
     height: 384px;
     top: 1442px;
     left: 1032px;
-    border-radius: 4px;
+    border-radius: 12px;
     overflow: hidden;
     position: absolute;
     border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .frame .next-page-wrapper {
     all: unset;
     box-sizing: border-box;
     width: 191px;
-    top: 2096px;
+    top: 2196px;
     left: 624px;
     background-color: #ffffff;
     border-radius: 4px;
@@ -1358,4 +1412,204 @@
     letter-spacing: 0;
     line-height: 48px;
     white-space: nowrap;
+  }
+
+  /* Category Section Styles */
+  .frame .categories-section {
+    position: relative;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 40px;
+  }
+  
+  .frame .categories-title {
+    font-family: "Archivo", Helvetica;
+    font-weight: 400;
+    color: #171a1f;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .frame .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .frame .category-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fffaf1;
+    border: 1px solid #a17561;
+    border-radius: 4px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #a17561;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .frame .category-link:hover {
+    background-color: #a17561;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(161, 117, 97, 0.2);
+  }
+
+  /* Wishlist heart icon styles */
+  .wishlist-heart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+  .wishlist-heart:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+  }
+
+  .wishlist-heart svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: #a17561;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+  }
+
+  .wishlist-heart.active svg {
+    fill: #a17561;
+  }
+
+  .wishlist-heart:hover svg {
+    stroke: #8a6354;
+  }
+  /* Adjust container-3 through container-6 for image-2 */
+  .frame .container-3 .wishlist-heart,
+  .frame .container-4 .wishlist-heart,
+  .frame .container-5 .wishlist-heart,
+  .frame .container-6 .wishlist-heart {
+    top: 52px; /* 44px (image top position) + 8px (margin) */
+  }
+  
+  /* Adjust container-7 through container-18 for image-3 */
+  .frame .container-7 .wishlist-heart,
+  .frame .container-8 .wishlist-heart,
+  .frame .container-9 .wishlist-heart,
+  .frame .container-10 .wishlist-heart,
+  .frame .container-11 .wishlist-heart,
+  .frame .container-12 .wishlist-heart,
+  .frame .container-13 .wishlist-heart,
+  .frame .container-14 .wishlist-heart,
+  .frame .container-15 .wishlist-heart,
+  .frame .container-16 .wishlist-heart,
+  .frame .container-17 .wishlist-heart,
+  .frame .container-18 .wishlist-heart {
+    top: 8px; /* Image top position is 0, so just add the margin */
+  }
+
+  /* Search Results Dropdown Styles */
+  .search-results-dropdown {
+    position: absolute;
+    top: 47px;
+    left: 0;
+    width: 280px;
+    max-height: 350px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border: 1px solid #e0e0e0;
+  }
+
+  .search-result-item {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .search-result-item:hover {
+    background-color: #f8f0ea;
+  }
+
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+
+  .search-result-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .search-result-details {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .search-result-name {
+    font-family: "Roboto", Helvetica;
+    font-weight: 500;
+    color: #171a1f;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .search-result-price {
+    font-family: "Roboto", Helvetica;
+    font-weight: 400;
+    color: #9095a1;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Highlighted product */
+  .highlighted {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3) !important;
+    border: 2px solid #a17561 !important;
+    animation: highlight-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes highlight-pulse {
+    0% { box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3); }
+    50% { box-shadow: 0 8px 25px rgba(161, 117, 97, 0.5); }
+    100% { box-shadow: 0 8px 20px rgba(161, 117, 97, 0.3); }
+  }
+
+  .search-container {
+    position: relative;
+  }
+  
+  .search-form {
+    position: relative;
+    width: 100%;
   }

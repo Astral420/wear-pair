@@ -5,80 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="products.css"/>
     <link rel="stylesheet" href="globals.css"/>
-    <script>
-         document.addEventListener('DOMContentLoaded', function() {
-        // Check if user is logged in from localStorage
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
-        
-        const profileButton = document.getElementById('profileButton');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
-        
-        // Get current user info if logged in
-        let currentUser = null;
-        if (isLoggedIn) {
-          const currentUserData = localStorage.getItem('currentUser');
-          if (currentUserData) {
-            currentUser = JSON.parse(currentUserData);
-            // Update only the text part of the profile button to show user's name
-            if (currentUser.fullName) {
-              // Find the text element inside the profile button and update only that
-              const textElement = profileButton.querySelector('.text-name');
-              if (textElement) {
-                // Just change the text content, keep the original structure
-                textElement.textContent = currentUser.fullName.split(' ')[0];
-              }
-            }
-          }
-        }
-        
-        // Set dropdown content based on login state
-        if (isLoggedIn) {
-          console.log('Setting logged-in dropdown menu');
-          // User is logged in - show logout option and wishlist
-          dropdownMenu.innerHTML = `
-            <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
-            <a href="/#" class="dropdown-item">Wishlist</a>
-            <a href="/#" class="dropdown-item">Submissions</a>
-          `;
-          
-          // Add logout functionality
-          document.getElementById('logoutLink')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('currentUser');
-            alert('Logged out successfully');
-            window.location.reload();
-          });
-        } else {
-          console.log('Setting logged-out dropdown menu');
-          // User is not logged in - show only login option
-          dropdownMenu.innerHTML = `
-            <a href="login.html" class="dropdown-item">Login</a>
-          `;
-        }
-        
-        
-        // Toggle dropdown on button click
-        profileButton.addEventListener('click', function(e) {
-          e.stopPropagation();
-          dropdownMenu.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking elsewhere on the document
-        document.addEventListener('click', function(e) {
-          if (!profileButton.contains(e.target)) {
-            dropdownMenu.classList.remove('active');
-          }
-        });
-            
-            // Set search input value from localStorage if available
-            const lastSearch = localStorage.getItem('lastSearch');
-            if (lastSearch && searchInput) {
-              searchInput.value = lastSearch;
-            }
-          });
-    </script>
+    <link rel="stylesheet" href="common.css"/>
+    <script src="scripts/common.js"></script>
 
 </head>
 <body>
@@ -125,6 +53,9 @@
                 <form class="search-form">
                   <input type="text" class="search-input" placeholder="Search products...">
                 </form>
+                <div class="search-results-dropdown" style="display: none;">
+                  <!-- Search results will appear here -->
+                </div>
               </div>
               <div class="dropdown-container">
                 <button class="button" id="profileButton">
@@ -139,86 +70,180 @@
             <div class="overlap-2">
                 <div class="container-2">
                   <div class="container-3">
+                    <div class="wishlist-heart" data-product-id="1" data-product-name="Denim Jacket" data-product-price="59.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-4">$59.99</div>
                     <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image.png" />
                     <div class="text-wrapper-5">Denim Jacket</div>
                   </div>
                   <div class="container-4">
+                    <div class="wishlist-heart" data-product-id="2" data-product-name="Knitted Sweater" data-product-price="39.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-4">$39.99</div>
                     <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png" />
                     <div class="text-wrapper-5">Knitted Sweater</div>
                   </div>
                   <div class="container-5">
+                    <div class="wishlist-heart" data-product-id="3" data-product-name="Slim-Fit Jeans" data-product-price="49.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-4">$49.99</div>
                     <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png" />
                     <div class="text-wrapper-5">Slim-Fit Jeans</div>
                   </div>
                   <div class="container-6">
+                    <div class="wishlist-heart" data-product-id="4" data-product-name="White T-Shirt" data-product-price="19.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-4">$19.99</div>
                     <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png" />
                     <div class="text-wrapper-5">White T-Shirt</div>
                   </div>
                   <div class="container-7">
+                    <div class="wishlist-heart" data-product-id="5" data-product-name="Sleeveless Sport Swimsuit" data-product-price="59.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$59.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png" />
                     <div class="text-wrapper-7">Sleeveless Sport Swimsuit</div>
                   </div>
                   <div class="container-8">
+                    <div class="wishlist-heart" data-product-id="6" data-product-name="Leather Boots" data-product-price="89.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$89.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png" />
                     <div class="text-wrapper-7">Leather Boots</div>
                   </div>
                   <div class="container-9">
+                    <div class="wishlist-heart" data-product-id="7" data-product-name="Adjustable Shoulder Bag" data-product-price="79.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$79.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png" />
                     <div class="text-wrapper-7">Adjustable Shoulder Bag</div>
                   </div>
                   <div class="text-wrapper-8">Featured Clothing Items</div>
                   <div class="container-10">
+                    <div class="wishlist-heart" data-product-id="8" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-11">
+                    <div class="wishlist-heart" data-product-id="9" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-12">
+                    <div class="wishlist-heart" data-product-id="10" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-13">
+                    <div class="wishlist-heart" data-product-id="11" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-14">
+                    <div class="wishlist-heart" data-product-id="12" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-15">
+                    <div class="wishlist-heart" data-product-id="13" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-16">
+                    <div class="wishlist-heart" data-product-id="14" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-17">
+                    <div class="wishlist-heart" data-product-id="15" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
                   <div class="container-18">
+                    <div class="wishlist-heart" data-product-id="16" data-product-name="Men's Fashionable T-Shirt" data-product-price="80.99">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                    </div>
                     <div class="text-wrapper-6">$80.99</div>
                     <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
                     <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
                   </div>
+                  
+                  <div class="categories-section">
+                    <div class="categories-container">
+                      <a href="#t-shirts" class="category-link">T-Shirts</a>
+                      <a href="#jeans" class="category-link">Jeans</a>
+                      <a href="#dresses" class="category-link">Dresses</a>
+                      <a href="#hoodies" class="category-link">Hoodies</a>
+                      <a href="#shoes" class="category-link">Shoes</a>
+                      <a href="#blazers" class="category-link">Blazers</a>
+                      <a href="#swimwear" class="category-link">Swimwear</a>
+                      <a href="#accessories" class="category-link">Accessories</a>
+                    </div>
+                  </div>
+                  
                   <button class="next-page-wrapper"><div class="next-page">Next Page</div></button>
                 </div>
 
@@ -278,3 +303,64 @@
     
 </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize wishlist from localStorage
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+    // Add event listeners to all wishlist heart icons
+    const wishlistHearts = document.querySelectorAll('.wishlist-heart');
+    
+    wishlistHearts.forEach(heart => {
+      const productId = heart.getAttribute('data-product-id');
+      
+      // Set initial state based on localStorage
+      if (wishlist.some(item => item.id === productId)) {
+        heart.classList.add('active');
+      }
+      
+      heart.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent container click
+        
+        const productId = this.getAttribute('data-product-id');
+        const productName = this.getAttribute('data-product-name');
+        const productPrice = this.getAttribute('data-product-price');
+        
+        // Check if user is logged in
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        if (!isLoggedIn) {
+          alert('Please log in to add items to your wishlist.');
+          return;
+        }
+        
+        // Toggle active class
+        this.classList.toggle('active');
+        
+        // Get current wishlist
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        
+        // Check if product is already in wishlist
+        const existingIndex = wishlist.findIndex(item => item.id === productId);
+        
+        if (existingIndex > -1) {
+          // Remove from wishlist
+          wishlist.splice(existingIndex, 1);
+          console.log(`Removed ${productName} from wishlist`);
+        } else {
+          // Add to wishlist
+          wishlist.push({
+            id: productId,
+            name: productName,
+            price: productPrice
+          });
+          console.log(`Added ${productName} to wishlist`);
+        }
+        
+        // Save updated wishlist
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      });
+    });
+  });
+</script>
