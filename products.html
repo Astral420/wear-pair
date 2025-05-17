@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="products.css"/>
+    <link rel="stylesheet" href="globals.css"/>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is logged in from localStorage
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
+        
+        const profileButton = document.getElementById('profileButton');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        // Get current user info if logged in
+        let currentUser = null;
+        if (isLoggedIn) {
+          const currentUserData = localStorage.getItem('currentUser');
+          if (currentUserData) {
+            currentUser = JSON.parse(currentUserData);
+            // Update only the text part of the profile button to show user's name
+            if (currentUser.fullName) {
+              // Find the text element inside the profile button and update only that
+              const textElement = profileButton.querySelector('.text-name');
+              if (textElement) {
+                // Just change the text content, keep the original structure
+                textElement.textContent = currentUser.fullName.split(' ')[0];
+              }
+            }
+          }
+        }
+        
+        // Set dropdown content based on login state
+        if (isLoggedIn) {
+          console.log('Setting logged-in dropdown menu');
+          // User is logged in - show logout option and wishlist
+          dropdownMenu.innerHTML = `
+            <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
+            <a href="/#" class="dropdown-item">Wishlist</a>
+            <a href="/#" class="dropdown-item">Submissions</a>
+          `;
+          
+          // Add logout functionality
+          document.getElementById('logoutLink')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            alert('Logged out successfully');
+            window.location.reload();
+          });
+        } else {
+          console.log('Setting logged-out dropdown menu');
+          // User is not logged in - show only login option
+          dropdownMenu.innerHTML = `
+            <a href="login.html" class="dropdown-item">Login</a>
+          `;
+        }
+        
+        
+        // Toggle dropdown on button click
+        profileButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          dropdownMenu.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking elsewhere on the document
+        document.addEventListener('click', function(e) {
+          if (!profileButton.contains(e.target)) {
+            dropdownMenu.classList.remove('active');
+          }
+        });
+            
+            // Set search input value from localStorage if available
+            const lastSearch = localStorage.getItem('lastSearch');
+            if (lastSearch && searchInput) {
+              searchInput.value = lastSearch;
+            }
+          });
+    </script>
+
+</head>
+<body>
+    <div class="frame" data-model-id="158:126">
+        <div class="product-page-wrapper">
+          <div class="product-page">
+            <header class="header">
+              <div class="image">
+                <div class="group">
+                  <div class="div-wrapper">
+                    <div class="group-wrapper">
+                      <div class="div-wrapper">
+                        <div class="overlap-group">
+                          <img class="img" src="https://c.animaapp.com/Ms9Ew6Mf/img/group@2x.png" />
+                          <img class="group-2" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-1@2x.png" />
+                          <img class="group-3" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-2@2x.png" />
+                          <img class="group-4" src="https://c.animaapp.com/Ms9Ew6Mf/img/group-3@2x.png" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="wear-pair">Wear &amp; Pair</div>
+              <div class="header-menu">
+                <div class="div">
+                 
+                  <a href="/" class="text-wrapper">home</a>
+                </div>
+                <div class="div-wrapper-2">
+                    <div class="rectangle"></div>
+                  <a href="products.html" class="text-wrapper-2">products</a>
+                </div>
+                <div class="overlap">
+                  <div class="custom-wrapper">
+                    <a href="builder.html" class="custom">outfit generator</a>
+                  </div>
+                  <div class="custom-wrapper-2">
+                    <a href="/#" class="custom-2">trending styles</a>
+                  </div>
+                </div>
+              </div>
+              <div class="search-container">
+                <form class="search-form">
+                  <input type="text" class="search-input" placeholder="Search products...">
+                </form>
+              </div>
+              <div class="dropdown-container">
+                <button class="button" id="profileButton">
+                  <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                  <div class="text-name">Profile</div>
+                </button>
+                <div class="dropdown-menu">
+                </div>
+              </div>
+            </header>
+
+            <div class="overlap-2">
+                <div class="container-2">
+                  <div class="container-3">
+                    <div class="text-wrapper-4">$59.99</div>
+                    <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image.png" />
+                    <div class="text-wrapper-5">Denim Jacket</div>
+                  </div>
+                  <div class="container-4">
+                    <div class="text-wrapper-4">$39.99</div>
+                    <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png" />
+                    <div class="text-wrapper-5">Knitted Sweater</div>
+                  </div>
+                  <div class="container-5">
+                    <div class="text-wrapper-4">$49.99</div>
+                    <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png" />
+                    <div class="text-wrapper-5">Slim-Fit Jeans</div>
+                  </div>
+                  <div class="container-6">
+                    <div class="text-wrapper-4">$19.99</div>
+                    <img class="image-2" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png" />
+                    <div class="text-wrapper-5">White T-Shirt</div>
+                  </div>
+                  <div class="container-7">
+                    <div class="text-wrapper-6">$59.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png" />
+                    <div class="text-wrapper-7">Sleeveless Sport Swimsuit</div>
+                  </div>
+                  <div class="container-8">
+                    <div class="text-wrapper-6">$89.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png" />
+                    <div class="text-wrapper-7">Leather Boots</div>
+                  </div>
+                  <div class="container-9">
+                    <div class="text-wrapper-6">$79.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png" />
+                    <div class="text-wrapper-7">Adjustable Shoulder Bag</div>
+                  </div>
+                  <div class="text-wrapper-8">Featured Clothing Items</div>
+                  <div class="container-10">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-11">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-12">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-13">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-14">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-15">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-16">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-17">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <div class="container-18">
+                    <div class="text-wrapper-6">$80.99</div>
+                    <img class="image-3" src="https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png" />
+                    <div class="text-wrapper-7">Men&#39;s Fashionable T-Shirt</div>
+                  </div>
+                  <button class="next-page-wrapper"><div class="next-page">Next Page</div></button>
+                </div>
+
+                <div class="footer">
+                    <div class="newsletter-wrapper">Subscribe to our newsletter</div>
+                    <div class="textbox">
+                      <div class="language">English</div>
+                      <img class="chevron-down-large" src="https://c.animaapp.com/mammlrq5P8khak/img/chevron-down-large.svg" />
+                    </div>
+                    <div class="text-wrapper-2">Sitemap</div>
+                    <div class="text-wrapper-3">•</div>
+                    <div class="text-wrapper-4">© 2024 Brand, Inc.</div>
+                    <div class="text-wrapper-5">Privacy</div>
+                    <div class="text-wrapper-6">Terms</div>
+                    <div class="text-wrapper-7">•</div>
+                    <div class="text-wrapper-8">•</div>
+                    <div class="textbox-2">
+                      <input type="text" placeholder="Input your email" class="email-input">
+                      <img class="mail" src="https://c.animaapp.com/mammlrq5P8khak/img/mail.svg" />
+                    </div>
+                    <button class="button"><div class="text-wrapper-10">Subscribe</div></button>
+                    <div class="logo-youtube"><div class="group"></div></div>
+                    <div class="logo-twitter"><div class="group-2"></div></div>
+                    <div class="logo-facebook"><div class="group-3"></div></div>
+                    <div class="logo-linkedin"><div class="group-4"></div></div>
+                    <div class="plans-pricing">Plans &amp; Pricing</div>
+                    <div class="text-wrapper-11">Personal</div>
+                    <div class="text-wrapper-12">Start up</div>
+                    <div class="text-wrapper-13">Organization</div>
+                    <div class="text-wrapper-14">Company</div>
+                    <div class="text-wrapper-15">About us</div>
+                    <div class="text-wrapper-16">Contact us</div>
+                    <div class="text-wrapper-17">Product</div>
+                    <div class="text-wrapper-18">Features</div>
+                    <div class="text-wrapper-19">Pricing</div>
+                    <div class="text-wrapper-20">Resources</div>
+                    <div class="text-wrapper-21">Blog</div>
+                    <div class="text-wrapper-22">User guides</div>
+                    <div class="text-wrapper-23">Webinars</div>
+                    <div class="image">
+                      <div class="group-wrapper">
+                        <div class="div-wrapper">
+                          <div class="group-5">
+                            <div class="div-wrapper">
+                              <div class="overlap-group">
+                                <img class="img" src="https://c.animaapp.com/mammlrq5P8khak/img/group-4.png" />
+                                <img class="group-6" src="https://c.animaapp.com/mammlrq5P8khak/img/group-5.png" />
+                                <img class="group-7" src="https://c.animaapp.com/mammlrq5P8khak/img/group-6.png" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="wear-pair">Wear &amp; Pair</div>
+                  </div>
+    
+</body>
+</html>

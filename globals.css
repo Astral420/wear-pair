@@ -9,6 +9,7 @@ body {
   margin: 0px;
   height: 100%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
   
 }
 /* a blue color as a generic focus style */
