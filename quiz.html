@@ -71,6 +71,17 @@
             }
           });
           
+          // Add event listener for the quiz start button to scroll to the quiz section
+          const quizStartButton = document.getElementById('quizStartButton');
+          if (quizStartButton) {
+            quizStartButton.addEventListener('click', function() {
+              const quizSection = document.querySelector('.container-10');
+              if (quizSection) {
+                quizSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            });
+          }
+          
           // Search functionality
           const searchForm = document.querySelector('.search-form');
           const searchInput = document.querySelector('.search-input');
@@ -192,7 +203,7 @@
                   colors: "Neutrals with denim blue",
                   pieces: "White t-shirt, denim shorts, white sneakers",
                   occasion: "Everyday casual, warm weather outings",
-                  inspiration: "Alexa Chung"
+                 
                 }
               },
               {
@@ -207,7 +218,7 @@
                   colors: "Neutrals + Black",
                   pieces: "Structured blazer, white blouse, tailored trousers",
                   occasion: "Office, formal events, upscale dining",
-                  inspiration: "Hailey Bieber"
+                 
                 }
               },
               {
@@ -222,7 +233,7 @@
                   colors: "Bright color palette",
                   pieces: "Oversized jacket, graphic tee, wide-leg pants",
                   occasion: "Creative events, casual outings, art shows",
-                  inspiration: "Emma Chamberlain"
+                 
                 }
               },
               {
@@ -237,7 +248,7 @@
                   colors: "Monochromes, darks",
                   pieces: "Track jacket, cargo joggers, high-top sneakers",
                   occasion: "Casual outings, urban settings, active days",
-                  inspiration: "BTS"
+                 
                 }
               },
               {
@@ -252,7 +263,7 @@
                   colors: "Pastels or neutrals",
                   pieces: "Pleated midi skirt, knit top, low heels",
                   occasion: "Brunches, dinner dates, semi-formal events",
-                  inspiration: "Zendaya"
+                  
                 }
               },
               {
@@ -267,7 +278,7 @@
                   colors: "Monochrome palette",
                   pieces: "Oversized hoodie, slim joggers, chunky sneakers",
                   occasion: "Urban outings, casual hang-outs, streetwear events",
-                  inspiration: "Timothée Chalamet"
+                 
                 }
               }
             ];
@@ -331,20 +342,6 @@
                   score += 3;
                 }
                 
-                // Score based on fashion icon inspiration
-                if (preferences.icon === "Hailey Bieber" && outfit.id === "modern-chic") {
-                  score += 3;
-                } else if (preferences.icon === "Emma Chamberlain" && outfit.id === "bold-creative") {
-                  score += 3;
-                } else if (preferences.icon === "BTS" && outfit.id === "sport-luxe") {
-                  score += 3;
-                } else if (preferences.icon === "Alexa Chung" && outfit.id === "summer-casual") {
-                  score += 3;
-                } else if (preferences.icon === "Zendaya" && outfit.id === "effortless-elegant") {
-                  score += 3;
-                } else if (preferences.icon === "Timothée Chalamet" && outfit.id === "street-style") {
-                  score += 3;
-                }
                 
                 return {
                   ...outfit,
@@ -371,7 +368,7 @@
                   <div class="style-detail-item"><strong>Colors:</strong> ${outfit.details.colors}</div>
                   <div class="style-detail-item"><strong>Pieces:</strong> ${outfit.details.pieces}</div>
                   <div class="style-detail-item"><strong>Occasions:</strong> ${outfit.details.occasion}</div>
-                  <div class="style-detail-item"><strong>Inspiration:</strong> ${outfit.details.inspiration}</div>
+                
                 </div>
                 <button class="view-details-button" data-outfit-id="${outfit.id}">View Details</button>
               `;
@@ -536,16 +533,7 @@
                     </div>
                     <div class="image-2"></div>
                 </div>
-                <div class="container-8">
-                  <div class="circle-3">
-                    <div class="group-7">
-                      <div class="group-8">
-                        <img class="group-9" src="https://c.animaapp.com/maqs7d0oT9rk3D/img/group-7.png" />
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
+               
               </div>
             </div>
             <div class="container-10">
@@ -823,6 +811,7 @@
         <!-- Content will be dynamically populated based on quiz answers -->
       </div>
     </div>
+
 
 </body>
 </html>

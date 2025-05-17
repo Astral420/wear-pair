@@ -764,7 +764,7 @@
   .style-quiz-page .container-6 {
     width: 384px;
     height: 235px;
-    top: 303px;
+    top: 230px;
     left: 0;
     position: absolute;
     border: 0px none;
@@ -826,7 +826,7 @@
   .style-quiz-page .container-8 {
     width: 384px;
     height: 209px;
-    top: 570px;
+    top: 500px;
     left: 0;
     position: absolute;
     border: 0px none;
@@ -2194,4 +2194,6 @@
   }
   
   /* End Style Quiz Results Popup */
+
+  
   
