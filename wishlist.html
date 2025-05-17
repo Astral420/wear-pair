@@ -50,10 +50,10 @@
       // Function to load and display wishlist items
       function loadWishlistItems() {
         // Check if user is logged in
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const userEmail = getCurrentUserEmail();
         const wishlistContainer = document.getElementById('wishlist-container');
         
-        if (!isLoggedIn) {
+        if (!userEmail) {
           wishlistContainer.innerHTML = `
             <div class="empty-wishlist">
               <h2>Please log in to view your wishlist</h2>
@@ -63,8 +63,8 @@
           return;
         }
         
-        // Get wishlist items from localStorage
-        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        // Get wishlist items for the current user
+        const wishlist = getUserWishlist();
         
         if (wishlist.length === 0) {
           wishlistContainer.innerHTML = `
@@ -94,7 +94,19 @@
           13: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
           14: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
           15: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
-          16: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png"
+          16: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png",
+          // Additional IDs for products on index page
+          101: "assets/whiteshirt-denim-outfit.png", // Summer Casual
+          102: "assets/formal-chic.png", // Formal Chic
+          103: "assets/img/cropped-hoodie.png", // Sporty Vibes
+          104: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", // Boho Style
+          105: "assets/winter-warmth-outfit.png", // Winter Warmth
+          106: "assets/img/striped-swimsuit.png", // Beach Ready
+          107: "assets/img/streetwear-hoodie.png", // Streetwear Cool
+          108: "https://images.unsplash.com/photo-1562137369-1a1a0bc66744?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", // Evening Glam
+          201: "https://c.animaapp.com/FpgE2lUx/img/image@2x.png", // Bomber Jacket
+          202: "https://c.animaapp.com/FpgE2lUx/img/image-1@2x.png", // Off-shoulder graphic tee
+          203: "https://c.animaapp.com/FpgE2lUx/img/image-2@2x.png" // New Balance 530
         };
         
         // Generate HTML for wishlist items
@@ -108,7 +120,7 @@
               <div class="wishlist-item-details">
                 <h3>${item.name}</h3>
                 <p class="wishlist-item-price">$${item.price}</p>
-                <button class="remove-from-wishlist" onclick="removeFromWishlist(${item.id})">Remove</button>
+                <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${item.id}')">Remove</button>
                 <button class="add-to-cart">Add to Cart</button>
               </div>
             </div>
@@ -119,18 +131,12 @@
       }
       
       // Function to remove item from wishlist
-      function removeFromWishlist(productId) {
-        // Get current wishlist
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        
-        // Remove the item
-        wishlist = wishlist.filter(item => item.id !== productId.toString());
-        
-        // Save updated wishlist
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        
-        // Reload wishlist items
-        loadWishlistItems();
+      function removeItemFromWishlist(productId) {
+        // Remove item using the global function from common.js
+        if (removeFromUserWishlist(productId)) {
+          // Reload wishlist items to update the display
+          loadWishlistItems();
+        }
       }
     </script>
 </head>

@@ -306,18 +306,17 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize wishlist from localStorage
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    
-    // Add event listeners to all wishlist heart icons
+    // Get all wishlist heart icons
     const wishlistHearts = document.querySelectorAll('.wishlist-heart');
     
     wishlistHearts.forEach(heart => {
       const productId = heart.getAttribute('data-product-id');
       
-      // Set initial state based on localStorage
-      if (wishlist.some(item => item.id === productId)) {
+      // Set initial state based on current user's wishlist
+      if (isInUserWishlist(productId)) {
         heart.classList.add('active');
+      } else {
+        heart.classList.remove('active');
       }
       
       heart.addEventListener('click', function(e) {
@@ -328,38 +327,32 @@
         const productPrice = this.getAttribute('data-product-price');
         
         // Check if user is logged in
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        
-        if (!isLoggedIn) {
+        const userEmail = getCurrentUserEmail();
+        if (!userEmail) {
           alert('Please log in to add items to your wishlist.');
           return;
         }
         
-        // Toggle active class
-        this.classList.toggle('active');
-        
-        // Get current wishlist
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        
-        // Check if product is already in wishlist
-        const existingIndex = wishlist.findIndex(item => item.id === productId);
-        
-        if (existingIndex > -1) {
+        // Toggle wishlist status
+        if (isInUserWishlist(productId)) {
           // Remove from wishlist
-          wishlist.splice(existingIndex, 1);
-          console.log(`Removed ${productName} from wishlist`);
+          if (removeFromUserWishlist(productId)) {
+            this.classList.remove('active');
+            console.log(`Removed ${productName} from wishlist`);
+          }
         } else {
           // Add to wishlist
-          wishlist.push({
+          const newItem = {
             id: productId,
             name: productName,
             price: productPrice
-          });
-          console.log(`Added ${productName} to wishlist`);
+          };
+          
+          if (addToUserWishlist(newItem)) {
+            this.classList.add('active');
+            console.log(`Added ${productName} to wishlist`);
+          }
         }
-        
-        // Save updated wishlist
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
       });
     });
   });

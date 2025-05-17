@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentUser = JSON.parse(currentUserData);
         // Update only the text part of the profile button to show user's name
         if (currentUser.fullName) {
-          // Find the text element inside the profile button and update only that
           // Try both classes that might be used (.text-name for products.html and .text-wrapper-3 for index.html)
           let textElement = profileButton.querySelector('.text-name');
           if (!textElement) {
@@ -207,4 +206,82 @@ document.addEventListener('DOMContentLoaded', function() {
     if (highlightId) {
       highlightProduct(highlightId);
     }
-}); 
+});
+
+// WISHLIST HELPER FUNCTIONS - Available globally
+
+// Get the current user's email (or null if not logged in)
+function getCurrentUserEmail() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  if (!isLoggedIn) return null;
+  
+  const currentUserData = localStorage.getItem('currentUser');
+  if (!currentUserData) return null;
+  
+  const currentUser = JSON.parse(currentUserData);
+  return currentUser.email;
+}
+
+// Get wishlist for current user
+function getUserWishlist() {
+  const userEmail = getCurrentUserEmail();
+  if (!userEmail) return [];
+  
+  // Get all wishlists
+  const allWishlists = JSON.parse(localStorage.getItem('userWishlists')) || {};
+  
+  // Return this user's wishlist, or empty array if none exists
+  return allWishlists[userEmail] || [];
+}
+
+// Save wishlist for current user
+function saveUserWishlist(wishlistItems) {
+  const userEmail = getCurrentUserEmail();
+  if (!userEmail) {
+    console.error('Cannot save wishlist - user not logged in');
+    return false;
+  }
+  
+  // Get all wishlists
+  const allWishlists = JSON.parse(localStorage.getItem('userWishlists')) || {};
+  
+  // Update this user's wishlist
+  allWishlists[userEmail] = wishlistItems;
+  
+  // Save back to localStorage
+  localStorage.setItem('userWishlists', JSON.stringify(allWishlists));
+  return true;
+}
+
+// Add item to current user's wishlist
+function addToUserWishlist(item) {
+  const wishlist = getUserWishlist();
+  
+  // Check if already in wishlist
+  if (wishlist.some(existingItem => existingItem.id === item.id)) {
+    return false; // Already exists
+  }
+  
+  // Add new item
+  wishlist.push(item);
+  
+  // Save updated wishlist
+  return saveUserWishlist(wishlist);
+}
+
+// Remove item from current user's wishlist
+function removeFromUserWishlist(productId) {
+  const wishlist = getUserWishlist();
+  
+  // Filter out the item to remove
+  const updatedWishlist = wishlist.filter(item => item.id !== productId.toString());
+  
+  // Save updated wishlist
+  return saveUserWishlist(updatedWishlist);
+}
+
+// Check if an item is in the current user's wishlist
+function isInUserWishlist(productId) {
+  const wishlist = getUserWishlist();
+  return wishlist.some(item => item.id === productId.toString());
+} 
