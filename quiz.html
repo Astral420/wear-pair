@@ -5,7 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="globals.css">
     <link rel="stylesheet" href="style-quiz.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+      /* Fix for dropdown menu */
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 150px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        margin-top: 8px;
+        z-index: 100;
+        overflow: hidden;
+      }
+      .dropdown-menu.active {
+        display: block !important;
+      }
+      .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        font-family: "Inter", Helvetica;
+        font-weight: 400;
+        font-size: 14px;
+        color: #565d6d;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+      .dropdown-item:hover {
+        background-color: #f5efe8;
+        color: #a17561;
+      }
+    </style>
+    <script src="scripts/common.js"></script>
     <script src="scripts/style-quiz.js"></script>
+    
 </head>
 <body>
     <div class="frame" data-model-id="158:126">
@@ -50,6 +86,9 @@
                 <form class="search-form">
                   <input type="text" class="search-input" placeholder="Search products...">
                 </form>
+                <div class="search-results-dropdown" style="display: none;">
+                  <!-- Search results will appear here -->
+                </div>
               </div>
               <div class="dropdown-container">
                 <button class="button" id="profileButton">

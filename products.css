@@ -512,17 +512,20 @@
     border: 0px none;
   }
   
-  .frame .container-3 {
+  .frame .container-3,
+  .frame .container-4,
+  .frame .container-5,
+  .frame .container-6 {
     width: 276px;
     height: 384px;
-    top: 174px;
-    left: 132px;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: visible;
     position: absolute;
     border: 0px none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-top: 44px;
+    box-sizing: border-box;
   }
   
   .frame .container-3:hover,
@@ -543,6 +546,7 @@
   .frame .container-18:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    clip-path: inset(0px -16px -16px -16px);
   }
   
   .frame .text-wrapper-4 {
@@ -562,7 +566,7 @@
     position: absolute;
     width: 276px;
     height: 276px;
-    top: 44px;
+    top: 0;
     left: 0;
     object-fit: cover;
     border-radius: 8px;
@@ -571,7 +575,7 @@
   .frame .text-wrapper-5 {
     position: absolute;
     width: 276px;
-    top: 328px;
+    top: 286px;
     left: 0;
     font-family: "Roboto", Helvetica;
     font-weight: 700;
@@ -579,6 +583,7 @@
     font-size: 16px;
     letter-spacing: 0;
     line-height: 26px;
+    text-align: center;
   }
   
   .frame .container-4 {
@@ -667,6 +672,7 @@
     font-size: 16px;
     letter-spacing: 0;
     line-height: 26px;
+    text-align: center;
   }
   
   .frame .container-8 {
@@ -1417,12 +1423,13 @@
   /* Category Section Styles */
   .frame .categories-section {
     position: relative;
-    width: 80%;
-    max-width: 1000px;
+    width: 90%; /* Increased from 80% to allow more space */
+    max-width: 1200px; /* Increased from 1000px to accommodate all buttons */
     margin: 0 auto;
     text-align: center;
     margin-top: 120px;
     margin-bottom: 40px;
+    
   }
   
   .frame .categories-title {
@@ -1438,15 +1445,16 @@
   
   .frame .categories-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Changed from wrap to nowrap to prevent wrapping */
     justify-content: center;
-    gap: 15px;
+    gap: 10px; /* Decreased from 15px to fit all buttons */
     margin-bottom: 30px;
+    min-width: min-content; /* Ensure container respects children's size */
   }
   
   .frame .category-link {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 15px; /* Reduced horizontal padding from 20px to 15px */
     background-color: #fffaf1;
     border: 1px solid #a17561;
     border-radius: 4px;
@@ -1458,6 +1466,7 @@
     line-height: 22px;
     text-decoration: none;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping within buttons */
   }
   
   .frame .category-link:hover {
@@ -1506,12 +1515,14 @@
   .wishlist-heart:hover svg {
     stroke: #8a6354;
   }
-  /* Adjust container-3 through container-6 for image-2 */
+
+  /* Update wishlist heart positioning for container-3 through container-6 */
   .frame .container-3 .wishlist-heart,
   .frame .container-4 .wishlist-heart,
   .frame .container-5 .wishlist-heart,
   .frame .container-6 .wishlist-heart {
-    top: 52px; /* 44px (image top position) + 8px (margin) */
+    top: 8px; /* Adjusted from 52px to 8px since the image is now at top: 0 */
+    z-index: 20; /* Ensure it's above the image */
   }
   
   /* Adjust container-7 through container-18 for image-3 */
@@ -1612,4 +1623,227 @@
   .search-form {
     position: relative;
     width: 100%;
+  }
+
+  /* Product Popup Styles */
+  .product-popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0;
+    display: none;
+    animation: popup-appear 0.3s forwards;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  @keyframes popup-appear {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .product-popup[style*="display: block"] {
+    animation: popup-appear 0.3s forwards;
+  }
+
+  .popup-content {
+    display: flex;
+    position: relative;
+    padding: 30px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .close-popup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .close-popup:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+  }
+
+  .popup-image {
+    flex: 0 0 300px;
+    margin-right: 30px;
+  }
+
+  .popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .popup-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popup-details h2 {
+    font-family: "Archivo", Helvetica;
+    font-weight: 700;
+    color: #171a1f;
+    font-size: 24px;
+    margin: 0 0 10px 0;
+  }
+
+  .popup-price {
+    font-family: "Roboto", Helvetica;
+    font-weight: 700;
+    color: #a17561;
+    font-size: 22px;
+    margin: 0 0 20px 0;
+  }
+
+  .popup-description {
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #424856;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 30px 0;
+  }
+
+  .buy-now-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #a17561;
+    color: white;
+    font-family: "Inter", Helvetica;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .buy-now-button:hover {
+    background-color: #8a6354;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .popup-retailers {
+    margin-top: auto;
+  }
+
+  .popup-retailers p {
+    font-family: "Inter", Helvetica;
+    font-weight: 500;
+    color: #171a1f;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+  }
+
+  .retailer-links {
+    display: flex;
+    gap: 15px;
+  }
+
+  .retailer-links a {
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #a17561;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .retailer-links a:hover {
+    color: #8a6354;
+    text-decoration: underline;
+  }
+
+  /* Make product containers clickable with a pointer cursor */
+  .product-container {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Media queries for responsive popup */
+  @media (max-width: 768px) {
+    .popup-content {
+      flex-direction: column;
+    }
+    
+    .popup-image {
+      flex: 0 0 auto;
+      margin-right: 0;
+      margin-bottom: 20px;
+      max-height: 250px;
+    }
+  }
+
+  /* Fix container-3 to restore positioning */
+  .frame .container-3 {
+    top: 210px;
+    left: 132px;
+  }
+
+  /* Add back the positioning for container-4 */
+  .frame .container-4 {
+    top: 210px;
+    left: 432px;
+  }
+
+  /* Add back the positioning for container-5 */
+  .frame .container-5 {
+    top: 210px;
+    left: 732px;
+  }
+
+  /* Add back the positioning for container-6 */
+  .frame .container-6 {
+    top: 210px;
+    left: 1032px;
   }

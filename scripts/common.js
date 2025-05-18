@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { id: 6, name: 'Leather Boots', price: '89.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png' },
       { id: 7, name: 'Adjustable Shoulder Bag', price: '79.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png' },
       { id: 8, name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png' }
+      
     ];
     
     // Add event listener for search input
@@ -144,21 +145,20 @@ document.addEventListener('DOMContentLoaded', function() {
           <img src="${product.image}" alt="${product.name}" class="search-result-image">
           <div class="search-result-details">
             <div class="search-result-name">${product.name}</div>
-            <div class="search-result-price">$${product.price}</div>
           </div>
         `;
         
         // Make the result item clickable
         resultItem.addEventListener('click', function() {
           console.log(`Clicked on product: ${product.name}`);
-          // Save the search term to localStorage
-          localStorage.setItem('lastSearch', product.name);
           
           // Redirect to products page if on a different page
           if (!window.location.pathname.includes('products.html')) {
+            // Clear the search input from localStorage when navigating to avoid persistence
+            localStorage.removeItem('lastSearch');
             window.location.href = 'products.html?highlight=' + product.id;
           } else {
-            // For now just highlight the product on the current page
+            // Just highlight the product on the current page
             highlightProduct(product.id);
             searchResultsDropdown.style.display = 'none';
             searchInput.value = product.name;
@@ -194,17 +194,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Set search input value from localStorage if available
-    const lastSearch = localStorage.getItem('lastSearch');
-    if (lastSearch && searchInput) {
-      searchInput.value = lastSearch;
-    }
-    
-    // Check if we should highlight a product (from URL parameter)
-    const urlParams = new URLSearchParams(window.location.search);
-    const highlightId = urlParams.get('highlight');
-    if (highlightId) {
-      highlightProduct(highlightId);
+    // Clear search input on page load across all pages
+    if (searchInput) {
+      // Only populate search input from URL parameter on products page
+      const urlParams = new URLSearchParams(window.location.search);
+      const highlightId = urlParams.get('highlight');
+      
+      if (window.location.pathname.includes('products.html') && highlightId) {
+        // If on products page with a highlight parameter, find the product and set the search input
+        const product = products.find(p => p.id.toString() === highlightId);
+        if (product) {
+          searchInput.value = product.name;
+          highlightProduct(highlightId);
+        }
+      } else {
+        // On all other pages or without highlight parameter, clear the search input
+        searchInput.value = '';
+      }
     }
 });
 

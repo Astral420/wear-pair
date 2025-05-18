@@ -74,34 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // Search functionality
-    const searchForm = document.querySelector('.search-form');
-    const searchInput = document.querySelector('.search-input');
-    
-    if (searchForm) {
-      searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const searchTerm = searchInput.value.trim();
-        
-        if (searchTerm !== '') {
-          // Store search term in localStorage for cross-page consistency
-          localStorage.setItem('lastSearch', searchTerm);
-          
-          // For now, alert the search term since we don't have a search results page
-          alert(`Searching for: ${searchTerm}\nSearch functionality will be implemented in a future update.`);
-          
-          // In a real implementation, redirect to a search results page
-          // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
-        }
-      });
-      
-      // Set search input value from localStorage if available
-      const lastSearch = localStorage.getItem('lastSearch');
-      if (lastSearch && searchInput) {
-        searchInput.value = lastSearch;
-      }
-    }
-    
     // Style Quiz Functionality
     const styleQuizForm = document.getElementById('styleQuizForm');
     if (styleQuizForm) {

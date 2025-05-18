@@ -245,49 +245,49 @@
           
           <div class="clothing-categories" style="margin-top: 0; padding-top: 0;">
             <div class="text-wrapper">Clothing Categories</div>
-            <a href="categories/tshirts.html" class="category-link">
+            <a href="products.html#t-shirts" class="category-link">
               <div class="container">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20.png" />
                 <div class="div">T-Shirts</div>
               </div>
             </a>
-            <a href="categories/jeans.html" class="category-link">
+            <a href="products.html#jeans" class="category-link">
               <div class="container-2">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-1.png" />
                 <div class="div">Jeans</div>
               </div>
             </a>
-            <a href="categories/dresses.html" class="category-link">
+            <a href="products.html#dresses" class="category-link">
               <div class="container-3">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-2.png" />
                 <div class="div">Dresses</div>
               </div>
             </a>
-            <a href="categories/hoodies.html" class="category-link">
+            <a href="products.html#hoodies" class="category-link">
               <div class="container-4">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-3.png" />
-                <div class="div">Hoodies</div>
+                <div class="div">Hoodies & Jacket</div>
               </div>
             </a>
-            <a href="categories/shoes.html" class="category-link">
+            <a href="products.html#shoes" class="category-link">
               <div class="container-5">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-4.png" />
                 <div class="div">Shoes</div>
               </div>
             </a>
-            <a href="categories/blazers.html" class="category-link">
+            <a href="products.html#blazers" class="category-link">
               <div class="container-6">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-5.png" />
                 <div class="div">Blazers</div>
               </div>
             </a>
-            <a href="categories/swimwear.html" class="category-link">
+            <a href="products.html#swimwear" class="category-link">
               <div class="container-7">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-6.png" />
                 <div class="div">Swimwear</div>
               </div>
             </a>
-            <a href="categories/accessories.html" class="category-link">
+            <a href="products.html#accessories" class="category-link">
               <div class="container-8">
                 <img class="image" src="https://c.animaapp.com/majzx0z8MDPiW0/img/image-20-7.png" />
                 <div class="div">Accessories</div>
@@ -334,7 +334,7 @@
             <div class="text-wrapper-7">•</div>
             <div class="text-wrapper-8">•</div>
             <div class="textbox-2">
-              <input type="text" placeholder="Input your email" class="email-input">
+              <input type="email" placeholder="Input your email" class="email-input">
               <img class="mail" src="https://c.animaapp.com/mammlrq5P8khak/img/mail.svg" />
             </div>
             <button class="button"><div class="text-wrapper-10">Subscribe</div></button>
@@ -377,63 +377,5 @@
       </div>
     </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get wishlist hearts (items that can be added to wishlist)
-    const wishlistHearts = document.querySelectorAll('.wishlist-heart');
-    
-    if (wishlistHearts.length > 0) {
-      // Initialize wishlist heart icons based on current user's wishlist
-      wishlistHearts.forEach(heart => {
-        const productId = heart.getAttribute('data-product-id');
-        
-        // Check if this product is in the user's wishlist
-        if (isInUserWishlist(productId)) {
-          heart.classList.add('active');
-        } else {
-          heart.classList.remove('active');
-        }
-        
-        // Add click event listener for toggling wishlist items
-        heart.addEventListener('click', function(e) {
-          e.stopPropagation(); // Prevent container click
-          
-          // Check if user is logged in
-          const userEmail = getCurrentUserEmail();
-          if (!userEmail) {
-            alert('Please log in to add items to your wishlist.');
-            return;
-          }
-          
-          // Get product info
-          const productId = this.getAttribute('data-product-id');
-          const productName = this.getAttribute('data-product-name');
-          const productPrice = this.getAttribute('data-product-price');
-          
-          // Toggle wishlist status
-          if (isInUserWishlist(productId)) {
-            // Remove from wishlist
-            if (removeFromUserWishlist(productId)) {
-              this.classList.remove('active');
-              console.log(`Removed ${productName} from wishlist`);
-            }
-          } else {
-            // Add to wishlist
-            const newItem = {
-              id: productId,
-              name: productName,
-              price: productPrice
-            };
-            
-            if (addToUserWishlist(newItem)) {
-              this.classList.add('active');
-              console.log(`Added ${productName} to wishlist`);
-            }
-          }
-        });
-      });
-    }
-  });
-</script>
   </body>
 </html>
