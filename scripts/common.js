@@ -108,8 +108,16 @@ document.addEventListener('DOMContentLoaded', function() {
       { id: 5, name: 'Sleeveless Sport Swimsuit', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png' },
       { id: 6, name: 'Leather Boots', price: '89.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png' },
       { id: 7, name: 'Adjustable Shoulder Bag', price: '79.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png' },
-      { id: 8, name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png' }
-      
+      { id: 8, name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png' },
+      { id: 9, name: 'Layered Chain Necklace', price: '80.99', image: 'https://img.ltwebstatic.com/images3_spmp/2024/04/23/b2/1713840736fdd321a04b895695dab9029a48bdf29d_thumbnail_900x.webp' },
+      { id: 10, name: 'Men Star & Lightning Decor Ring Set', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2022/11/01/1667282605139b18061a747fa75d434c82cd8f73a0_thumbnail_900x.webp' },
+      { id: 11, name: 'YOUNGLA The Boys Hoodie', price: '80.99', image: 'https://www.youngla.com/cdn/shop/files/UntitledSession13694.jpg?v=1744134834&width=1255' },
+      { id: 12, name: 'Off-shoulder Graphic Tee', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2024/12/18/bf/1734505217ffdce50c66aa658c2232a269b3744ba8_thumbnail_900x.webp' },
+      { id: 13, name: 'Sleeveless Dress', price: '80.99', image: 'https://img.ltwebstatic.com/v4/j/spmp/2025/03/26/f4/174299283770ff3f1bc9d8bc7db84ca8e6763d989d_wk_1745220650_thumbnail_900x.webp' },
+      { id: 14, name: 'New Balances 530', price: '80.99', image: 'https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440' },
+      { id: 15, name: 'Manfinity Loose Fit Blazer', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp' },
+      { id: 16, name: 'Bomber Jacket', price: '80.99', image: 'https://c.animaapp.com/FpgE2lUx/img/image@2x.png' }
+
     ];
     
     // Add event listener for search input

@@ -229,7 +229,10 @@
                     </div>
                   </div>
                   
-                  <button class="next-page-wrapper"><div class="next-page">Next Page</div></button>
+                  <div class="pagination-container">
+                    <button class="prev-page-wrapper"><div class="prev-page">Previous Page</div></button>
+                    <button class="next-page-wrapper"><div class="next-page">Next Page</div></button>
+                  </div>
                 </div>
 
                 <div class="footer">
@@ -340,5 +343,16 @@
         }
       });
     });
+    
+    // DEBUG: Direct event listener for Next Page button
+    const nextPageButton = document.querySelector('.next-page-wrapper');
+    if (nextPageButton) {
+      console.log('DEBUG: Next Page button found');
+      nextPageButton.addEventListener('click', function() {
+        console.log('DEBUG: Next Page button clicked directly from HTML');
+      });
+    } else {
+      console.error('DEBUG: Next Page button not found in the HTML');
+    }
   });
 </script>
