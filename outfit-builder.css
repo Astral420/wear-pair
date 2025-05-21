@@ -588,7 +588,6 @@
 .item-details {
   padding: 12px;
   width: 100%;
-  background-color: #fffaf1;
   color: #323743;
 }
 
@@ -632,11 +631,12 @@
   margin-bottom: 16px;
 }
 
-.outfit-style-container h3 {
+.outfit-style-container h3,
+.outfit-description-container h3 {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: #a17561;
+  color: #323743;
   margin-bottom: 10px;
 }
 
