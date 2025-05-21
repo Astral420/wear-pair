@@ -661,6 +661,25 @@
           closeOutfitPopup();
         }
       });
+
+      // Additional code to ensure search works properly in builder page
+      document.addEventListener('DOMContentLoaded', function() {
+        // Ensure the search results dropdown is properly initialized
+        const searchInput = document.querySelector('.search-input');
+        const searchResultsDropdown = document.querySelector('.search-results-dropdown');
+        
+        if (searchInput && searchResultsDropdown) {
+          console.log("Initializing search dropdown in builder page");
+          
+          // Add a click handler for the search container to prevent clicks from closing the dropdown
+          const searchContainer = document.querySelector('.search-container');
+          if (searchContainer) {
+            searchContainer.addEventListener('click', function(e) {
+              e.stopPropagation(); // Prevent document click from closing dropdown
+            });
+          }
+        }
+      });
     </script>
   </body>
 </html>
