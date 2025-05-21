@@ -354,16 +354,6 @@
          document.addEventListener('DOMContentLoaded', function() {
         // Load and display wishlist items
         loadWishlistItems();
-        
-        // Add event listeners for "Buy Now" buttons on regular products
-        setTimeout(() => {
-          document.querySelectorAll('.wishlist-item:not(.outfit-item) .add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-              const productId = this.closest('.wishlist-item').getAttribute('data-product-id');
-              redirectToProductBuyPage(productId);
-            });
-          });
-        }, 500);
       });
 
       // Function to load and display wishlist items
@@ -479,7 +469,7 @@
                   <h3>${item.name}</h3>
                   <div class="buttons">
                     <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${item.id}')">Remove</button>
-                    <button class="add-to-cart">Buy Now</button>
+                    <button class="add-to-cart" onclick="redirectToProductBuyPage('${item.id}')">Buy Now</button>
                   </div>
                 </div>
               </div>
