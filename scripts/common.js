@@ -116,9 +116,102 @@ document.addEventListener('DOMContentLoaded', function() {
       { id: 13, name: 'Sleeveless Dress', price: '80.99', image: 'https://img.ltwebstatic.com/v4/j/spmp/2025/03/26/f4/174299283770ff3f1bc9d8bc7db84ca8e6763d989d_wk_1745220650_thumbnail_900x.webp' },
       { id: 14, name: 'New Balances 530', price: '80.99', image: 'https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440' },
       { id: 15, name: 'Manfinity Loose Fit Blazer', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp' },
-      { id: 16, name: 'Bomber Jacket', price: '80.99', image: 'https://c.animaapp.com/FpgE2lUx/img/image@2x.png' }
-
+      { id: 16, name: 'Bomber Jacket', price: '80.99', image: 'https://c.animaapp.com/FpgE2lUx/img/image@2x.png' },
+      { id: 17, name: 'Summer Straw Hat', price: '29.99', image: 'https://img.ltwebstatic.com/images3_spmp/2024/06/10/64/1717994598ca89fa6a234f30b9de88e6e2ad731e04_thumbnail_900x.webp' },
+      { id: 18, name: 'Linen Button-Up Shirt', price: '45.99', image: 'https://via.placeholder.com/276x276?text=Linen+Shirt' },
+      { id: 19, name: 'Casual Canvas Sneakers', price: '39.99', image: 'https://via.placeholder.com/276x276?text=Canvas+Sneakers' },
+      { id: 20, name: 'Floral Summer Dress', price: '54.99', image: 'https://via.placeholder.com/276x276?text=Floral+Dress' },
+      { id: 21, name: 'Striped Cotton Polo', price: '32.99', image: 'https://via.placeholder.com/276x276?text=Striped+Polo' },
+      { id: 22, name: 'Lightweight Cardigan', price: '48.99', image: 'https://via.placeholder.com/276x276?text=Cardigan' },
+      { id: 23, name: 'Slim Chino Pants', price: '45.99', image: 'https://via.placeholder.com/276x276?text=Chino+Pants' },
+      { id: 24, name: 'Vintage Leather Watch', price: '65.99', image: 'https://via.placeholder.com/276x276?text=Leather+Watch' },
+      { id: 25, name: 'Sunglasses', price: '29.99', image: 'https://via.placeholder.com/276x276?text=Sunglasses' },
+      { id: 26, name: 'Patterned Scarf', price: '22.99', image: 'https://via.placeholder.com/276x276?text=Patterned+Scarf' },
+      { id: 27, name: 'Casual Denim Skirt', price: '36.99', image: 'https://via.placeholder.com/276x276?text=Denim+Skirt' },
+      { id: 28, name: 'Knit Beanie Hat', price: '19.99', image: 'https://via.placeholder.com/276x276?text=Beanie+Hat' },
+      { id: 29, name: 'Graphic Print Hoodie', price: '56.99', image: 'https://via.placeholder.com/276x276?text=Graphic+Hoodie' },
+      { id: 30, name: 'Sleek Leather Belt', price: '28.99', image: 'https://via.placeholder.com/276x276?text=Leather+Belt' },
+      { id: 31, name: 'Lightweight Running Shoes', price: '79.99', image: 'https://via.placeholder.com/276x276?text=Running+Shoes' },
+      { id: 32, name: 'Pleated Midi Skirt', price: '42.99', image: 'https://via.placeholder.com/276x276?text=Midi+Skirt' },
+      { id: 33, name: 'Wool Blend Peacoat', price: '89.99', image: 'https://via.placeholder.com/276x276?text=Peacoat' },
+      { id: 34, name: 'Ribbed Turtleneck Sweater', price: '49.99', image: 'https://via.placeholder.com/276x276?text=Turtleneck' },
+      { id: 35, name: 'Leather Crossbody Bag', price: '59.99', image: 'https://via.placeholder.com/276x276?text=Crossbody+Bag' },
+      { id: 36, name: 'High-Waisted Yoga Pants', price: '44.99', image: 'https://via.placeholder.com/276x276?text=Yoga+Pants' },
+      { id: 37, name: 'Athletic Performance Shorts', price: '34.99', image: 'https://via.placeholder.com/276x276?text=Athletic+Shorts' },
+      { id: 38, name: 'Quilted Vest', price: '52.99', image: 'https://via.placeholder.com/276x276?text=Quilted+Vest' },
+      { id: 39, name: 'Embroidered Baseball Cap', price: '24.99', image: 'https://via.placeholder.com/276x276?text=Baseball+Cap' },
+      { id: 40, name: 'Tie-Dye Print T-Shirt', price: '26.99', image: 'https://via.placeholder.com/276x276?text=Tie-Dye+Shirt' },
+      { id: 41, name: 'Suede Ankle Boots', price: '74.99', image: 'https://via.placeholder.com/276x276?text=Suede+Boots' },
+      { id: 42, name: 'Denim Overalls', price: '64.99', image: 'https://via.placeholder.com/276x276?text=Denim+Overalls' },
+      { id: 43, name: 'Linen Beach Pants', price: '38.99', image: 'https://via.placeholder.com/276x276?text=Beach+Pants' },
+      { id: 44, name: 'Colorblock Windbreaker', price: '57.99', image: 'https://via.placeholder.com/276x276?text=Windbreaker' },
+      { id: 45, name: 'Statement Necklace', price: '32.99', image: 'https://via.placeholder.com/276x276?text=Statement+Necklace' },
+      { id: 46, name: 'Wide-Brim Fedora Hat', price: '35.99', image: 'https://via.placeholder.com/276x276?text=Fedora+Hat' },
+      { id: 47, name: 'Satin Sleep Mask', price: '15.99', image: 'https://via.placeholder.com/276x276?text=Sleep+Mask' },
+      { id: 48, name: 'Printed Silk Bandana', price: '18.99', image: 'https://via.placeholder.com/276x276?text=Silk+Bandana' }
     ];
+    
+    // Add categories to products for better filtering in products.js
+    // Add these category assignments here to help with filtering on the products page
+    const categories = {
+      1: 'hoodies',
+      2: 't-shirts',
+      3: 'jeans',
+      4: 't-shirts',
+      5: 'swimwear',
+      6: 'shoes',
+      7: 'accessories',
+      8: 't-shirts',
+      9: 'accessories',
+      10: 'accessories',
+      11: 'hoodies',
+      12: 't-shirts',
+      13: 'dresses',
+      14: 'shoes',
+      15: 'blazers',
+      16: 'hoodies',
+      17: 'accessories',
+      18: 't-shirts',
+      19: 'shoes',
+      20: 'dresses',
+      21: 't-shirts',
+      22: 'hoodies',
+      23: 'jeans',
+      24: 'accessories',
+      25: 'accessories',
+      26: 'accessories',
+      27: 'jeans',
+      28: 'accessories',
+      29: 'hoodies',
+      30: 'accessories',
+      31: 'shoes',
+      32: 'jeans',
+      33: 'hoodies',
+      34: 't-shirts',
+      35: 'accessories',
+      36: 'jeans',
+      37: 'jeans',
+      38: 'hoodies',
+      39: 'accessories',
+      40: 't-shirts',
+      41: 'shoes',
+      42: 'jeans',
+      43: 'jeans',
+      44: 'hoodies',
+      45: 'accessories',
+      46: 'accessories',
+      47: 'accessories',
+      48: 'accessories'
+    };
+    
+    // Assign categories to products
+    products.forEach(product => {
+      product.category = categories[product.id];
+    });
+    
+    // Expose products data to window object for outfit builder
+    window.products = products;
+    window.productCategories = categories;
     
     // Add event listener for search input
     searchInput.addEventListener('input', function(e) {
@@ -133,9 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Filter products based on search term
+      // Filter products based on search term (only show products with names and images)
       const matchingProducts = products.filter(product => 
-        product.name.toLowerCase().includes(searchTerm)
+        product.name && product.name.toLowerCase().includes(searchTerm) && product.image
       );
       
       console.log(`Found ${matchingProducts.length} matching products for "${searchTerm}"`);
@@ -145,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Display matching products in dropdown
-      matchingProducts.forEach(product => {
+      // Display matching products in dropdown (limit to first 5 for better UX)
+      matchingProducts.slice(0, 5).forEach(product => {
         const resultItem = document.createElement('div');
         resultItem.className = 'search-result-item';
         resultItem.innerHTML = `
@@ -167,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'products.html?highlight=' + product.id;
           } else {
             // Just highlight the product on the current page
-            highlightProduct(product.id);
+           
             searchResultsDropdown.style.display = 'none';
             searchInput.value = product.name;
           }
@@ -186,21 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return false;
     });
     
-    // Function to highlight a product
-    function highlightProduct(productId) {
-      // Remove any existing highlights
-      document.querySelectorAll('.container-3, .container-4, .container-5, .container-6, .container-7, .container-8, .container-9, .container-10, .container-11, .container-12, .container-13, .container-14, .container-15, .container-16, .container-17, .container-18').forEach(container => {
-        container.classList.remove('highlighted');
-      });
-      
-      // Find the container with the matching product ID
-      const productContainer = document.querySelector(`.container-${Number(productId) + 2}`);
-      if (productContainer) {
-        productContainer.classList.add('highlighted');
-        // Scroll to the highlighted product
-        productContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
+   
     
     // Clear search input on page load across all pages
     if (searchInput) {

@@ -6,97 +6,419 @@
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="outfit-builder.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+      /* Popup Styles */
+      .outfit-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .outfit-popup-content {
+        background-color: #fff;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #323743;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .popup-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: #323743;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      
+      .popup-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .popup-item {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      
+      .popup-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .popup-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      
+      .popup-item h4 {
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        font-weight: 600;
+        color: #323743;
+        margin: 0 0 5px 0;
+      }
+      
+      .popup-item .price {
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        color: #a17561;
+        margin-bottom: 10px;
+      }
+      
+      .popup-item .buy-btn {
+        display: inline-block;
+        background-color: #a17561;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        margin-top: 10px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      
+      .popup-item .buy-btn:hover {
+        background-color: #8a6354;
+      }
+    </style>
+    <script src="scripts/common.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Check if user is logged in from localStorage
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        console.log('Login state:', isLoggedIn, 'localStorage value:', localStorage.getItem('isLoggedIn'));
-        
-        const profileButton = document.getElementById('profileButton');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
-        
-        // Get current user info if logged in
-        let currentUser = null;
-        if (isLoggedIn) {
-          const currentUserData = localStorage.getItem('currentUser');
-          if (currentUserData) {
-            currentUser = JSON.parse(currentUserData);
-            // Update only the text part of the profile button to show user's name
-            if (currentUser.fullName) {
-              // Find the text element inside the profile button and update only that
-              const textElement = profileButton.querySelector('.text-wrapper-3');
-              if (textElement) {
-                // Just change the text content, keep the original structure
-                textElement.textContent = currentUser.fullName.split(' ')[0];
-              }
-            }
-          }
-        }
-        
-        // Set dropdown content based on login state
-        if (isLoggedIn) {
-          console.log('Setting logged-in dropdown menu');
-          // User is logged in - show logout option and wishlist
-          dropdownMenu.innerHTML = `
-            <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
-            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-            <a href="submissions.html" class="dropdown-item">Submissions</a>
-          `;
+        // Products categorized by type for outfit generation
+        const outfitItems = {
+          tops: [],
+          bottoms: [],
+          shoes: [],
+          accessories: []
+        };
+
+        // Populate outfit items from product data in common.js
+        // First wait for the common.js script to load
+        setTimeout(() => {
+          // Try to get products from the window object
+          const products = window.products || [];
+          console.log('Loaded products:', products.length);
           
-          // Add logout functionality
-          document.getElementById('logoutLink')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('currentUser');
-            alert('Logged out successfully');
-            window.location.reload();
-          });
-        } else {
-          console.log('Setting logged-out dropdown menu');
-          // User is not logged in - show only login option
-          dropdownMenu.innerHTML = `
-            <a href="login.html" class="dropdown-item">Login</a>
-          `;
-        }
-        
-        // Toggle dropdown on button click
-        profileButton.addEventListener('click', function(e) {
-          e.stopPropagation();
-          dropdownMenu.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking elsewhere on the document
-        document.addEventListener('click', function(e) {
-          if (!profileButton.contains(e.target)) {
-            dropdownMenu.classList.remove('active');
+          if (products.length === 0) {
+            console.error('No products found in the window object. Using fallback data.');
+            // Create some fallback products
+            const fallbackProducts = [
+              { id: 1, name: 'Denim Jacket', category: 'hoodies', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image.png' },
+              { id: 2, name: 'Knitted Sweater', category: 't-shirts', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png' },
+              { id: 3, name: 'Slim-Fit Jeans', category: 'jeans', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png' },
+              { id: 4, name: 'White T-Shirt', category: 't-shirts', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png' },
+              { id: 5, name: 'Sleeveless Sport Swimsuit', category: 'swimwear', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png' },
+              { id: 6, name: 'Leather Boots', category: 'shoes', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png' },
+              { id: 7, name: 'Adjustable Shoulder Bag', category: 'accessories', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png' }
+            ];
+            categorizeProducts(fallbackProducts);
+          } else {
+            categorizeProducts(products);
           }
-        });
+          
+          // Set up event listeners for outfit generation
+          document.getElementById('generateOutfitBtn').addEventListener('click', generateRandomOutfit);
+          document.getElementById('saveOutfitBtn').addEventListener('click', saveCurrentOutfit);
+          const buyNowBtn = document.getElementById('buyNowBtn');
+          if (buyNowBtn) {
+            buyNowBtn.addEventListener('click', showOutfitPopup);
+          }
+          document.querySelectorAll('.regenerate-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const category = this.getAttribute('data-category');
+              regenerateItem(category);
+            });
+          });
+
+          // Initial outfit generation
+          generateRandomOutfit();
+          
+          // Update login status
+          updateLoginStatus();
+        }, 500); // Short delay to ensure common.js is loaded
         
-        // Search functionality
-        const searchForm = document.querySelector('.search-form');
-        const searchInput = document.querySelector('.search-input');
-        
-        if (searchForm) {
-          searchForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchTerm = searchInput.value.trim();
+        // Function to categorize products into outfit types
+        function categorizeProducts(products) {
+          products.forEach(product => {
+            if (!product.category) return;
             
-            if (searchTerm !== '') {
-              // Store search term in localStorage for cross-page consistency
-              localStorage.setItem('lastSearch', searchTerm);
-              
-              // For now, alert the search term since we don't have a search results page
-              alert(`Searching for: ${searchTerm}\nSearch functionality will be implemented in a future update.`);
-              
-              // In a real implementation, redirect to a search results page
-              // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+            // Categorize products for outfit building
+            if (product.category === 't-shirts' || product.category === 'hoodies' || product.category === 'blazers') {
+              outfitItems.tops.push(product);
+            } else if (product.category === 'jeans' || product.category === 'dresses') {
+              outfitItems.bottoms.push(product);
+            } else if (product.category === 'shoes') {
+              outfitItems.shoes.push(product);
+            } else if (product.category === 'accessories') {
+              outfitItems.accessories.push(product);
             }
           });
           
-          // Set search input value from localStorage if available
-          const lastSearch = localStorage.getItem('lastSearch');
-          if (lastSearch && searchInput) {
-            searchInput.value = lastSearch;
+          console.log('Outfit items categorized:', {
+            tops: outfitItems.tops.length,
+            bottoms: outfitItems.bottoms.length,
+            shoes: outfitItems.shoes.length,
+            accessories: outfitItems.accessories.length
+          });
+        }
+
+        // Initial outfit generation on page load
+        generateRandomOutfit();
+
+        // Function to generate a random outfit
+        function generateRandomOutfit() {
+          // Get random items from each category
+          const top = getRandomItem(outfitItems.tops);
+          const bottom = getRandomItem(outfitItems.bottoms);
+          const shoe = getRandomItem(outfitItems.shoes);
+          const accessory = getRandomItem(outfitItems.accessories);
+
+          // Display the outfit
+          displayOutfitItem('top', top);
+          displayOutfitItem('bottom', bottom);
+          displayOutfitItem('shoe', shoe);
+          displayOutfitItem('accessory', accessory);
+
+          // Generate outfit description
+          generateOutfitDescription(top, bottom, shoe, accessory);
+
+          // Update outfit style based on selected items
+          updateOutfitStyle(top, bottom, shoe, accessory);
+        }
+
+        // Function to regenerate a specific item
+        function regenerateItem(category) {
+          let items;
+          switch(category) {
+            case 'top':
+              items = outfitItems.tops;
+              break;
+            case 'bottom':
+              items = outfitItems.bottoms;
+              break;
+            case 'shoe':
+              items = outfitItems.shoes;
+              break;
+            case 'accessory':
+              items = outfitItems.accessories;
+              break;
+            default:
+              return;
+          }
+
+          const newItem = getRandomItem(items);
+          displayOutfitItem(category, newItem);
+
+          // Get current items for other categories
+          const currentTop = document.querySelector('.outfit-item[data-category="top"]').getAttribute('data-item-id');
+          const currentBottom = document.querySelector('.outfit-item[data-category="bottom"]').getAttribute('data-item-id');
+          const currentShoe = document.querySelector('.outfit-item[data-category="shoe"]').getAttribute('data-item-id');
+          const currentAccessory = document.querySelector('.outfit-item[data-category="accessory"]').getAttribute('data-item-id');
+
+          // Find all current items
+          const top = outfitItems.tops.find(item => item.id == currentTop);
+          const bottom = outfitItems.bottoms.find(item => item.id == currentBottom);
+          const shoe = outfitItems.shoes.find(item => item.id == currentShoe);
+          const accessory = outfitItems.accessories.find(item => item.id == currentAccessory);
+
+          // Update description and style with the new item
+          generateOutfitDescription(top, bottom, shoe, accessory);
+          updateOutfitStyle(top, bottom, shoe, accessory);
+        }
+
+        // Helper function to get a random item from an array
+        function getRandomItem(array) {
+          if (!array || array.length === 0) {
+            return { 
+              id: 0, 
+              name: 'Item Not Available', 
+              image: 'https://via.placeholder.com/276x276?text=Not+Available',
+              category: 'none'
+            };
+          }
+          return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Function to display an outfit item
+        function displayOutfitItem(category, item) {
+          if (!item) return;
+
+          const container = document.querySelector(`.outfit-item[data-category="${category}"]`);
+          if (!container) return;
+
+          // Update the container with the item details
+          container.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-details">
+              <h3>${item.name}</h3>
+            </div>
+          `;
+          container.setAttribute('data-item-id', item.id);
+        }
+
+        // Function to generate a description for the outfit
+        function generateOutfitDescription(top, bottom, shoe, accessory) {
+          if (!top || !bottom || !shoe || !accessory) return;
+
+          const topStyle = getCategoryStyle(top.category);
+          const bottomStyle = getCategoryStyle(bottom.category);
+          const shoeStyle = getCategoryStyle(shoe.category);
+          const accessoryStyle = getCategoryStyle(accessory.category);
+
+          // Generate a description based on the items
+          let description = `This outfit combines a ${topStyle} ${top.name} with `;
+          
+          if (bottom.category === 'dresses') {
+            description = `This outfit features a stylish ${bottom.name} paired with `;
+          } else {
+            description += `${bottomStyle} ${bottom.name}, `;
+          }
+          
+          description += `complemented by ${shoeStyle} ${shoe.name} and a ${accessoryStyle} ${accessory.name}.`;
+          
+          // Add a style suggestion
+          const styleNames = ['casual', 'formal', 'sporty', 'bohemian', 'streetwear'];
+          const randomStyle = styleNames[Math.floor(Math.random() * styleNames.length)];
+          
+          description += ` This outfit is perfect for a ${randomStyle} look.`;
+
+          document.getElementById('outfitDescription').textContent = description;
+        }
+
+        // Helper function to get style description based on category
+        function getCategoryStyle(category) {
+          switch(category) {
+            case 't-shirts':
+              return 'comfortable';
+            case 'hoodies':
+              return 'cozy';
+            case 'blazers':
+              return 'sophisticated';
+            case 'jeans':
+              return 'classic';
+            case 'dresses':
+              return 'elegant';
+            case 'shoes':
+              return 'stylish';
+            case 'accessories':
+              return 'trendy';
+            default:
+              return 'stylish';
+          }
+        }
+
+        // Function to update the outfit style
+        function updateOutfitStyle(top, bottom, shoe, accessory) {
+          // Simple style categorization
+          let formalCount = 0;
+          let casualCount = 0;
+          let sportCount = 0;
+
+          // Count style types
+          if (top.category === 'blazers') formalCount++;
+          if (top.category === 't-shirts') casualCount++;
+          if (top.category === 'hoodies') sportCount++;
+
+          if (bottom.category === 'dresses') formalCount++;
+          if (bottom.category === 'jeans') casualCount++;
+
+          if (shoe.name.toLowerCase().includes('boot')) formalCount++;
+          if (shoe.name.toLowerCase().includes('sneaker')) sportCount++;
+
+          // Determine dominant style
+          let style = 'Casual';
+          if (formalCount > casualCount && formalCount > sportCount) {
+            style = 'Formal';
+          } else if (sportCount > casualCount && sportCount > formalCount) {
+            style = 'Sporty';
+          }
+
+          document.getElementById('outfitStyle').textContent = style;
+        }
+
+        // Function to save the current outfit to wishlist
+        function saveCurrentOutfit() {
+          // Check if user is logged in
+          const userEmail = getCurrentUserEmail();
+          if (!userEmail) {
+            alert('Please log in to save outfits to your wishlist.');
+            return;
+          }
+
+          // Get current outfit items
+          const topId = document.querySelector('.outfit-item[data-category="top"]').getAttribute('data-item-id');
+          const bottomId = document.querySelector('.outfit-item[data-category="bottom"]').getAttribute('data-item-id');
+          const shoeId = document.querySelector('.outfit-item[data-category="shoe"]').getAttribute('data-item-id');
+          const accessoryId = document.querySelector('.outfit-item[data-category="accessory"]').getAttribute('data-item-id');
+
+          // Create a composite outfit object
+          const outfit = {
+            id: 'outfit-' + Date.now(), // Generate a unique ID
+            name: 'Custom Outfit: ' + document.getElementById('outfitStyle').textContent,
+            items: [topId, bottomId, shoeId, accessoryId].filter(id => id != 0), // Filter out "not available" items
+            description: document.getElementById('outfitDescription').textContent
+          };
+
+          // Save the outfit to localStorage
+          const wishlist = getUserWishlist();
+          const outfitItem = {
+            id: outfit.id,
+            name: outfit.name,
+            price: 'Custom Outfit',
+            outfitData: outfit // Store the outfit data for later retrieval
+          };
+          
+          if (addToUserWishlist(outfitItem)) {
+            alert('Outfit saved to your wishlist!');
+          }
+        }
+
+        // Handle login state
+        updateLoginStatus();
+        function updateLoginStatus() {
+          const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+          const saveOutfitBtn = document.getElementById('saveOutfitBtn');
+          
+          if (!isLoggedIn) {
+            saveOutfitBtn.disabled = true;
+            saveOutfitBtn.title = 'Please log in to save outfits';
+          } else {
+            saveOutfitBtn.disabled = false;
+            saveOutfitBtn.title = 'Save this outfit to your wishlist';
           }
         }
       });
@@ -147,6 +469,7 @@
               <form class="search-form">
                 <input type="text" class="search-input" placeholder="Search products...">
               </form>
+              <div class="search-results-dropdown"></div>
             </div>
             <div class="dropdown-container">
               <button class="button" id="profileButton">
@@ -159,8 +482,185 @@
             </div>
           </header>
 
+          <!-- Outfit Builder Content -->
+          <div class="outfit-builder-content">
+            <h1 class="outfit-builder-title">Create Your Perfect Outfit</h1>
+            <p class="outfit-builder-description">Mix and match items to create your ideal look, or let us generate a stylish outfit for you.</p>
+            
+            <div class="outfit-container">
+              <div class="outfit-items">
+                <div class="outfit-column">
+                  <h2 class="category-title">Top</h2>
+                  <div class="outfit-item" data-category="top">
+                    <img src="https://via.placeholder.com/276x276?text=Loading..." alt="Loading...">
+                  </div>
+                  <button class="regenerate-item" data-category="top">↻ Change Top</button>
+                </div>
+                
+                <div class="outfit-column">
+                  <h2 class="category-title">Bottom</h2>
+                  <div class="outfit-item" data-category="bottom">
+                    <img src="https://via.placeholder.com/276x276?text=Loading..." alt="Loading...">
+                  </div>
+                  <button class="regenerate-item" data-category="bottom">↻ Change Bottom</button>
+                </div>
+                
+                <div class="outfit-column">
+                  <h2 class="category-title">Shoes</h2>
+                  <div class="outfit-item" data-category="shoe">
+                    <img src="https://via.placeholder.com/276x276?text=Loading..." alt="Loading...">
+                  </div>
+                  <button class="regenerate-item" data-category="shoe">↻ Change Shoes</button>
+                </div>
+                
+                <div class="outfit-column">
+                  <h2 class="category-title">Accessory</h2>
+                  <div class="outfit-item" data-category="accessory">
+                    <img src="https://via.placeholder.com/276x276?text=Loading..." alt="Loading...">
+                  </div>
+                  <button class="regenerate-item" data-category="accessory">↻ Change Accessory</button>
+                </div>
+              </div>
+              
+              <div class="outfit-details">
+                <div class="outfit-style-container">
+                  <h3>Outfit Style: <span id="outfitStyle">Casual</span></h3>
+                </div>
+                <p id="outfitDescription" class="outfit-description">
+                  Generating your personalized outfit description...
+                </p>
+                <div class="outfit-actions">
+                  <button id="generateOutfitBtn" class="primary-button">Generate New Outfit</button>
+                  <button id="saveOutfitBtn" class="secondary-button">Save to Wishlist</button>
+                  <button id="buyNowBtn" class="secondary-button">Buy Now</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="outfit-tips">
+              <h3>Styling Tips</h3>
+              <ul>
+                <li>For a balanced look, try to mix one statement piece with more subtle items</li>
+                <li>Consider the occasion when choosing your outfit</li>
+                <li>Color coordination can elevate any outfit - try complementary or monochromatic schemes</li>
+                <li>Accessorize thoughtfully to complete your look</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+    
+    <!-- Outfit items popup -->
+    <div id="outfitPopup" class="outfit-popup">
+      <div class="outfit-popup-content">
+        <button class="close-popup" onclick="closeOutfitPopup()">&times;</button>
+        <h3 class="popup-title">Shop This Outfit</h3>
+        <div id="popupItems" class="popup-items">
+          <!-- Items will be populated here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Function to display the outfit items popup
+      function showOutfitPopup() {
+        // Get current outfit items
+        const topId = document.querySelector('.outfit-item[data-category="top"]').getAttribute('data-item-id');
+        const bottomId = document.querySelector('.outfit-item[data-category="bottom"]').getAttribute('data-item-id');
+        const shoeId = document.querySelector('.outfit-item[data-category="shoe"]').getAttribute('data-item-id');
+        const accessoryId = document.querySelector('.outfit-item[data-category="accessory"]').getAttribute('data-item-id');
+        
+        // Filter out any "not available" items (id == 0)
+        const itemIds = [topId, bottomId, shoeId, accessoryId].filter(id => id != 0);
+        
+        if (itemIds.length === 0) {
+          alert("No items available in this outfit");
+          return;
+        }
+        
+        // Product data with buy links
+        const productData = {
+          1: { name: 'Denim Jacket', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image.png', buyLink: "https://ph.shein.com/ph/Men's-Casual-Washed-Funny-Plain-Dark-Denim-Jacket,-Spring-&-Fall,-For-Party-p-38400397.html" },
+          2: { name: 'Knitted Sweater', price: '39.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png', buyLink: "https://ph.shein.com/eur/Manfinity-Hypemode-Men-1Pc-Cartoon-Pattern-Colorblock-Drop-Shoulder-Baggy-Sweater-Crew-Neck-Long-Sleeve-Colorful-Dinosaur-Pattern-Going-Out-Fashion-Sweater-For-Friends-p-23864215.html" },
+          3: { name: 'Slim-Fit Jeans', price: '49.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png', buyLink: "https://ph.shein.com/Women-s-Slim-Fit-Denim-Pants-With-Pockets-Suitable-For-Daily-Outings-p-34406940.html" },
+          4: { name: 'White T-Shirt', price: '19.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png', buyLink: 'https://sphere-vista.com/products/solid-round-neck-t-shirt' },
+          5: { name: 'Sleeveless Sport Swimsuit', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png', buyLink: "https://ph.shein.com/DAZY-Contrast-Binding-Halter-Bikini-Swimsuit-p-17444181-cat-1866.html" },
+          6: { name: 'Leather Boots', price: '89.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png', buyLink: 'https://www.uggoutlet.com.au/products/chunky-boots-lace-up-women-stephanie' },
+          7: { name: 'Adjustable Shoulder Bag', price: '79.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png', buyLink: "https://ph.shein.com/ph/1pc-Adjustable-Strap-Flap-Closure-Plain-Color-Shoulder-Bag,-Casual-Retro-Business-Commuting-Waterproof-PU-Mini-Messenger-Crossbody-Bag-Christmas-Men-Bag-Vacation-Dad-Gifts-Retro-Bag-Vintage-Messenger-Bag-Tote-Bag-Side-Bags-Gifts-Valentine-Day-Black-Bag-Camping-Sling-Bag-Stickers-Winter-Back-To-School-Valentines-Gifts-Valentine-Gifts-Vintage-Gift-Bag-Pack-Cross-Body-Bag-Spring-Vintage-Bags-School-Supplies-Mini-Bag-Small-Bag-Purse-College-Bags-New-Life-Items-For-Students-Men-Essentials-Fashion-Men's-Bags-Graduation-p-37807827.html" },
+          8: { name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png', buyLink: 'https://snobasia.com/collections/t-shirts/products/yukariyo-t-shirt' },
+          9: { name: 'Layered Chain Necklace', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2024/04/23/b2/1713840736fdd321a04b895695dab9029a48bdf29d_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Men-s-Necklace-And-Unique-Design-Hip-Hop-Style-Chain-Jewelry-Sweater-Chain-Halloween-p-34255889.html" },
+          10: { name: 'Men Star & Lightning Decor Ring Set', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2022/11/01/1667282605139b18061a747fa75d434c82cd8f73a0_thumbnail_900x.webp', buyLink: "https://ph.shein.com/5pcs-Men-Star-Lightning-Decor-Ring-p-12015672.html" },
+          11: { name: 'YOUNGLA The Boys Hoodie', price: '80.99', image: 'https://www.youngla.com/cdn/shop/files/UntitledSession13694.jpg?v=1744134834&width=1255', buyLink: 'https://www.youngla.com/products/5076' },
+          12: { name: 'Off-shoulder Graphic Tee', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2024/12/18/bf/1734505217ffdce50c66aa658c2232a269b3744ba8_thumbnail_900x.webp', buyLink: "https://ph.shein.com/us/goods-p-45942661.html" },
+          13: { name: 'Sleeveless Dress', price: '80.99', image: 'https://img.ltwebstatic.com/v4/j/spmp/2025/03/26/f4/174299283770ff3f1bc9d8bc7db84ca8e6763d989d_wk_1745220650_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Women-Sleeveless-High-Neck-Skinny-Sexy-Long-Dress-Bodycon-Sexy-Party-Dress-Evening-p-67030400.html" },
+          14: { name: 'New Balances 530', price: '80.99', image: 'https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440', buyLink: 'https://www.newbalance.com/pd/530/MR530-32265-PMG-NA.html' },
+          15: { name: 'Manfinity Loose Fit Blazer', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Manfinity-RebelGame-Plus-Size-Men-s-Loose-Fit-Black-Woven-Long-Sleeve-Blazer-Jacket-p-56151083.html" },
+          16: { name: 'Bomber Jacket', price: '80.99', image: 'https://c.animaapp.com/FpgE2lUx/img/image@2x.png', buyLink: "https://us.shein.com/Autumn-Colorblock-Faux-Leather-Casual-Loose-Fit-Jacket-For-Men-p-44366683.html" },
+          17: { name: 'Summer Straw Hat', price: '29.99', image: 'https://img.ltwebstatic.com/images3_spmp/2024/06/10/64/1717994598ca89fa6a234f30b9de88e6e2ad731e04_thumbnail_900x.webp', buyLink: "https://us.shein.com/Women-Straw-Bucket-Hat-With-Contrasting-Braided-Band-p-14998553.html" }
+        };
+        
+        // Populate the popup with outfit items
+        const popupItems = document.getElementById('popupItems');
+        popupItems.innerHTML = '';
+        
+        itemIds.forEach(id => {
+          const product = productData[id];
+          if (!product) return;
+          
+          // Get product details from window.products if not in the hardcoded data
+          let productName = product.name;
+          let productPrice = product.price;
+          let productImage = product.image;
+          let productBuyLink = product.buyLink;
+          
+          if (!productName || !productImage) {
+            // Try to find product in window.products
+            const windowProduct = window.products.find(p => p.id == id);
+            if (windowProduct) {
+              productName = windowProduct.name || productName;
+              productPrice = windowProduct.price || productPrice;
+              productImage = windowProduct.image || productImage;
+            }
+          }
+          
+          const itemHtml = `
+            <div class="popup-item">
+              <img src="${productImage}" alt="${productName}">
+              <h4>${productName}</h4>
+              <div class="price">$${productPrice}</div>
+              <a href="${productBuyLink}" target="_blank" class="buy-btn">Buy Now</a>
+            </div>
+          `;
+          
+          popupItems.innerHTML += itemHtml;
+        });
+        
+        // Show the popup
+        const popup = document.getElementById('outfitPopup');
+        popup.style.display = 'flex';
+      }
+      
+      // Function to close the popup
+      function closeOutfitPopup() {
+        const popup = document.getElementById('outfitPopup');
+        popup.style.display = 'none';
+      }
+      
+      // Close popup when clicking outside the content
+      document.getElementById('outfitPopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeOutfitPopup();
+        }
+      });
+      
+      // Close popup on ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeOutfitPopup();
+        }
+      });
+    </script>
   </body>
 </html>

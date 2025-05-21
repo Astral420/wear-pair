@@ -515,17 +515,22 @@
   .frame .container-3,
   .frame .container-4,
   .frame .container-5,
-  .frame .container-6 {
-    width: 276px;
-    height: 384px;
-    border-radius: 12px;
-    overflow: visible;
-    position: absolute;
-    border: 0px none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  .frame .container-6,
+  .frame .container-7,
+  .frame .container-8,
+  .frame .container-9,
+  .frame .container-10,
+  .frame .container-11,
+  .frame .container-12,
+  .frame .container-13,
+  .frame .container-14,
+  .frame .container-15,
+  .frame .container-16,
+  .frame .container-17,
+  .frame .container-18,
+  [class*="container-"][class*="product-container"] {
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding-top: 44px;
-    box-sizing: border-box;
   }
   
   .frame .container-3:hover,
@@ -543,10 +548,10 @@
   .frame .container-15:hover,
   .frame .container-16:hover,
   .frame .container-17:hover,
-  .frame .container-18:hover {
+  .frame .container-18:hover,
+  [class*="container-"][class*="product-container"]:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    clip-path: inset(0px -16px -16px -16px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
   .frame .text-wrapper-4 {
@@ -597,6 +602,7 @@
     border: 0px none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
   }
   
   .frame .container-5 {
@@ -610,6 +616,7 @@
     border: 0px none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
   }
   
   .frame .container-6 {
@@ -623,6 +630,7 @@
     border: 0px none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
   }
   
   .frame .container-7 {
@@ -1559,16 +1567,70 @@
     stroke: #8a6354;
   }
 
-  /* Update wishlist heart positioning for container-3 through container-6 */
-  .frame .container-3 .wishlist-heart,
+  /* Update wishlist heart positioning for container-3 to match the image */
+  .frame .container-3 .wishlist-heart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
+  }
+  
+  /* Add back the positioning for container-4 */
+  .frame .container-4 {
+    width: 276px;
+    height: 384px;
+    top: 174px;
+    left: 432px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: absolute;
+    border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Add back the positioning for container-5 */
+  .frame .container-5 {
+    width: 276px;
+    height: 384px;
+    top: 174px;
+    left: 732px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: absolute;
+    border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Add back the positioning for container-6 */
+  .frame .container-6 {
+    width: 276px;
+    height: 384px;
+    top: 174px;
+    left: 1032px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: absolute;
+    border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Update wishlist heart positioning for containers 4-6 */
   .frame .container-4 .wishlist-heart,
   .frame .container-5 .wishlist-heart,
   .frame .container-6 .wishlist-heart {
-    top: 8px; /* Adjusted from 52px to 8px since the image is now at top: 0 */
+    position: absolute;
+    top: 8px;
+    right: 8px;
     z-index: 20; /* Ensure it's above the image */
   }
   
-  /* Adjust container-7 through container-18 for image-3 */
+  /* Adjust wishlist heart positioning for container-7 through container-18 */
   .frame .container-7 .wishlist-heart,
   .frame .container-8 .wishlist-heart,
   .frame .container-9 .wishlist-heart,
@@ -1581,7 +1643,10 @@
   .frame .container-16 .wishlist-heart,
   .frame .container-17 .wishlist-heart,
   .frame .container-18 .wishlist-heart {
-    top: 8px; /* Image top position is 0, so just add the margin */
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
   }
 
   /* Search Results Dropdown Styles */
@@ -1885,26 +1950,25 @@
     }
   }
 
-  /* Fix container-3 to restore positioning */
+  /* Fix container-3 to restore positioning and appearance */
   .frame .container-3 {
-    top: 210px;
+    width: 276px;
+    height: 384px;
+    top: 174px;
     left: 132px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: absolute;
+    border: 0px none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
   }
 
-  /* Add back the positioning for container-4 */
-  .frame .container-4 {
-    top: 210px;
-    left: 432px;
-  }
-
-  /* Add back the positioning for container-5 */
-  .frame .container-5 {
-    top: 210px;
-    left: 732px;
-  }
-
-  /* Add back the positioning for container-6 */
-  .frame .container-6 {
-    top: 210px;
-    left: 1032px;
+  /* Update wishlist heart positioning for container-3 to match the image */
+  .frame .container-3 .wishlist-heart {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
   }

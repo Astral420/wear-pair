@@ -1,7 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('products.js loaded and running');
 
-    
+    // Check URL hash for category filtering from index.html links
+    function checkUrlForCategoryFilter() {
+        if (window.location.hash) {
+            const category = window.location.hash.substring(1); // Remove the # from the hash
+            console.log('Category filter detected in URL:', category);
+            
+            // Update the category heading
+            const featuredHeading = document.querySelector('.text-wrapper-8');
+            if (featuredHeading) {
+                const categoryDisplayNames = {
+                    't-shirts': 'T-Shirts',
+                    'jeans': 'Jeans',
+                    'dresses': 'Dresses',
+                    'swimwear': 'Swimwear',
+                    'shoes': 'Shoes',
+                    'blazers': 'Blazers',
+                    'hoodies': 'Hoodies & Jackets',
+                    'accessories': 'Accessories',
+                    'all': 'All Products'
+                };
+                
+                featuredHeading.textContent = categoryDisplayNames[category] || category;
+            }
+            
+            // Apply the category filter
+            if (category === 'all') {
+                resetProductDisplay();
+            } else {
+                // Wait a short moment for all products to be initialized
+                setTimeout(() => {
+                    filterProductsByCategory(category);
+                }, 200);
+            }
+        }
+    }
     
     // Pagination variables
     const ITEMS_PER_PAGE = 16;
@@ -244,6 +278,19 @@ document.addEventListener('DOMContentLoaded', function() {
         rating: 4.7,
         store_name: 'SHEIN',
         store_link: 'https://ph.shein.com/'
+      },
+      // New product to demonstrate replacement of a placeholder
+      { 
+        id: 17, 
+        name: 'Summer Straw Hat', 
+        price: '29.99', 
+        image: 'https://img.ltwebstatic.com/images3_spmp/2024/06/10/64/1717994598ca89fa6a234f30b9de88e6e2ad731e04_thumbnail_900x.webp',
+        description: 'Stylish wide-brim straw hat, perfect for beach days and summer outings. Provides great sun protection with a fashionable design.',
+        buyLink: "https://us.shein.com/Women-Straw-Bucket-Hat-With-Contrasting-Braided-Band-p-14998553.html",
+        category: 'accessories',
+        rating: 4.9,
+        store_name: 'SHEIN',
+        store_link: 'https://ph.shein.com/'
       }
     ];
     
@@ -276,8 +323,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         placeholderProducts.push({
           id: id,
+          
           name: `Product ${id}`,
-          price: (Math.random() * 100 + 20).toFixed(2),
+          price: ((30 + Math.random() * 70).toFixed(2)),
           image: `https://via.placeholder.com/276x276?text=Product+${id}`,
           description: `This is a placeholder product ${id}. A stylish and comfortable item perfect for everyday wear.`,
           buyLink: store.link,
@@ -290,10 +338,23 @@ document.addEventListener('DOMContentLoaded', function() {
       return placeholderProducts;
     }
     
-    // Generate additional placeholder products
-    const additionalProducts = generatePlaceholderProducts(extendedProducts.length + 1, 32);
+    // Manage products with placeholders
+    const MIN_TOTAL_PRODUCTS = 48; // Minimum number of products (extendedProducts + placeholders)
+    
+    // Calculate how many placeholder products we need
+    // As you add more real products to extendedProducts, fewer placeholders will be needed
+    // When extendedProducts.length reaches MIN_TOTAL_PRODUCTS, no placeholders will be generated
+    const numPlaceholdersNeeded = Math.max(0, MIN_TOTAL_PRODUCTS - extendedProducts.length);
+    console.log(`Using ${extendedProducts.length} real products and ${numPlaceholdersNeeded} placeholder products`);
+    
+    // Generate placeholder products only if needed
+    const additionalProducts = generatePlaceholderProducts(extendedProducts.length + 1, numPlaceholdersNeeded);
     const allProducts = [...extendedProducts, ...additionalProducts];
     totalPages = Math.ceil(allProducts.length / ITEMS_PER_PAGE);
+    
+    // To add new real products in the future:
+    // 1. Add them to the extendedProducts array
+    // 2. The system will automatically reduce the number of placeholder products shown
     
     // Function to update product display based on current page
     function updateProductDisplay(page) {
@@ -582,11 +643,11 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(`Clicked on product: ${product.name}`);
           // For now just highlight the product on the current page
           // In a real implementation, this could navigate to a product detail page
-          highlightProduct(product.id);
+          openProductPopup(product);
           searchResultsDropdown.style.display = 'none';
           searchInput.value = product.name;
-          // Save the search term to localStorage
-          localStorage.setItem('lastSearch', product.name);
+          
+          
         });
         
         searchResultsDropdown.appendChild(resultItem);
@@ -602,21 +663,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return false;
     });
     
-    // Function to highlight a product
-    function highlightProduct(productId) {
-      // Remove any existing highlights
-      document.querySelectorAll('.container-3, .container-4, .container-5, .container-6, .container-7, .container-8, .container-9, .container-10, .container-11, .container-12, .container-13, .container-14, .container-15, .container-16, .container-17, .container-18').forEach(container => {
-        container.classList.remove('highlighted');
-      });
-      
-      // Find the container with the matching product ID
-      const productContainer = document.querySelector(`.container-${productId + 2}`);
-      if (productContainer) {
-        productContainer.classList.add('highlighted');
-        // Scroll to the highlighted product
-        productContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
+    
     
     // Set search input value from localStorage if available
     const lastSearch = localStorage.getItem('lastSearch');
@@ -722,7 +769,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'shoes': 'Shoes',
             'blazers': 'Blazers',
             'hoodies': 'Hoodies & Jackets',
-            'accessories': 'Accessories'
+            'accessories': 'Accessories',
+            'all': 'All Products'
         };
         
         // Add click event listeners to category links
@@ -738,7 +786,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 featuredHeading.textContent = categoryDisplayNames[category] || category;
                 
                 // Filter products by category
-                filterProductsByCategory(category);
+                if (category === 'all') {
+                    resetProductDisplay();
+                } else {
+                    filterProductsByCategory(category);
+                }
             });
         });
     }
@@ -751,14 +803,19 @@ document.addEventListener('DOMContentLoaded', function() {
             container.style.display = 'none';
         });
         
-        // Get products matching the category
-        const filteredProducts = extendedProducts.filter(product => 
-            product.category === category
-        );
+        // Get products matching the category (using allProducts instead of just extendedProducts)
+        const filteredProducts = category === 'all' 
+            ? allProducts 
+            : allProducts.filter(product => product.category === category);
         
         // If no products in this category, show a message and return
         if (filteredProducts.length === 0) {
             featuredHeading.textContent = 'No products found in ' + (categoryDisplayNames[category] || category);
+            // Hide pagination buttons
+            const paginationContainer = document.querySelector('.pagination-container');
+            if (paginationContainer) {
+                paginationContainer.style.display = 'none';
+            }
             return;
         }
         
@@ -766,10 +823,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const baseTop = 210; // Starting Y position
         const baseLeft = 132; // Starting X position
         const xOffset = 300; // Horizontal spacing between products
-        const yOffset = 452; // Vertical spacing between rows
+        const yOffset = 416; // Vertical spacing between rows
+        
+        // First, clear current display
+        document.querySelectorAll('[class*="container-"][class*="product-container"]').forEach(container => {
+            container.remove();
+        });
+        
+        // Show the first page of filtered products
+        const ITEMS_PER_PAGE = 16;
+        const productsToShow = filteredProducts.slice(0, ITEMS_PER_PAGE);
+        const productGrid = document.querySelector('.container-2');
         
         // Position the filtered products in a grid (4 per row)
-        filteredProducts.forEach((product, index) => {
+        productsToShow.forEach((product, index) => {
             // Calculate row and column position
             const row = Math.floor(index / 4);
             const col = index % 4;
@@ -778,19 +845,166 @@ document.addEventListener('DOMContentLoaded', function() {
             const topPosition = baseTop + (row * yOffset);
             const leftPosition = baseLeft + (col * xOffset);
             
-            // Find the corresponding container
-            const containerNumber = product.id + 2; // Container numbers start at 3 for product ID 1
-            const container = document.querySelector(`.container-${containerNumber}`);
+            // Create container for this product
+            const container = document.createElement('div');
+            const containerNumber = index + 3; // Container numbers start at 3
+            container.className = `container-${containerNumber} product-container`;
+            container.style.top = `${topPosition}px`;
+            container.style.left = `${leftPosition}px`;
             
-            if (container) {
-                // Update container position and make visible
-                container.style.top = `${topPosition}px`;
-                container.style.left = `${leftPosition}px`;
-                container.style.display = 'block';
-            }
+            container.innerHTML = `
+                <div class="wishlist-heart" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price}">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <img class="image-${containerNumber <= 6 ? '2' : '3'}" src="${product.image}" alt="${product.name}" />
+                <div class="text-wrapper-${containerNumber <= 6 ? '5' : '7'}">${product.name}</div>
+            `;
+            
+            productGrid.appendChild(container);
+            
+            // Set up event listeners
+            setupProductContainerEventListeners(container, product);
         });
+        
+        // Update pagination for filtered products
+        const paginationContainer = document.querySelector('.pagination-container');
+        if (paginationContainer) {
+            if (filteredProducts.length <= ITEMS_PER_PAGE) {
+                paginationContainer.style.display = 'none';
+            } else {
+                paginationContainer.style.display = 'flex';
+                // Reset to first page whenever filtering
+                currentPage = 1;
+                // Update pagination buttons to reflect the filtered total
+                totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+                updatePaginationButtons();
+                
+                // Update pagination function to use filtered products
+                window.filteredProductList = filteredProducts;
+                window.inCategoryView = true;
+            }
+        }
+        
+        // Re-setup wishlist functionality for new containers
+        setupWishlistFunctionality();
     }
     
+    // Function to reset product display to original state
+    function resetProductDisplay() {
+        // Clear category filtering state
+        window.filteredProductList = null;
+        window.inCategoryView = false;
+        
+        // Reset to first page
+        currentPage = 1;
+        
+        // Reset total pages to include all products
+        totalPages = Math.ceil(allProducts.length / ITEMS_PER_PAGE);
+        
+        // Update product display for the first page
+        updateProductDisplay(currentPage);
+        
+        // Restore pagination
+        const paginationContainer = document.querySelector('.pagination-container');
+        if (paginationContainer) {
+            paginationContainer.style.display = 'flex';
+            updatePaginationButtons();
+        }
+    }
+
+    // Override the original function
+    const originalUpdateProductDisplay = updateProductDisplay;
+    updateProductDisplay = function(page) {
+        // If we're in category view, use the filtered products
+        if (window.inCategoryView && window.filteredProductList) {
+            const startIndex = (page - 1) * ITEMS_PER_PAGE;
+            const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, window.filteredProductList.length);
+            const currentPageProducts = window.filteredProductList.slice(startIndex, endIndex);
+            
+            // Find the container
+            const productGrid = document.querySelector('.container-2');
+            if (!productGrid) {
+                console.error('Product grid container not found');
+                return;
+            }
+            
+            // Remove existing product containers
+            document.querySelectorAll('[class*="container-"][class*="product-container"]').forEach(container => {
+                container.remove();
+            });
+            
+            // Define the base positions
+            const baseTop = 210; // Starting Y position
+            const baseLeft = 132; // Starting X position
+            const xOffset = 300; // Horizontal spacing between products
+            const yOffset = 416; // Vertical spacing between rows
+            
+            // Create and add new product containers
+            currentPageProducts.forEach((product, index) => {
+                const containerNumber = index + 3; // Container numbers start at 3
+                const row = Math.floor(index / 4);
+                const col = index % 4;
+                
+                const topPosition = baseTop + (row * yOffset);
+                const leftPosition = baseLeft + (col * xOffset);
+                
+                const container = document.createElement('div');
+                container.className = `container-${containerNumber} product-container`;
+                container.style.top = `${topPosition}px`;
+                container.style.left = `${leftPosition}px`;
+                
+                container.innerHTML = `
+                    <div class="wishlist-heart" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price}">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <img class="image-${containerNumber <= 6 ? '2' : '3'}" src="${product.image}" alt="${product.name}" />
+                    <div class="text-wrapper-${containerNumber <= 6 ? '5' : '7'}">${product.name}</div>
+                `;
+                
+                productGrid.appendChild(container);
+                
+                // Set up event listeners
+                setupProductContainerEventListeners(container, product);
+            });
+            
+            // Update pagination
+            updatePaginationButtons();
+            
+            // Re-setup wishlist functionality
+            setupWishlistFunctionality();
+        } else {
+            // Use the original function for non-category view
+            originalUpdateProductDisplay(page);
+        }
+    };
+
+    // Initialize the first page display and set up pagination
+    console.log("Initializing first page display");
+    updateProductDisplay(currentPage);
+    updatePaginationButtons();
+    initPaginationButtons();
+    
+    // Make sure wishlist functionality is set up
+    setTimeout(function() {
+      setupWishlistFunctionality();
+      console.log("Wishlist functionality initialized");
+    }, 500);
+    
+    // Check for category filtering from URL after initialization
+    checkUrlForCategoryFilter();
+
+    // Override the debug event listener in HTML
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove any inline event listeners added in HTML
+      setTimeout(function() {
+        initPaginationButtons();
+      }, 100);
+    });
+
     // Add a "Show All" button to the categories
     const categoriesContainer = document.querySelector('.categories-container');
     if (categoriesContainer) {
@@ -813,60 +1027,4 @@ document.addEventListener('DOMContentLoaded', function() {
             resetProductDisplay();
         });
     }
-    
-    // Function to reset product display to original state
-    function resetProductDisplay() {
-        // Original positions for each container
-        const originalPositions = {
-            3: { top: 210, left: 132 },
-            4: { top: 210, left: 432 },
-            5: { top: 210, left: 732 },
-            6: { top: 210, left: 1032 },
-            7: { top: 626, left: 1032 },
-            8: { top: 626, left: 132 },
-            9: { top: 626, left: 732 },
-            10: { top: 626, left: 432 },
-            11: { top: 1034, left: 132 },
-            12: { top: 1034, left: 432 },
-            13: { top: 1034, left: 732 },
-            14: { top: 1034, left: 1032 },
-            15: { top: 1442, left: 132 },
-            16: { top: 1442, left: 432 },
-            17: { top: 1442, left: 732 },
-            18: { top: 1442, left: 1032 }
-        };
-        
-        // Restore all containers to their original positions
-        for (let containerNum = 3; containerNum <= 18; containerNum++) {
-            const container = document.querySelector(`.container-${containerNum}`);
-            if (container && originalPositions[containerNum]) {
-                container.style.top = `${originalPositions[containerNum].top}px`;
-                container.style.left = `${originalPositions[containerNum].left}px`;
-                container.style.display = 'block';
-            }
-        }
-    }
-
-    // Store reference to the original function
-    const _updateProductDisplay = updateProductDisplay;
-
-    // Override the original function
-    updateProductDisplay = function(page) {
-      _updateProductDisplay(page);
-      updatePaginationButtons();
-    };
-
-    // Initialize the first page display and set up pagination
-    console.log("Initializing first page display");
-    updateProductDisplay(currentPage);
-    updatePaginationButtons();
-    initPaginationButtons();
-
-    // Override the debug event listener in HTML
-    document.addEventListener('DOMContentLoaded', function() {
-      // Remove any inline event listeners added in HTML
-      setTimeout(function() {
-        initPaginationButtons();
-      }, 100);
-    });
 });

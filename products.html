@@ -6,6 +6,191 @@
     <link rel="stylesheet" href="products.css"/>
     <link rel="stylesheet" href="globals.css"/>
     <link rel="stylesheet" href="common.css"/>
+    <style>
+      /* Product popup styles */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 998;
+      }
+      
+      .modal-overlay.active {
+        display: block;
+      }
+      
+      .product-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 900px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        overflow: hidden;
+      }
+      
+      .popup-content {
+        display: flex;
+        flex-direction: row;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      @media (max-width: 768px) {
+        .popup-content {
+          flex-direction: column;
+        }
+      }
+      
+      .popup-image {
+        flex: 1;
+        max-width: 50%;
+        padding: 20px;
+      }
+      
+      .popup-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      
+      .popup-details {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .popup-rating {
+        margin: 10px 0;
+        color: #a17561;
+      }
+      
+      .rating-stars {
+        color: #a17561;
+        font-size: 20px;
+        margin-right: 5px;
+      }
+      
+      .popup-description {
+        margin: 15px 0;
+        line-height: 1.6;
+        color: #565d6d;
+      }
+      
+      .buy-now-button {
+        display: inline-block;
+        background-color: #a17561;
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-family: "Inter", Helvetica;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 15px 0;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .buy-now-button:hover {
+        background-color: #8a6354;
+      }
+      
+      .popup-retailers {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      
+      .retailer-links a {
+        color: #a17561;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .retailer-links a:hover {
+        color: #8a6354;
+        text-decoration: underline;
+      }
+      
+      .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #323743;
+      }
+      
+      /* Wishlist heart active state */
+      .wishlist-heart.active svg {
+        fill: #a17561;
+      }
+      
+      .wishlist-heart svg {
+        fill: transparent;
+        stroke: #a17561;
+        stroke-width: 1px;
+        transition: fill 0.3s ease;
+      }
+      
+      .wishlist-heart:hover svg {
+        fill: rgba(161, 117, 97, 0.3);
+      }
+      
+      /* Fix for wishlist heart button */
+      .wishlist-heart {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px; 
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      }
+      
+      .wishlist-heart:hover {
+        transform: scale(1.1);
+      }
+      
+      /* Make product containers clickable */
+      [class*="container-"][class*="product-container"],
+      .container-3, .container-4, .container-5, .container-6, 
+      .container-7, .container-8, .container-9, .container-10, 
+      .container-11, .container-12, .container-13, .container-14, 
+      .container-15, .container-16, .container-17, .container-18 {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      [class*="container-"][class*="product-container"]:hover,
+      .container-3:hover, .container-4:hover, .container-5:hover, .container-6:hover, 
+      .container-7:hover, .container-8:hover, .container-9:hover, .container-10:hover, 
+      .container-11:hover, .container-12:hover, .container-13:hover, .container-14:hover, 
+      .container-15:hover, .container-16:hover, .container-17:hover, .container-18:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+    </style>
     <script src="scripts/common.js"></script>
     <script src="scripts/products.js"></script>
 
@@ -294,65 +479,97 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Get all wishlist heart icons
-    const wishlistHearts = document.querySelectorAll('.wishlist-heart');
-    
-    wishlistHearts.forEach(heart => {
-      const productId = heart.getAttribute('data-product-id');
+    // Setup for wishlist hearts
+    setTimeout(function() {
+      // Get all wishlist heart icons
+      const wishlistHearts = document.querySelectorAll('.wishlist-heart');
       
-      // Set initial state based on current user's wishlist
-      if (isInUserWishlist(productId)) {
-        heart.classList.add('active');
-      } else {
-        heart.classList.remove('active');
-      }
-      
-      heart.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent container click
+      wishlistHearts.forEach(heart => {
+        const productId = heart.getAttribute('data-product-id');
         
-        const productId = this.getAttribute('data-product-id');
-        const productName = this.getAttribute('data-product-name');
-        const productPrice = this.getAttribute('data-product-price');
-        
-        // Check if user is logged in
-        const userEmail = getCurrentUserEmail();
-        if (!userEmail) {
-          alert('Please log in to add items to your wishlist.');
-          return;
-        }
-        
-        // Toggle wishlist status
-        if (isInUserWishlist(productId)) {
-          // Remove from wishlist
-          if (removeFromUserWishlist(productId)) {
-            this.classList.remove('active');
-            console.log(`Removed ${productName} from wishlist`);
-          }
+        // Set initial state based on current user's wishlist
+        if (typeof isInUserWishlist === 'function' && isInUserWishlist(productId)) {
+          heart.classList.add('active');
         } else {
-          // Add to wishlist
-          const newItem = {
-            id: productId,
-            name: productName,
-            price: productPrice
-          };
-          
-          if (addToUserWishlist(newItem)) {
-            this.classList.add('active');
-            console.log(`Added ${productName} to wishlist`);
-          }
+          heart.classList.remove('active');
         }
+        
+        // Clear existing event listeners to avoid duplicates
+        const newHeart = heart.cloneNode(true);
+        heart.parentNode.replaceChild(newHeart, heart);
+        
+        // Add the click event listener
+        newHeart.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent container click
+          e.preventDefault(); // Prevent any default action
+          
+          const productId = this.getAttribute('data-product-id');
+          const productName = this.getAttribute('data-product-name');
+          const productPrice = this.getAttribute('data-product-price');
+          
+          if (typeof getCurrentUserEmail !== 'function') {
+            console.error('getCurrentUserEmail function not available');
+            return;
+          }
+          
+          // Check if user is logged in
+          const userEmail = getCurrentUserEmail();
+          if (!userEmail) {
+            alert('Please log in to add items to your wishlist.');
+            return;
+          }
+          
+          // Toggle wishlist status
+          if (isInUserWishlist(productId)) {
+            // Remove from wishlist
+            if (removeFromUserWishlist(productId)) {
+              this.classList.remove('active');
+              console.log(`Removed ${productName} from wishlist`);
+            }
+          } else {
+            // Add to wishlist
+            const newItem = {
+              id: productId,
+              name: productName,
+              price: productPrice
+            };
+            
+            if (addToUserWishlist(newItem)) {
+              this.classList.add('active');
+              console.log(`Added ${productName} to wishlist`);
+            }
+          }
+        });
       });
-    });
-    
-    // DEBUG: Direct event listener for Next Page button
-    const nextPageButton = document.querySelector('.next-page-wrapper');
-    if (nextPageButton) {
-      console.log('DEBUG: Next Page button found');
-      nextPageButton.addEventListener('click', function() {
-        console.log('DEBUG: Next Page button clicked directly from HTML');
+      
+      // Setup click handlers for product containers
+      const productContainers = document.querySelectorAll('.container-3, .container-4, .container-5, .container-6, .container-7, .container-8, .container-9, .container-10, .container-11, .container-12, .container-13, .container-14, .container-15, .container-16, .container-17, .container-18, [class*="container-"][class*="product-container"]');
+      
+      productContainers.forEach(container => {
+        // Find the product ID from the wishlist heart inside the container
+        const wishlistHeart = container.querySelector('.wishlist-heart');
+        if (!wishlistHeart) return;
+        
+        const productId = wishlistHeart.getAttribute('data-product-id');
+        
+        container.addEventListener('click', function(e) {
+          // Don't trigger if clicking on the wishlist heart
+          if (e.target.closest('.wishlist-heart')) return;
+          
+          // Find the product info
+          const product = window.allProducts ? window.allProducts.find(p => p.id == productId) : null;
+          
+          if (product && typeof openProductPopup === 'function') {
+            openProductPopup(product);
+          } else {
+            console.log('Product clicked:', productId);
+            // Fallback if openProductPopup is not available
+            if (product && product.buyLink) {
+              window.open(product.buyLink, '_blank');
+            }
+          }
+        });
       });
-    } else {
-      console.error('DEBUG: Next Page button not found in the HTML');
-    }
+    }, 800); // Give time for common.js to load
   });
 </script>

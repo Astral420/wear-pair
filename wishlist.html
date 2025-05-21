@@ -39,12 +39,331 @@
         background-color: #f5efe8;
         color: #a17561;
       }
+      
+      /* Wishlist heart active state */
+      .wishlist-heart.active svg {
+        fill: #a17561;
+      }
+      
+      .wishlist-heart svg {
+        fill: transparent;
+        stroke: #a17561;
+        stroke-width: 1px;
+        transition: fill 0.3s ease;
+      }
+      
+      .wishlist-heart:hover svg {
+        fill: rgba(161, 117, 97, 0.3);
+      }
+      
+      /* Custom Outfit Styles */
+      .outfit-item {
+        background-color: rgba(255, 250, 241, 0.9);
+        padding: 15px;
+        border-radius: 8px;
+      }
+      
+      .outfit-title {
+        color: #a17561;
+        margin-bottom: 10px;
+        font-family: "Inter", Helvetica;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      
+      .outfit-description {
+        font-size: 14px;
+        margin-bottom: 15px;
+        font-family: "Inter", Helvetica;
+        color: #565d6d;
+        line-height: 1.5;
+      }
+      
+      .outfit-items-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      
+      .outfit-preview-item {
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      .outfit-preview-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .regenerate-outfit {
+        background-color: #a17561;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+      }
+      
+      .regenerate-outfit:hover {
+        background-color: #8a6354;
+      }
+      
+      .outfit-placeholder {
+        padding: 20px;
+        text-align: center;
+      }
+      
+      .outfit-placeholder h3 {
+        font-family: "Inter", Helvetica;
+        font-size: 18px;
+        font-weight: 600;
+        color: #a17561;
+        margin-bottom: 8px;
+      }
+      
+      .outfit-placeholder p {
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        color: #565d6d;
+      }
+      
+      /* Custom button styling */
+      .remove-from-wishlist {
+        background-color: transparent;
+        color: #a17561;
+        border: 1px solid #a17561;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .remove-from-wishlist:hover {
+        background-color: rgba(161, 117, 97, 0.1);
+      }
+      
+      .add-to-cart {
+        background-color: #a17561;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+      }
+      
+      .add-to-cart:hover {
+        background-color: #8a6354;
+      }
+      
+      /* Consistent wishlist layout styling */
+      .wishlist-items-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      
+      .container-2 {
+        padding-top: 30px;
+      }
+      
+      .wishlist-item {
+        display: flex;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .wishlist-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      
+      .wishlist-item-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+      
+      .wishlist-item-details {
+        padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      .wishlist-item-details h3 {
+        font-family: "Inter", Helvetica;
+        font-size: 16px;
+        font-weight: 600;
+        color: #323743;
+        margin: 0 0 10px 0;
+      }
+      
+      .wishlist-item-details .buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+      }
+      
+      /* Outfit-specific overrides */
+      .outfit-item {
+        flex-direction: column;
+        padding: 0;
+      }
+      
+      .outfit-content {
+        padding: 15px;
+      }
+      
+      /* Wishlist Page Styling */
+      .wishlist-heading {
+        font-family: "Montserrat", sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #323743;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+      /* Popup Styles */
+      .outfit-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .outfit-popup-content {
+        background-color: #fff;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      
+      .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #323743;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .popup-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: #323743;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      
+      .popup-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .popup-item {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      
+      .popup-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .popup-item img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      
+      .popup-item h4 {
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        font-weight: 600;
+        color: #323743;
+        margin: 0 0 5px 0;
+      }
+      
+      .popup-item .buy-btn {
+        display: inline-block;
+        background-color: #a17561;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Inter", Helvetica;
+        font-size: 14px;
+        margin-top: 10px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      
+      .popup-item .buy-btn:hover {
+        background-color: #8a6354;
+      }
     </style>
     <script src="scripts/common.js"></script>
     <script>
          document.addEventListener('DOMContentLoaded', function() {
         // Load and display wishlist items
         loadWishlistItems();
+        
+        // Add event listeners for "Buy Now" buttons on regular products
+        setTimeout(() => {
+          document.querySelectorAll('.wishlist-item:not(.outfit-item) .add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+              const productId = this.closest('.wishlist-item').getAttribute('data-product-id');
+              redirectToProductBuyPage(productId);
+            });
+          });
+        }, 500);
       });
 
       // Function to load and display wishlist items
@@ -95,6 +414,39 @@
           14: "https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440", // New Balances 530
           15: "https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp", // Manfinity Loose Fit Blazer
           16: "https://c.animaapp.com/FpgE2lUx/img/image@2x.png", 
+          17: "https://img.ltwebstatic.com/images3_spmp/2024/06/10/64/1717994598ca89fa6a234f30b9de88e6e2ad731e04_thumbnail_900x.webp",
+          18: "",
+          19: "",
+          20: "",
+          21: "",
+          22: "",
+          23: "",
+          24: "",
+          25: "",
+          26: "",
+          27: "",
+          28: "",
+          29: "",
+          30: "",
+          31: "",
+          32: "",
+          33: "",
+          34: "",
+          35: "",
+          36: "",
+          37: "",
+          38: "",
+          39: "",
+          40: "",
+          41: "",
+          42: "",
+          43: "",
+          44: "",
+          45: "",
+          46: "",
+          47: "",
+          48: "",
+
           // Additional IDs for products on index page
           101: "assets/whiteshirt-denim-outfit.png", // Summer Casual
           102: "assets/formal-chic.png", // Formal Chic
@@ -112,22 +464,113 @@
         // Generate HTML for wishlist items
         let wishlistHTML = '';
         wishlist.forEach(item => {
-          const imageSrc = productImages[item.id] || "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png";
-          
-          wishlistHTML += `
-            <div class="wishlist-item" data-product-id="${item.id}">
-              <img src="${imageSrc}" alt="${item.name}" class="wishlist-item-image">
-              <div class="wishlist-item-details">
-                <h3>${item.name}</h3>
-                
-                <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${item.id}')">Remove</button>
-                <button class="add-to-cart">Add to Cart</button>
+          // Check if this is a custom outfit from the outfit builder
+          if (item.id && item.id.toString().startsWith('outfit-')) {
+            // This is a custom outfit
+            wishlistHTML += generateOutfitHTML(item);
+          } else {
+            // Regular product
+            const imageSrc = productImages[item.id] || "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png";
+            
+            wishlistHTML += `
+              <div class="wishlist-item" data-product-id="${item.id}">
+                <img src="${imageSrc}" alt="${item.name}" class="wishlist-item-image">
+                <div class="wishlist-item-details">
+                  <h3>${item.name}</h3>
+                  <div class="buttons">
+                    <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${item.id}')">Remove</button>
+                    <button class="add-to-cart">Buy Now</button>
+                  </div>
+                </div>
               </div>
+            `;
+          }
+        });
+        
+        wishlistContainer.innerHTML = wishlistHTML;
+      }
+      
+      // Function to generate HTML for a custom outfit
+      function generateOutfitHTML(outfitItem) {
+        // Get the outfit data
+        const outfit = outfitItem.outfitData;
+        
+        if (!outfit) {
+          return `
+            <div class="wishlist-item outfit-item" data-product-id="${outfitItem.id}">
+              <div class="outfit-placeholder">
+                <h3>${outfitItem.name}</h3>
+                <p>Custom outfit details unavailable</p>
+              </div>
+              <div class="wishlist-item-details">
+                <div class="buttons">
+                  <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${outfitItem.id}')">Remove</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        
+        // Create outfit display with the items
+        return `
+          <div class="wishlist-item outfit-item" data-product-id="${outfitItem.id}">
+            <div class="outfit-content">
+              <h3 class="outfit-title">${outfitItem.name}</h3>
+              <p class="outfit-description">${outfit.description || 'Custom outfit created in the outfit generator'}</p>
+              <div class="outfit-items-preview">
+                ${generateOutfitItemsPreview(outfit.items)}
+              </div>
+              <div class="wishlist-item-details">
+                <div class="buttons">
+                  <button class="remove-from-wishlist" onclick="removeItemFromWishlist('${outfitItem.id}')">Remove</button>
+                  <button class="add-to-cart" onclick="showOutfitPopup('${outfitItem.id}')">Buy Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Function to generate preview of outfit items
+      function generateOutfitItemsPreview(itemIds) {
+        if (!itemIds || itemIds.length === 0) {
+          return '<p>No items in this outfit</p>';
+        }
+        
+        let previewHTML = '<div class="outfit-items-grid">';
+        
+        // Product images mapping (simplified for demo)
+        const productImages = {
+          1: "https://c.animaapp.com/maskue7rUMC7Hc/img/image.png", // Denim Jacket
+          2: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png", // Knitted Sweater
+          3: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png", // Slim-Fit Jeans
+          4: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png", // White T-Shirt
+          5: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png", // Sleeveless Sport Swimsuit
+          6: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png", // Leather Boots
+          7: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png", // Adjustable Shoulder Bag
+          8: "https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png", // Men's Fashionable T-Shirt
+          9: "https://img.ltwebstatic.com/images3_spmp/2024/04/23/b2/1713840736fdd321a04b895695dab9029a48bdf29d_thumbnail_900x.webp", // Layered Chain Necklace
+          10: "https://img.ltwebstatic.com/images3_pi/2022/11/01/1667282605139b18061a747fa75d434c82cd8f73a0_thumbnail_900x.webp", // Men Star & Lightning Decor Ring Set
+          11: "https://www.youngla.com/cdn/shop/files/UntitledSession13694.jpg?v=1744134834&width=1255", // YOUNGLA The Boys Hoodie
+          12: "https://img.ltwebstatic.com/images3_pi/2024/12/18/bf/1734505217ffdce50c66aa658c2232a269b3744ba8_thumbnail_900x.webp", // Off-shoulder Graphic Tee
+          13: "https://img.ltwebstatic.com/v4/j/spmp/2025/03/26/f4/174299283770ff3f1bc9d8bc7db84ca8e6763d989d_wk_1745220650_thumbnail_900x.webp", // Sleeveless Dress
+          14: "https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440", // New Balances 530
+          15: "https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp", // Manfinity Loose Fit Blazer
+          16: "https://c.animaapp.com/FpgE2lUx/img/image@2x.png"
+        };
+        
+        // Add each item to the preview
+        itemIds.forEach(id => {
+          const imageSrc = productImages[id] || "https://via.placeholder.com/80x80?text=Item";
+          previewHTML += `
+            <div class="outfit-preview-item">
+              <img src="${imageSrc}" alt="Outfit item" class="outfit-preview-image">
             </div>
           `;
         });
         
-        wishlistContainer.innerHTML = wishlistHTML;
+        previewHTML += '</div>';
+        return previewHTML;
       }
       
       // Function to remove item from wishlist
@@ -136,6 +579,37 @@
         if (removeFromUserWishlist(productId)) {
           // Reload wishlist items to update the display
           loadWishlistItems();
+        }
+      }
+      
+      // Function to redirect to product buy page
+      function redirectToProductBuyPage(productId) {
+        // Product data with buy links
+        const productData = {
+          1: { buyLink: "https://ph.shein.com/ph/Men's-Casual-Washed-Funny-Plain-Dark-Denim-Jacket,-Spring-&-Fall,-For-Party-p-38400397.html" },
+          2: { buyLink: "https://ph.shein.com/eur/Manfinity-Hypemode-Men-1Pc-Cartoon-Pattern-Colorblock-Drop-Shoulder-Baggy-Sweater-Crew-Neck-Long-Sleeve-Colorful-Dinosaur-Pattern-Going-Out-Fashion-Sweater-For-Friends-p-23864215.html" },
+          3: { buyLink: "https://ph.shein.com/Women-s-Slim-Fit-Denim-Pants-With-Pockets-Suitable-For-Daily-Outings-p-34406940.html" },
+          4: { buyLink: 'https://sphere-vista.com/products/solid-round-neck-t-shirt' },
+          5: { buyLink: "https://ph.shein.com/DAZY-Contrast-Binding-Halter-Bikini-Swimsuit-p-17444181-cat-1866.html" },
+          6: { buyLink: 'https://www.uggoutlet.com.au/products/chunky-boots-lace-up-women-stephanie' },
+          7: { buyLink: "https://ph.shein.com/ph/1pc-Adjustable-Strap-Flap-Closure-Plain-Color-Shoulder-Bag,-Casual-Retro-Business-Commuting-Waterproof-PU-Mini-Messenger-Crossbody-Bag-Christmas-Men-Bag-Vacation-Dad-Gifts-Retro-Bag-Vintage-Messenger-Bag-Tote-Bag-Side-Bags-Gifts-Valentine-Day-Black-Bag-Camping-Sling-Bag-Stickers-Winter-Back-To-School-Valentines-Gifts-Valentine-Gifts-Vintage-Gift-Bag-Pack-Cross-Body-Bag-Spring-Vintage-Bags-School-Supplies-Mini-Bag-Small-Bag-Purse-College-Bags-New-Life-Items-For-Students-Men-Essentials-Fashion-Men's-Bags-Graduation-p-37807827.html" },
+          8: { buyLink: 'https://snobasia.com/collections/t-shirts/products/yukariyo-t-shirt' },
+          9: { buyLink: "https://ph.shein.com/Men-s-Necklace-And-Unique-Design-Hip-Hop-Style-Chain-Jewelry-Sweater-Chain-Halloween-p-34255889.html" },
+          10: { buyLink: "https://ph.shein.com/5pcs-Men-Star-Lightning-Decor-Ring-p-12015672.html" },
+          11: { buyLink: 'https://www.youngla.com/products/5076' },
+          12: { buyLink: "https://ph.shein.com/us/goods-p-45942661.html" },
+          13: { buyLink: "https://ph.shein.com/Women-Sleeveless-High-Neck-Skinny-Sexy-Long-Dress-Bodycon-Sexy-Party-Dress-Evening-p-67030400.html" },
+          14: { buyLink: 'https://www.newbalance.com/pd/530/MR530-32265-PMG-NA.html' },
+          15: { buyLink: "https://ph.shein.com/Manfinity-RebelGame-Plus-Size-Men-s-Loose-Fit-Black-Woven-Long-Sleeve-Blazer-Jacket-p-56151083.html" },
+          16: { buyLink: "https://us.shein.com/Autumn-Colorblock-Faux-Leather-Casual-Loose-Fit-Jacket-For-Men-p-44366683.html" },
+          17: { buyLink: "https://us.shein.com/Women-Straw-Bucket-Hat-With-Contrasting-Braided-Band-p-14998553.html" }
+        };
+        
+        const buyLink = productData[productId]?.buyLink;
+        if (buyLink) {
+          window.open(buyLink, '_blank');
+        } else {
+          alert("Product buy link not found");
         }
       }
     </script>
@@ -200,7 +674,7 @@
 
             <div class="overlap-2">
                 <div class="container-2">
-                  <div class="text-wrapper-8">My Wishlist</div>
+                  <h1 class="wishlist-heading">My Wishlist</h1>
                   
                   <div id="wishlist-container" class="wishlist-items-container">
                     <!-- Wishlist items will be populated here by JavaScript -->
@@ -265,5 +739,102 @@
             </div>
         </div>
     </div>
-</body>
+    
+    <!-- Outfit items popup -->
+    <div id="outfitPopup" class="outfit-popup">
+      <div class="outfit-popup-content">
+        <button class="close-popup" onclick="closeOutfitPopup()">&times;</button>
+        <h3 class="popup-title">Shop This Outfit</h3>
+        <div id="popupItems" class="popup-items">
+          <!-- Items will be populated here -->
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // Function to display the outfit items popup
+      function showOutfitPopup(outfitId) {
+        const wishlist = getUserWishlist();
+        const outfitItem = wishlist.find(item => item.id === outfitId);
+        
+        if (!outfitItem || !outfitItem.outfitData) {
+          alert("Outfit details not found");
+          return;
+        }
+        
+        const outfit = outfitItem.outfitData;
+        const itemIds = outfit.items || [];
+        
+        if (itemIds.length === 0) {
+          alert("No items available in this outfit");
+          return;
+        }
+        
+        // Product data from common.js or a simplified version
+        const productData = {
+          1: { name: 'Denim Jacket', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image.png', buyLink: "https://ph.shein.com/ph/Men's-Casual-Washed-Funny-Plain-Dark-Denim-Jacket,-Spring-&-Fall,-For-Party-p-38400397.html" },
+          2: { name: 'Knitted Sweater', price: '39.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-1.png', buyLink: "https://ph.shein.com/eur/Manfinity-Hypemode-Men-1Pc-Cartoon-Pattern-Colorblock-Drop-Shoulder-Baggy-Sweater-Crew-Neck-Long-Sleeve-Colorful-Dinosaur-Pattern-Going-Out-Fashion-Sweater-For-Friends-p-23864215.html" },
+          3: { name: 'Slim-Fit Jeans', price: '49.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-2.png', buyLink: "https://ph.shein.com/Women-s-Slim-Fit-Denim-Pants-With-Pockets-Suitable-For-Daily-Outings-p-34406940.html" },
+          4: { name: 'White T-Shirt', price: '19.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-3.png', buyLink: 'https://sphere-vista.com/products/solid-round-neck-t-shirt' },
+          5: { name: 'Sleeveless Sport Swimsuit', price: '59.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-4.png', buyLink: "https://ph.shein.com/DAZY-Contrast-Binding-Halter-Bikini-Swimsuit-p-17444181-cat-1866.html" },
+          6: { name: 'Leather Boots', price: '89.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-5.png', buyLink: 'https://www.uggoutlet.com.au/products/chunky-boots-lace-up-women-stephanie' },
+          7: { name: 'Adjustable Shoulder Bag', price: '79.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-6.png', buyLink: "https://ph.shein.com/ph/1pc-Adjustable-Strap-Flap-Closure-Plain-Color-Shoulder-Bag,-Casual-Retro-Business-Commuting-Waterproof-PU-Mini-Messenger-Crossbody-Bag-Christmas-Men-Bag-Vacation-Dad-Gifts-Retro-Bag-Vintage-Messenger-Bag-Tote-Bag-Side-Bags-Gifts-Valentine-Day-Black-Bag-Camping-Sling-Bag-Stickers-Winter-Back-To-School-Valentines-Gifts-Valentine-Gifts-Vintage-Gift-Bag-Pack-Cross-Body-Bag-Spring-Vintage-Bags-School-Supplies-Mini-Bag-Small-Bag-Purse-College-Bags-New-Life-Items-For-Students-Men-Essentials-Fashion-Men's-Bags-Graduation-p-37807827.html" },
+          8: { name: 'Men\'s Fashionable T-Shirt', price: '80.99', image: 'https://c.animaapp.com/maskue7rUMC7Hc/img/image-15.png', buyLink: 'https://snobasia.com/collections/t-shirts/products/yukariyo-t-shirt' },
+          9: { name: 'Layered Chain Necklace', price: '80.99', image: 'https://img.ltwebstatic.com/images3_spmp/2024/04/23/b2/1713840736fdd321a04b895695dab9029a48bdf29d_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Men-s-Necklace-And-Unique-Design-Hip-Hop-Style-Chain-Jewelry-Sweater-Chain-Halloween-p-34255889.html" },
+          10: { name: 'Men Star & Lightning Decor Ring Set', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2022/11/01/1667282605139b18061a747fa75d434c82cd8f73a0_thumbnail_900x.webp', buyLink: "https://ph.shein.com/5pcs-Men-Star-Lightning-Decor-Ring-p-12015672.html" },
+          11: { name: 'YOUNGLA The Boys Hoodie', price: '80.99', image: 'https://www.youngla.com/cdn/shop/files/UntitledSession13694.jpg?v=1744134834&width=1255', buyLink: 'https://www.youngla.com/products/5076' },
+          12: { name: 'Off-shoulder Graphic Tee', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2024/12/18/bf/1734505217ffdce50c66aa658c2232a269b3744ba8_thumbnail_900x.webp', buyLink: "https://ph.shein.com/us/goods-p-45942661.html" },
+          13: { name: 'Sleeveless Dress', price: '80.99', image: 'https://img.ltwebstatic.com/v4/j/spmp/2025/03/26/f4/174299283770ff3f1bc9d8bc7db84ca8e6763d989d_wk_1745220650_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Women-Sleeveless-High-Neck-Skinny-Sexy-Long-Dress-Bodycon-Sexy-Party-Dress-Evening-p-67030400.html" },
+          14: { name: 'New Balances 530', price: '80.99', image: 'https://nb.scene7.com/is/image/NB/mr530ck_nb_05_i?$pdpflexf2$&wid=440&hei=440', buyLink: 'https://www.newbalance.com/pd/530/MR530-32265-PMG-NA.html' },
+          15: { name: 'Manfinity Loose Fit Blazer', price: '80.99', image: 'https://img.ltwebstatic.com/images3_pi/2025/02/12/4f/1739326527025da56ff20ec19fdbd7bbe10d65314a_thumbnail_900x.webp', buyLink: "https://ph.shein.com/Manfinity-RebelGame-Plus-Size-Men-s-Loose-Fit-Black-Woven-Long-Sleeve-Blazer-Jacket-p-56151083.html" },
+          16: { name: 'Bomber Jacket', price: '80.99', image: 'https://c.animaapp.com/FpgE2lUx/img/image@2x.png', buyLink: "https://us.shein.com/Autumn-Colorblock-Faux-Leather-Casual-Loose-Fit-Jacket-For-Men-p-44366683.html" },
+          17: { name: 'Summer Straw Hat', price: '29.99', image: 'https://img.ltwebstatic.com/images3_spmp/2024/06/10/64/1717994598ca89fa6a234f30b9de88e6e2ad731e04_thumbnail_900x.webp', buyLink: "https://us.shein.com/Women-Straw-Bucket-Hat-With-Contrasting-Braided-Band-p-14998553.html" }
+        };
+        
+        // Populate the popup with outfit items
+        const popupItems = document.getElementById('popupItems');
+        popupItems.innerHTML = '';
+        
+        itemIds.forEach(id => {
+          const product = productData[id];
+          if (!product) return;
+          
+          const itemHtml = `
+            <div class="popup-item">
+              <img src="${product.image}" alt="${product.name}">
+              <h4>${product.name}</h4>
+              <div class="price">$${product.price}</div>
+              <a href="${product.buyLink}" target="_blank" class="buy-btn">Buy Now</a>
+            </div>
+          `;
+          
+          popupItems.innerHTML += itemHtml;
+        });
+        
+        // Show the popup
+        const popup = document.getElementById('outfitPopup');
+        popup.style.display = 'flex';
+      }
+      
+      // Function to close the popup
+      function closeOutfitPopup() {
+        const popup = document.getElementById('outfitPopup');
+        popup.style.display = 'none';
+      }
+      
+      // Close popup when clicking outside the content
+      document.getElementById('outfitPopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeOutfitPopup();
+        }
+      });
+      
+      // Close popup on ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeOutfitPopup();
+        }
+      });
+    </script>
+  </body>
 </html> 
