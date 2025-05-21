@@ -212,14 +212,42 @@
           displayOutfitItem('bottom', bottom);
           displayOutfitItem('shoe', shoe);
           displayOutfitItem('accessory', accessory);
-
-          // Generate outfit description
-          generateOutfitDescription(top, bottom, shoe, accessory);
-
-          // Update outfit style based on selected items
-          updateOutfitStyle(top, bottom, shoe, accessory);
+          
+          // Suggest a name based on items (optional enhancement)
+          suggestOutfitName(top, bottom, shoe, accessory);
         }
-
+        
+        // Function to suggest a name for the outfit based on the selected items (optional)
+        function suggestOutfitName(top, bottom, shoe, accessory) {
+          // Only suggest a name if the field is empty or has the default value
+          const outfitNameField = document.getElementById('outfitName');
+          if (!outfitNameField.value || outfitNameField.value === "My Custom Outfit") {
+            // Create a name based on a dominant category and color
+            let dominantCategory = '';
+            
+            // Simple logic to determine a dominant category
+            if (top.category === 'blazers') {
+              dominantCategory = 'Formal';
+            } else if (top.category === 'hoodies') {
+              dominantCategory = 'Casual';
+            } else if (bottom.category === 'dresses') {
+              dominantCategory = 'Elegant';
+            } else if (shoe.name.toLowerCase().includes('boot')) {
+              dominantCategory = 'Bold';
+            } else {
+              dominantCategory = 'Stylish';
+            }
+            
+            outfitNameField.value = `${dominantCategory} ${getRandomTimePeriod()} Look`;
+          }
+        }
+        
+        // Helper function for outfit name generation
+        function getRandomTimePeriod() {
+          const periods = ['Day', 'Night', 'Weekend', 'Summer', 'Winter', 'Spring', 'Fall', 'Evening'];
+          return periods[Math.floor(Math.random() * periods.length)];
+        }
+        
         // Function to regenerate a specific item
         function regenerateItem(category) {
           let items;
@@ -254,10 +282,9 @@
           const bottom = outfitItems.bottoms.find(item => item.id == currentBottom);
           const shoe = outfitItems.shoes.find(item => item.id == currentShoe);
           const accessory = outfitItems.accessories.find(item => item.id == currentAccessory);
-
-          // Update description and style with the new item
-          generateOutfitDescription(top, bottom, shoe, accessory);
-          updateOutfitStyle(top, bottom, shoe, accessory);
+          
+          // Suggest a new name if the current one is the default
+          suggestOutfitName(top, bottom, shoe, accessory);
         }
 
         // Helper function to get a random item from an array
@@ -290,86 +317,6 @@
           container.setAttribute('data-item-id', item.id);
         }
 
-        // Function to generate a description for the outfit
-        function generateOutfitDescription(top, bottom, shoe, accessory) {
-          if (!top || !bottom || !shoe || !accessory) return;
-
-          const topStyle = getCategoryStyle(top.category);
-          const bottomStyle = getCategoryStyle(bottom.category);
-          const shoeStyle = getCategoryStyle(shoe.category);
-          const accessoryStyle = getCategoryStyle(accessory.category);
-
-          // Generate a description based on the items
-          let description = `This outfit combines a ${topStyle} ${top.name} with `;
-          
-          if (bottom.category === 'dresses') {
-            description = `This outfit features a stylish ${bottom.name} paired with `;
-          } else {
-            description += `${bottomStyle} ${bottom.name}, `;
-          }
-          
-          description += `complemented by ${shoeStyle} ${shoe.name} and a ${accessoryStyle} ${accessory.name}.`;
-          
-          // Add a style suggestion
-          const styleNames = ['casual', 'formal', 'sporty', 'bohemian', 'streetwear'];
-          const randomStyle = styleNames[Math.floor(Math.random() * styleNames.length)];
-          
-          description += ` This outfit is perfect for a ${randomStyle} look.`;
-
-          document.getElementById('outfitDescription').textContent = description;
-        }
-
-        // Helper function to get style description based on category
-        function getCategoryStyle(category) {
-          switch(category) {
-            case 't-shirts':
-              return 'comfortable';
-            case 'hoodies':
-              return 'cozy';
-            case 'blazers':
-              return 'sophisticated';
-            case 'jeans':
-              return 'classic';
-            case 'dresses':
-              return 'elegant';
-            case 'shoes':
-              return 'stylish';
-            case 'accessories':
-              return 'trendy';
-            default:
-              return 'stylish';
-          }
-        }
-
-        // Function to update the outfit style
-        function updateOutfitStyle(top, bottom, shoe, accessory) {
-          // Simple style categorization
-          let formalCount = 0;
-          let casualCount = 0;
-          let sportCount = 0;
-
-          // Count style types
-          if (top.category === 'blazers') formalCount++;
-          if (top.category === 't-shirts') casualCount++;
-          if (top.category === 'hoodies') sportCount++;
-
-          if (bottom.category === 'dresses') formalCount++;
-          if (bottom.category === 'jeans') casualCount++;
-
-          if (shoe.name.toLowerCase().includes('boot')) formalCount++;
-          if (shoe.name.toLowerCase().includes('sneaker')) sportCount++;
-
-          // Determine dominant style
-          let style = 'Casual';
-          if (formalCount > casualCount && formalCount > sportCount) {
-            style = 'Formal';
-          } else if (sportCount > casualCount && sportCount > formalCount) {
-            style = 'Sporty';
-          }
-
-          document.getElementById('outfitStyle').textContent = style;
-        }
-
         // Function to save the current outfit to wishlist
         function saveCurrentOutfit() {
           // Check if user is logged in
@@ -385,12 +332,16 @@
           const shoeId = document.querySelector('.outfit-item[data-category="shoe"]').getAttribute('data-item-id');
           const accessoryId = document.querySelector('.outfit-item[data-category="accessory"]').getAttribute('data-item-id');
 
+          // Get the custom outfit name and description
+          const outfitName = document.getElementById('outfitName').value || "My Custom Outfit";
+          const outfitDescription = document.getElementById('outfitDescription').value || "A custom outfit created in the outfit generator.";
+
           // Create a composite outfit object
           const outfit = {
             id: 'outfit-' + Date.now(), // Generate a unique ID
-            name: 'Custom Outfit: ' + document.getElementById('outfitStyle').textContent,
+            name: outfitName,
             items: [topId, bottomId, shoeId, accessoryId].filter(id => id != 0), // Filter out "not available" items
-            description: document.getElementById('outfitDescription').textContent
+            description: outfitDescription
           };
 
           // Save the outfit to localStorage
@@ -524,11 +475,13 @@
               
               <div class="outfit-details">
                 <div class="outfit-style-container">
-                  <h3>Outfit Style: <span id="outfitStyle">Casual</span></h3>
+                  <h3>Outfit Name:</h3>
+                  <input type="text" id="outfitName" class="outfit-input" placeholder="Enter outfit name..." value="My Custom Outfit">
                 </div>
-                <p id="outfitDescription" class="outfit-description">
-                  Generating your personalized outfit description...
-                </p>
+                <div class="outfit-description-container">
+                  <h3>Outfit Description:</h3>
+                  <textarea id="outfitDescription" class="outfit-textarea" placeholder="Describe your outfit...">A stylish combination of items perfect for any occasion.</textarea>
+                </div>
                 <div class="outfit-actions">
                   <button id="generateOutfitBtn" class="primary-button">Generate New Outfit</button>
                   <button id="saveOutfitBtn" class="secondary-button">Save to Wishlist</button>
@@ -571,6 +524,9 @@
         const bottomId = document.querySelector('.outfit-item[data-category="bottom"]').getAttribute('data-item-id');
         const shoeId = document.querySelector('.outfit-item[data-category="shoe"]').getAttribute('data-item-id');
         const accessoryId = document.querySelector('.outfit-item[data-category="accessory"]').getAttribute('data-item-id');
+        
+        // Get the custom outfit name
+        const outfitName = document.getElementById('outfitName').value || "Custom Outfit";
         
         // Filter out any "not available" items (id == 0)
         const itemIds = [topId, bottomId, shoeId, accessoryId].filter(id => id != 0);
@@ -640,6 +596,12 @@
         // Show the popup
         const popup = document.getElementById('outfitPopup');
         popup.style.display = 'flex';
+        
+        // Update popup title to show the custom outfit name
+        const popupTitle = popup.querySelector('.popup-title');
+        if (popupTitle) {
+          popupTitle.textContent = `Shop This Outfit: ${outfitName}`;
+        }
       }
       
       // Function to close the popup
