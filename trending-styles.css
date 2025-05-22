@@ -1,0 +1,541 @@
+/* Trending Styles Page Specific CSS */
+
+/* Inherit styles from style.css for consistency */
+
+/* Trending styles content container */
+
+
+/* Active state for trending styles nav item */
+.frame .custom-wrapper-2#trending-styles-nav {
+  width: 143px;
+  position: relative;
+  height: 52px;
+  top: 0;
+  left: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.frame .custom-wrapper-2#trending-styles-nav::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: #a17561;
+  border-radius: 2px;
+}
+
+/* Override hover effects from other stylesheets */
+.frame .custom-wrapper-2#trending-styles-nav:hover::after {
+  /* Keep the same style as non-hover to effectively remove hover effect */
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: #a17561;
+  border-radius: 2px;
+  /* No transition or color change */
+}
+
+.frame .custom-wrapper-2#trending-styles-nav:hover {
+  /* No background color change or other hover effects */
+  background-color: transparent !important;
+}
+
+.frame .custom-wrapper-2#trending-styles-nav:hover .custom-2 {
+  /* Keep text color the same on hover */
+  color: #a17561 !important;
+  font-weight: 700 !important;
+  /* No other hover effects */
+}
+
+.frame .custom-wrapper-2#trending-styles-nav .custom-2 {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Add hover effect to home nav button */
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .frame .custom-2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .frame .custom-2 {
+    text-align: center;
+  }
+} 
+
+.frame .wear-and-pair {
+  position: absolute;
+  width: 1440px;
+  height: 1033px;
+  top: 54px;
+  left: 0;
+  background-color: #fffaf1;
+  box-shadow: 0px 3px 6px #120f281f;
+}
+
+.frame .div-2 {
+  position: relative;
+  height: 1020px;
+  background-color: #fffaf1;
+  border: 0px none;
+}
+
+.frame .text-wrapper-3 {
+  position: absolute;
+  width: 261px;
+  top: 96px;
+  left: 591px;
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 48px;
+}
+
+.frame .div-3 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 192px;
+  left: 132px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .image-2 {
+  position: absolute;
+  width: 244px;
+  height: 244px;
+  top: 16px;
+  left: 16px;
+}
+
+.frame .text-wrapper-4 {
+  position: absolute;
+  width: 244px;
+  top: 268px;
+  left: 16px;
+  font-family: "Roboto", Helvetica;
+  font-weight: 700;
+  color: #171a1f;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 26px;
+}
+
+.frame .shop-now-wrapper {
+  all: unset;
+  box-sizing: border-box;
+  width: 244px;
+  height: 36px;
+  top: 302px;
+  left: 16px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: #a17561;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+.frame .shop-now {
+  position: absolute;
+  top: 6px;
+  left: 86px;
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.frame .div-4 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 192px;
+  left: 432px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-5 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 192px;
+  left: 732px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-6 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 192px;
+  left: 1032px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-7 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 570px;
+  left: 132px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-8 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 570px;
+  left: 432px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-9 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 570px;
+  left: 732px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame .div-10 {
+  position: absolute;
+  width: 276px;
+  height: 354px;
+  top: 570px;
+  left: 1032px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f0d, 0px 0px 2px #171a1f14;
+}
+
+.frame  .div-11 {
+  position: absolute;
+  width: 1440px;
+  height: 1000px;
+  top: 1087px;
+  left: 0;
+  background-color: #fffaf1;
+  border: 0px none;
+  
+}
+
+.frame .text-wrapper-5 {
+  position: absolute;
+  width: 292px;
+  top: -14px;
+  left: 574px;
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 48px;
+}
+
+.frame .div-12 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 168px;
+  left: 132px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .text-wrapper-6 {
+  position: absolute;
+  width: 344px;
+  top: 220px;
+  left: 16px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.frame .image-3 {
+  position: absolute;
+  width: 344px;
+  height: 162px;
+  top: 16px;
+  left: 16px;
+}
+
+.frame .text-wrapper-7 {
+  position: absolute;
+  width: 344px;
+  top: 186px;
+  left: 16px;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #171a1f;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 26px;
+}
+
+.frame .text-wrapper-8 {
+  position: absolute;
+  width: 344px;
+  top: 250px;
+  left: 16px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+}
+
+.frame .button-2 {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  width: 344px;
+  height: 36px;
+  top: 280px;
+  left: 16px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #a17561;
+}
+
+.frame .text-wrapper-9 {
+  position: absolute;
+  top: 6px;
+  left: 158px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.frame .div-13 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 168px;
+  left: 532px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .div-14 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 168px;
+  left: 932px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame  .div-15 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 524px;
+  left: 132px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .div-16 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 524px;
+  left: 532px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .div-17 {
+  position: absolute;
+  width: 376px;
+  height: 332px;
+  top: 524px;
+  left: 932px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .container-wrapper {
+  position: absolute;
+  width: 1440px;
+  height: 548px;
+  top: 913px;
+  left: 0;
+  background-color: #fffaf1;
+  border-radius: 6px;
+  border: 0px none;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.frame .div-18 {
+  position: relative;
+  width: 1176px;
+  height: 356px;
+  top: 32px;
+  left: 132px;
+  background-color: #efe0bb;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 0px none;
+}
+
+.frame .text-wrapper-10 {
+  position: absolute;
+  width: 1176px;
+  top: 90px;
+  left: 0;
+  font-family: "Archivo", Helvetica;
+  font-weight: 700;
+  color: #a17561;
+  font-size: 48px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 68px;
+}
+
+.frame .p {
+  position: absolute;
+  width: 912px;
+  top: 166px;
+  left: 132px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+
+.frame .button-3 {
+  all: unset;
+  box-sizing: border-box;
+  width: 143px;
+  height: 52px;
+  top: 214px;
+  left: 517px;
+  background-color: #a17561;
+  border-radius: 6px;
+  border-color: transparent;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+.frame .text-wrapper-11 {
+  position: absolute;
+  top: 11px;
+  left: 20px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.frame .text-wrapper-12 {
+  position: absolute;
+  width: 1176px;
+  top: 75px;
+  left: 132px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #565d6d;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 26px;
+}

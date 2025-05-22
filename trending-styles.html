@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="trending-styles.css" />
+    <style>
+      /* Fix for dropdown menu - making sure it displays properly */
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 150px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        margin-top: 8px;
+        z-index: 100;
+        overflow: hidden;
+      }
+      .dropdown-menu.active {
+        display: block !important;
+      }
+      .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        font-family: "Inter", Helvetica;
+        font-weight: 400;
+        font-size: 14px;
+        color: #565d6d;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+      .dropdown-item:hover {
+        background-color: #f5efe8;
+        color: #a17561;
+      }
+      
+      /* Override the hover effects specifically for trending-styles page */
+      .custom-wrapper-2#trending-styles-nav:hover::after,
+      .frame .custom-wrapper-2#trending-styles-nav:hover::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: 0;
+        left: 0;
+        background-color: #a17561;
+        border-radius: 2px;
+      }
+      
+      .custom-wrapper-2#trending-styles-nav:hover,
+      .frame .custom-wrapper-2#trending-styles-nav:hover {
+        background-color: transparent !important;
+      }
+      
+      .custom-wrapper-2#trending-styles-nav:hover .custom-2,
+      .frame .custom-wrapper-2#trending-styles-nav:hover .custom-2 {
+        color: #a17561 !important;
+        font-weight: 700 !important;
+      }
+      
+      /* Remove font-weight and color from home nav button */
+      .frame .text-wrapper#home-nav {
+        font-weight: normal !important;
+        color: #565d6d !important;
+      }
+
+      .frame .text-wrapper:hover{
+        color: #a17561;
+      }
+      
+      /* Add hover effect with underline for home nav button */
+      .frame .div:hover::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: 0;
+        left: 0;
+        background-color: #a17561;
+        border-radius: 2px;
+      }
+      
+      
+      
+      .frame .div:hover .text-wrapper#home-nav {
+        color: #a17561 !important;
+        font-weight: normal !important;
+      }
+    </style>
+    <script src="scripts/common.js"></script>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="landing-page-wrapper">
+        <div class="landing-page">
+          <header class="header">
+            <div class="image">
+              <div class="group">
+                <div class="div-wrapper">
+                  <div class="group-wrapper">
+                    <div class="div-wrapper">
+                      <div class="overlap-group">
+                        <img class="logo-img" src="assets/img/log6 (1).png" alt="Wear & Pair Logo" style="width: 100%; height: auto;" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wear-pair">Wear &amp; Pair</div>
+            <div class="header-menu">
+              <div class="div">
+                <a href="/" class="text-wrapper" id="home-nav">home</a>
+              </div>
+              <div class="div-wrapper-2">
+                <a href="products.html" class="text-wrapper-2">products</a>
+              </div>
+              <div class="overlap">
+                <div class="custom-wrapper">
+                  <a href="builder.html" class="custom">outfit generator</a>
+                </div>
+                <div class="custom-wrapper-2" id="trending-styles-nav">
+                  <a href="trending-styles.html" class="custom-2">trending styles</a>
+                </div>
+              </div>
+            </div>
+            <div class="search-container">
+              <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search products...">
+              </form>
+              <div class="search-results-dropdown" style="display: none;">
+                <!-- Search results will appear here -->
+              </div>
+            </div>
+            <div class="dropdown-container">
+              <button class="button" id="profileButton">
+                <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                <div class="text-wrapper-3">Profile</div>
+              </button>
+              <div class="dropdown-menu">
+               <!-- Dropdown items will be added by JavaScript -->
+              </div>
+            </div>
+          </header>
+          
+          <!-- Main content of the trending styles page will go here -->
+          <div class="wear-and-pair">
+            <div class="div-2">
+              <div class="text-wrapper-3">Trending Styles</div>
+              <div class="div-3">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20.png" />
+                <div class="text-wrapper-4">Y2K Revival</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-4">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-1.png" />
+                <div class="text-wrapper-4">90s Vintage</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-5">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-2.png" />
+                <div class="text-wrapper-4">Coffee Date</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-6">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-3.png" />
+                <div class="text-wrapper-4">Layers</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-7">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-4.png" />
+                <div class="text-wrapper-4">Check Patterns</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-8">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-5.png" />
+                <div class="text-wrapper-4">Pastel Colors</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-9">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-6.png" />
+                <div class="text-wrapper-4">Polo Fits</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+              <div class="div-10">
+                <img class="image-2" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-7.png" />
+                <div class="text-wrapper-4">Streetwear in General</div>
+                <button class="shop-now-wrapper"><div class="shop-now">View Styles</div></button>
+              </div>
+            </div>
+          </div>
+          <div class="div-11">
+            <div class="text-wrapper-5">Community Gallery</div>
+            <div class="div-12">
+              <div class="text-wrapper-6">Emma Johnson</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-8.png" />
+              <div class="text-wrapper-7">Warm Vibes</div>
+              <div class="text-wrapper-8">#CozyLiving</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="div-13">
+              <div class="text-wrapper-6">Mark Wilson</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-9.png" />
+              <div class="text-wrapper-7">Fresh Prep</div>
+              <div class="text-wrapper-8">#ModernKitchen</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="div-14">
+              <div class="text-wrapper-6">Sophia Lee</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-10.png" />
+              <div class="text-wrapper-7">Ocean Calm</div>
+              <div class="text-wrapper-8">#BeachLife</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="div-15">
+              <div class="text-wrapper-6">David Brown</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-11.png" />
+              <div class="text-wrapper-7">Happy Paws</div>
+              <div class="text-wrapper-8">#PetLove</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="div-16">
+              <div class="text-wrapper-6">Olivia Martin</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-12.png" />
+              <div class="text-wrapper-7">Bloom Bliss</div>
+              <div class="text-wrapper-8">#GardenGoals</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="div-17">
+              <div class="text-wrapper-6">James Taylor</div>
+              <img class="image-3" src="https://c.animaapp.com/maz6hi20R9XqZo/img/image-20-13.png" />
+              <div class="text-wrapper-7">Work Mode</div>
+              <div class="text-wrapper-8">#WorkCorner</div>
+              <button class="button-2"><div class="text-wrapper-9">Like</div></button>
+            </div>
+            <div class="container-wrapper">
+              <div class="div-18">
+                <div class="text-wrapper-10">Submit Your Look</div>
+                <p class="p">Show off your unique style and inspire the community by sharing your outfit.</p>
+                <button class="button-3"><div class="text-wrapper-11">Submit Now</div></button>
+              </div>
+            </div>
+            <p class="text-wrapper-12">
+              Explore our community collection of stylish looks and unique fashion statements. Dive into a world of
+              inspiration and creativity as you browse through these timeless ensembles that express individuality and
+              personal style.
+            </p>
+          </div>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html> 

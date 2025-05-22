@@ -35,33 +35,33 @@
 .frame .image {
   width: 36px;
   height: 36px;
-  top: 10px;
-  left: 27px;
+  top: -5px;
+  left: 15px;
   position: absolute;
   border: 0px none;
 }
 
 .frame .group {
   position: relative;
-  width: 31px;
-  height: 32px;
+  width: 65px;
+  height: 65px;
   top: 2px;
   left: 2px;
 }
 
 .frame .div-wrapper {
-  height: 32px;
+  height: 65px;
 }
 
 .frame .group-wrapper {
-  width: 31px;
-  height: 32px;
+  width: 65px;
+  height: 65px;
 }
 
 .frame .overlap-group {
   position: relative;
-  width: 31px;
-  height: 32px;
+  width: 65px;
+  height: 65px;
 }
 
 .frame .img {
