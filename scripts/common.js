@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       dropdownMenu.innerHTML = `
         <a href="#" id="logoutLink" class="dropdown-item">Logout</a>
         <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-        <a href="/#" class="dropdown-item">Submissions</a>
+        <a href="submissions.html" class="dropdown-item">Submissions</a>
       `;
       
       // Add logout functionality

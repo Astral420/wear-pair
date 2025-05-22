@@ -1,0 +1,479 @@
+/* Submissions Page Specific CSS */
+
+/* Main container for the submissions page */
+.submissions-container {
+  position: absolute;
+  width: 1440px;
+  top: 54px;
+  left: 0;
+  background-color: #fffaf1;
+  padding-bottom: 60px;
+  box-shadow: 0px 3px 6px #120f281f;
+}
+
+/* Header section */
+.submissions-header {
+  position: relative;
+  width: 100%;
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.submissions-title {
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 48px;
+  margin-bottom: 16px;
+}
+
+.submissions-subtitle {
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #565d6d;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 26px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+/* Section titles */
+.section-title {
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 36px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+/* Submission form section */
+.submission-form-container {
+  width: 600px;
+  margin: 0 auto 60px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+}
+
+.submission-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: "Inter", Helvetica;
+  font-weight: 600;
+  color: #171a1f;
+  font-size: 14px;
+}
+
+.form-group input[type="text"] {
+  height: 46px;
+  padding: 0 16px;
+  font-family: "Inter", Helvetica;
+  font-size: 14px;
+  border: 1px solid #cfd3dc;
+  border-radius: 4px;
+}
+
+.form-group input[type="text"]:focus {
+  border-color: #a17561;
+  outline: none;
+}
+
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.image-preview {
+  width: 100%;
+  height: 200px;
+  background-color: #f8f9fa;
+  border: 1px dashed #cfd3dc;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #9095a1;
+  cursor: pointer;
+}
+
+.image-preview.has-image {
+  border: none;
+  padding: 0;
+}
+
+.image-preview.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.upload-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.browse-btn {
+  all: unset;
+  box-sizing: border-box;
+  width: 120px;
+  height: 36px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-family: "Roboto", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 36px;
+  border: 1px solid #a17561;
+  cursor: pointer;
+}
+
+.browse-btn:hover {
+  background-color: #f8f2ec;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.submit-btn {
+  all: unset;
+  box-sizing: border-box;
+  width: 120px;
+  height: 46px;
+  background-color: #a17561;
+  border-radius: 6px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 46px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #8a6453;
+}
+
+/* User submissions section */
+.user-submissions-container,
+.community-submissions-container {
+  width: 1176px;
+  margin: 0 auto 60px;
+}
+
+.submissions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.submission-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
+  overflow: hidden;
+  height: 332px;
+}
+
+.submission-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.delete-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  color: #f44336;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.submission-image-container {
+  width: 100%;
+  height: 162px;
+  overflow: hidden;
+}
+
+.submission-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.submission-info {
+  padding: 16px;
+}
+
+.submission-author {
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-bottom: 4px;
+}
+
+.submission-title {
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #171a1f;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 26px;
+  margin-bottom: 4px;
+}
+
+.submission-hashtag {
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  margin-bottom: 16px;
+}
+
+.submission-stats {
+  display: flex;
+  align-items: center;
+}
+
+.likes-count {
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #9095a1;
+  font-size: 14px;
+}
+
+.like-btn {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  height: 36px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid;
+  border-color: #a17561;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #a17561;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.like-btn:hover {
+  background-color: #f8f2ec;
+}
+
+.like-btn[data-liked="true"] {
+  background-color: #f8f2ec;
+}
+
+.like-btn[data-liked="true"] .like-icon {
+  color: #a17561;
+}
+
+.like-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.like-btn:hover .like-icon {
+  transform: scale(1.2);
+}
+
+/* Empty state and loading */
+.empty-state, 
+.submission-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 0;
+  color: #9095a1;
+  font-family: "Inter", Helvetica;
+  font-size: 16px;
+}
+
+/* Login modal */
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal.active {
+  display: flex;
+}
+
+.login-modal-content {
+  width: 380px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  color: #9095a1;
+  cursor: pointer;
+}
+
+.login-modal h2 {
+  font-family: "Archivo", Helvetica;
+  font-weight: 400;
+  color: #171a1f;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.login-modal p {
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #565d6d;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.login-btn {
+  display: inline-block;
+  width: 120px;
+  height: 46px;
+  background-color: #a17561;
+  border-radius: 6px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  line-height: 46px;
+  text-decoration: none;
+}
+
+.login-btn:hover {
+  background-color: #8a6453;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .submissions-container {
+    width: 100%;
+  }
+  
+  .user-submissions-container,
+  .community-submissions-container {
+    width: 90%;
+  }
+  
+  .submissions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .submission-form-container {
+    width: 90%;
+  }
+  
+  .submissions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .submissions-title {
+    font-size: 28px;
+    line-height: 42px;
+  }
+  
+  .submissions-subtitle {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .submissions-header {
+    padding: 40px 0 30px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  
+  .submission-form-container {
+    padding: 20px;
+  }
+  
+  .image-preview {
+    height: 160px;
+  }
+} 

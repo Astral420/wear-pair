@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="submissions.css" />
+    <style>
+      /* Fix for dropdown menu - making sure it displays properly */
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 150px;
+        background-color: #ffffff;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        margin-top: 8px;
+        z-index: 100;
+        overflow: hidden;
+      }
+      .dropdown-menu.active {
+        display: block !important;
+      }
+      .dropdown-item {
+        display: block;
+        padding: 12px 16px;
+        font-family: "Inter", Helvetica;
+        font-weight: 400;
+        font-size: 14px;
+        color: #565d6d;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+      }
+      .dropdown-item:hover {
+        background-color: #f5efe8;
+        color: #a17561;
+      }
+      
+      /* Active state for submissions nav */
+      .custom-wrapper-2#submissions-nav .custom-2 {
+        font-weight: 700 !important;
+        color: #a17561 !important;
+      }
+
+      .custom-wrapper-2#submissions-nav::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: 0;
+        left: 0;
+        background-color: #a17561;
+        border-radius: 2px;
+      }
+      
+      /* Hover states for nav */
+      .frame .text-wrapper:hover{
+        color: #a17561;
+      }
+      
+      .frame .div:hover::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: 0;
+        left: 0;
+        background-color: #a17561;
+        border-radius: 2px;
+      }
+      
+      .frame .div:hover .text-wrapper#home-nav {
+        color: #a17561 !important;
+      }
+    </style>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/submissions.js"></script>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="landing-page-wrapper">
+        <div class="landing-page">
+          <header class="header">
+            <div class="image">
+              <div class="group">
+                <div class="div-wrapper">
+                  <div class="group-wrapper">
+                    <div class="div-wrapper">
+                      <div class="overlap-group">
+                        <img class="logo-img" src="assets/img/log6 (1).png" alt="Wear & Pair Logo" style="width: 100%; height: auto;" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wear-pair">Wear &amp; Pair</div>
+            <div class="header-menu">
+              <div class="div">
+                <a href="/" class="text-wrapper" id="home-nav">home</a>
+              </div>
+              <div class="div-wrapper-2">
+                <a href="products.html" class="text-wrapper-2">products</a>
+              </div>
+              <div class="overlap">
+                <div class="custom-wrapper">
+                  <a href="builder.html" class="custom">outfit generator</a>
+                </div>
+                <div class="custom-wrapper-2">
+                  <a href="trending-styles.html" class="custom-2">trending styles</a>
+                </div>
+                <div class="custom-wrapper-2" id="submissions-nav">
+                  <a href="submissions.html" class="custom-2">submissions</a>
+                </div>
+              </div>
+            </div>
+            <div class="search-container">
+              <form class="search-form">
+                <input type="text" class="search-input" placeholder="Search products...">
+              </form>
+              <div class="search-results-dropdown" style="display: none;">
+                <!-- Search results will appear here -->
+              </div>
+            </div>
+            <div class="dropdown-container">
+              <button class="button" id="profileButton">
+                <img class="user" src="https://c.animaapp.com/Ms9Ew6Mf/img/user.png" />
+                <div class="text-wrapper-3">Profile</div>
+              </button>
+              <div class="dropdown-menu">
+               <!-- Dropdown items will be added by JavaScript -->
+              </div>
+            </div>
+          </header>
+          
+          <!-- Main content of the submissions page -->
+          <div class="submissions-container">
+            <div class="submissions-header">
+              <h1 class="submissions-title">Your Submissions</h1>
+              <p class="submissions-subtitle">Share your unique style with the Wear & Pair community</p>
+            </div>
+            
+            <!-- Upload form section -->
+            <div class="submission-form-container">
+              <h2 class="section-title">Create New Submission</h2>
+              <form id="submission-form" class="submission-form">
+                <div class="form-group">
+                  <label for="submission-title">Title</label>
+                  <input type="text" id="submission-title" name="title" placeholder="Give your style a name..." required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="submission-hashtag">Hashtag</label>
+                  <input type="text" id="submission-hashtag" name="hashtag" placeholder="#YourStyleTag" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="submission-image">Upload Image</label>
+                  <div class="image-upload-container">
+                    <div class="image-preview" id="image-preview">
+                      <i class="upload-icon">📸</i>
+                      <span>No image selected</span>
+                    </div>
+                    <input type="file" id="submission-image" name="image" accept="image/*" required>
+                    <button type="button" class="browse-btn">Browse Files</button>
+                  </div>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="submit" class="submit-btn">Submit</button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- User's submissions section -->
+            <div class="user-submissions-container">
+              <h2 class="section-title">My Submissions</h2>
+              <div class="submissions-grid" id="user-submissions">
+                <!-- User submissions will be loaded here via JavaScript -->
+                <div class="empty-state" id="empty-submissions">
+                  <p>You haven't submitted any styles yet</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Community gallery section -->
+            <div class="community-submissions-container">
+              <h2 class="section-title">Community Gallery</h2>
+              <div class="submissions-grid" id="community-submissions">
+                <!-- Community submissions will be loaded here via JavaScript -->
+                <div class="submission-loading" id="submissions-loading">
+                  <p>Loading submissions...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Submission templates (for JavaScript use) -->
+          <template id="user-submission-template">
+            <div class="submission-card user-submission" data-id="">
+              <div class="submission-actions">
+                <button class="delete-btn" title="Delete submission">×</button>
+              </div>
+              <div class="submission-image-container">
+                <img class="submission-image" src="" alt="">
+              </div>
+              <div class="submission-info">
+                <h3 class="submission-title"></h3>
+                <p class="submission-hashtag"></p>
+                <div class="submission-stats">
+                  <span class="likes-count">0 likes</span>
+                </div>
+              </div>
+            </div>
+          </template>
+          
+          <template id="community-submission-template">
+            <div class="submission-card community-submission" data-id="">
+              <div class="submission-image-container">
+                <img class="submission-image" src="" alt="">
+              </div>
+              <div class="submission-info">
+                <p class="submission-author"></p>
+                <h3 class="submission-title"></h3>
+                <p class="submission-hashtag"></p>
+                <button class="like-btn" data-liked="false">
+                  Like
+                  <span class="like-icon">♡</span>
+                </button>
+              </div>
+            </div>
+          </template>
+          
+          <!-- Login message modal for non-logged-in users -->
+          <div class="login-modal" id="login-modal">
+            <div class="login-modal-content">
+              <span class="close-modal">&times;</span>
+              <h2>Login Required</h2>
+              <p>You need to be logged in to submit or interact with styles.</p>
+              <a href="login.html" class="login-btn">Log In</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html> 
