@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // DOM elements
   const submissionForm = document.getElementById('submission-form');
+  console.log('Submission form element:', submissionForm); // Debug log
   const imageInput = document.getElementById('submission-image');
   const imagePreview = document.getElementById('image-preview');
   const browseBtn = document.querySelector('.browse-btn');
@@ -41,7 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Event listeners
   if (submissionForm) {
-    submissionForm.addEventListener('submit', handleSubmissionFormSubmit);
+    // Remove any existing event listeners to prevent duplicates
+    submissionForm.removeEventListener('submit', handleSubmissionFormSubmit);
+    // Add the event listener with explicit error handling
+    submissionForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      try {
+        handleSubmissionFormSubmit(e);
+      } catch (error) {
+        console.error('Error handling form submission:', error);
+        alert('There was an error submitting your form. Please try again.');
+      }
+    });
   }
   
   if (imageInput) {
