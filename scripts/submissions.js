@@ -326,55 +326,97 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ensure hashtag starts with #
     const formattedHashtag = hashtag.startsWith('#') ? hashtag : `#${hashtag}`;
     
-    // Convert image to data URL
+    // Compress and convert image
     const reader = new FileReader();
     reader.onload = function(event) {
-      const imageUrl = event.target.result;
-      
-      // Get current submissions
-      const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
-      
-      // Check for duplicate submission
-      const isDuplicate = submissions.some(sub => 
-        sub.title === title && 
-        sub.authorId === currentUser.email
-      );
-      
-      if (isDuplicate) {
-        alert('You have already submitted a post with this title');
-        return;
-      }
-      
-      // Create new submission
-      const newSubmission = {
-        id: parseInt(localStorage.getItem('nextSubmissionId') || '1'),
-        author: currentUser.fullName,
-        authorId: currentUser.email,
-        title: title,
-        hashtag: formattedHashtag,
-        image: imageUrl,
-        likes: 0,
-        likedBy: []
+      const img = new Image();
+      img.onload = function() {
+        // Create canvas for image compression
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to compressed JPEG
+        const compressedImageUrl = canvas.toDataURL('image/jpeg', 0.6);
+        
+        try {
+          // Get current submissions
+          const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+          
+          // Check for duplicate submission
+          const isDuplicate = submissions.some(sub => 
+            sub.title === title && 
+            sub.authorId === currentUser.email
+          );
+          
+          if (isDuplicate) {
+            alert('You have already submitted a post with this title');
+            return;
+          }
+          
+          // Create new submission
+          const newSubmission = {
+            id: parseInt(localStorage.getItem('nextSubmissionId') || '1'),
+            author: currentUser.fullName,
+            authorId: currentUser.email,
+            title: title,
+            hashtag: formattedHashtag,
+            image: compressedImageUrl,
+            likes: 0,
+            likedBy: []
+          };
+          
+          // Update submissions in localStorage
+          submissions.push(newSubmission);
+          localStorage.setItem('submissions', JSON.stringify(submissions));
+          
+          // Update next submission ID
+          const nextId = parseInt(localStorage.getItem('nextSubmissionId') || '1') + 1;
+          localStorage.setItem('nextSubmissionId', nextId.toString());
+          
+          // Reset form
+          submissionForm.reset();
+          imagePreview.innerHTML = '<i class="upload-icon">📸</i><span>No image selected</span>';
+          imagePreview.classList.remove('has-image');
+          
+          // Refresh user submissions
+          loadUserSubmissions();
+          
+          // Show success message
+          alert('Your submission has been added successfully!');
+        } catch (error) {
+          if (error.name === 'QuotaExceededError') {
+            alert('Storage limit reached. Please try uploading a smaller image or clear some space.');
+          } else {
+            console.error('Error saving submission:', error);
+            alert('There was an error saving your submission. Please try again.');
+          }
+        }
       };
-      
-      // Update submissions in localStorage
-      submissions.push(newSubmission);
-      localStorage.setItem('submissions', JSON.stringify(submissions));
-      
-      // Update next submission ID
-      const nextId = parseInt(localStorage.getItem('nextSubmissionId') || '1') + 1;
-      localStorage.setItem('nextSubmissionId', nextId.toString());
-      
-      // Reset form
-      submissionForm.reset();
-      imagePreview.innerHTML = '<i class="upload-icon">📸</i><span>No image selected</span>';
-      imagePreview.classList.remove('has-image');
-      
-      // Refresh user submissions
-      loadUserSubmissions();
-      
-      // Show success message
-      alert('Your submission has been added successfully!');
+      img.src = event.target.result;
+    };
+    
+    reader.onerror = function() {
+      alert('Error reading the image file. Please try again.');
     };
     
     reader.readAsDataURL(imageFile);
