@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
           loadUserSubmissions();
           
           // Show success message
-          alert('Your submission has been added successfully!');
+          
         } catch (error) {
           if (error.name === 'QuotaExceededError') {
             alert('Storage limit reached. Please try uploading a smaller image or clear some space.');
