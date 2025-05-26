@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
     image.src = submission.image;
     image.alt = submission.title;
     
-    submissionCard.querySelector('.submission-author').textContent = submission.author;
+    //submissionCard.querySelector('.submission-author').textContent = submission.author;
     submissionCard.querySelector('.submission-title').textContent = submission.title;
     submissionCard.querySelector('.submission-hashtag').textContent = submission.hashtag;
     

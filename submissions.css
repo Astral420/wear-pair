@@ -201,6 +201,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  padding: 0 20px;
 }
 
 .submission-card {
@@ -210,6 +211,12 @@ input[type="file"] {
   box-shadow: 0px 0px 1px #171a1f12, 0px 0px 2px #171a1f1f;
   overflow: hidden;
   height: 332px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submission-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 4px 8px #171a1f1f;
 }
 
 .submission-actions {
@@ -241,7 +248,7 @@ input[type="file"] {
 
 .submission-image-container {
   width: 100%;
-  height: 162px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -249,30 +256,37 @@ input[type="file"] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.submission-card:hover .submission-image {
+  transform: scale(1.05);
 }
 
 .submission-info {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .submission-author {
   font-family: "Inter", Helvetica;
-  font-weight: 400;
-  color: #9095a1;
+  font-weight: 500;
+  color: #565d6d;
   font-size: 14px;
   letter-spacing: 0;
   line-height: 22px;
-  margin-bottom: 4px;
 }
 
 .submission-title {
   font-family: "Inter", Helvetica;
-  font-weight: 700;
+  font-weight: 600;
   color: #171a1f;
   font-size: 16px;
   letter-spacing: 0;
-  line-height: 26px;
-  margin-bottom: 4px;
+  line-height: 24px;
+  margin: 0;
 }
 
 .submission-hashtag {
@@ -282,7 +296,7 @@ input[type="file"] {
   font-size: 14px;
   letter-spacing: 0;
   line-height: 22px;
-  margin-bottom: 16px;
+  margin: 0;
 }
 
 .submission-stats {
@@ -308,7 +322,7 @@ input[type="file"] {
   border: 1px solid;
   border-color: #a17561;
   font-family: "Inter", Helvetica;
-  font-weight: 400;
+  font-weight: 500;
   color: #a17561;
   font-size: 14px;
   letter-spacing: 0;
@@ -319,27 +333,21 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   gap: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .like-btn:hover {
-  background-color: #f8f2ec;
+  background-color: #a17561;
+  color: #ffffff;
 }
 
 .like-btn[data-liked="true"] {
-  background-color: #f8f2ec;
-}
-
-.like-btn[data-liked="true"] .like-icon {
-  color: #a17561;
+  background-color: #a17561;
+  color: #ffffff;
 }
 
 .like-icon {
   font-size: 16px;
-  transition: transform 0.3s ease;
-}
-
-.like-btn:hover .like-icon {
-  transform: scale(1.2);
 }
 
 /* Empty state and loading */
