@@ -199,7 +199,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Render each submission
       userSubmissions.forEach(submission => {
-        renderUserSubmission(submission);
+        // Check if submission already exists in container
+        const existingSubmission = userSubmissionsContainer.querySelector(`[data-id="${submission.id}"]`);
+        if (!existingSubmission) {
+          renderUserSubmission(submission);
+        }
       });
     }
   }
@@ -225,7 +229,11 @@ document.addEventListener('DOMContentLoaded', function() {
       submissionsData.forEach(submission => {
         // Don't show current user's submissions in community section
         if (!currentUser || submission.authorId !== currentUser.email) {
-          renderCommunitySubmission(submission);
+          // Check if submission already exists in container
+          const existingSubmission = communitySubmissionsContainer.querySelector(`[data-id="${submission.id}"]`);
+          if (!existingSubmission) {
+            renderCommunitySubmission(submission);
+          }
         }
       });
     }
@@ -311,6 +319,20 @@ document.addEventListener('DOMContentLoaded', function() {
     reader.onload = function(event) {
       const imageUrl = event.target.result;
       
+      // Get current submissions
+      const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+      
+      // Check for duplicate submission
+      const isDuplicate = submissions.some(sub => 
+        sub.title === title && 
+        sub.authorId === currentUser.email
+      );
+      
+      if (isDuplicate) {
+        alert('You have already submitted a post with this title');
+        return;
+      }
+      
       // Create new submission
       const newSubmission = {
         id: parseInt(localStorage.getItem('nextSubmissionId') || '1'),
@@ -324,7 +346,6 @@ document.addEventListener('DOMContentLoaded', function() {
       };
       
       // Update submissions in localStorage
-      const submissions = JSON.parse(localStorage.getItem('submissions')) || [];
       submissions.push(newSubmission);
       localStorage.setItem('submissions', JSON.stringify(submissions));
       
@@ -419,9 +440,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update localStorage
     localStorage.setItem('submissions', JSON.stringify(submissions));
     
-    // Refresh submissions
-    loadUserSubmissions();
-    loadCommunitySubmissions();
+    // Remove the submission card from the DOM
+    const submissionCard = userSubmissionsContainer.querySelector(`[data-id="${submissionId}"]`);
+    if (submissionCard) {
+      submissionCard.remove();
+    }
+    
+    // Check if there are any remaining submissions
+    const remainingSubmissions = userSubmissionsContainer.querySelectorAll('.submission-card');
+    if (remainingSubmissions.length === 0) {
+      emptySubmissionsMsg.style.display = 'block';
+    }
+    
+    // Also remove from community submissions if it exists there
+    const communityCard = communitySubmissionsContainer.querySelector(`[data-id="${submissionId}"]`);
+    if (communityCard) {
+      communityCard.remove();
+    }
   }
   
   // Like a submission
