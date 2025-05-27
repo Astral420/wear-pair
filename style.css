@@ -435,10 +435,27 @@
   cursor: pointer;
   display: block;
   text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
 }
 
 .frame .button-2:hover {
   background-color: #8a6354;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 8px rgba(161, 117, 97, 0.3);
+}
+
+.frame .button-2:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
+}
+
+.frame .button-2 .text-wrapper-5 {
+  transition: transform 0.3s ease;
+}
+
+.frame .button-2:hover .text-wrapper-5 {
+  transform: scale(1.05);
 }
 
 .frame .text-wrapper-5 {
@@ -721,6 +738,18 @@
   line-height: 28px;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .frame .button-4 {
   all: unset;
   box-sizing: border-box;
@@ -732,8 +761,29 @@
   background-color: #a17561;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid;
-  border-color: transparent;
+  border: 1px solid #a17561;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.frame .button-4:hover {
+  background-color: #8a6354;
+  border-color: #8a6354;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 8px rgba(161, 117, 97, 0.3);
+  animation-play-state: paused;
+}
+
+.frame .button-4:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
+  animation-play-state: paused;
 }
 
 .frame .clothing-categories {
@@ -2150,10 +2200,19 @@
   border-color: transparent;
   cursor: pointer;
   z-index: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
 }
 
 .quiz-button:hover {
   background-color: #8a6354;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 8px rgba(161, 117, 97, 0.3);
+}
+
+.quiz-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(161, 117, 97, 0.2);
 }
 
 .quiz-button-text {
@@ -2168,7 +2227,13 @@
   line-height: 28px;
   white-space: nowrap;
   z-index: 1;
+  transition: transform 0.3s ease;
 }
+
+.quiz-button:hover .quiz-button-text {
+  transform: scale(1.05);
+}
+
 /* Clothing Categories Section */
 .clothing-categories {
   position: absolute;

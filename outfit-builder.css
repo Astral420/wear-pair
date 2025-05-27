@@ -9,12 +9,12 @@
 
 .frame .outfit-builder-wrapper {
   width: 1441px;
-  height: 4450px;
+  height: 1800px;
 }
 
 .frame .outfit-builder-page {
   position: relative;
-  height: 6000px;
+  height: 1800px;
   overflow: hidden;
   box-shadow: 0px 3px 6px #120f281f;
   background-color: #fffaf1;
@@ -856,4 +856,5 @@
 .outfit-description-container {
   margin-bottom: 20px;
 }
+
 
