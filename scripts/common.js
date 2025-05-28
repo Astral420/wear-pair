@@ -252,17 +252,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Make the result item clickable
         resultItem.addEventListener('click', function() {
           console.log(`Clicked on product: ${product.name}`);
-          
-          // Redirect to products page if on a different page
           if (!window.location.pathname.includes('products.html')) {
-            // Clear the search input from localStorage when navigating to avoid persistence
+            // Store only the product id in localStorage before redirect
+            localStorage.setItem('popupProductId', product.id);
             localStorage.removeItem('lastSearch');
-            window.location.href = 'products.html?highlight=' + product.id;
+            window.location.href = 'products.html';
           } else {
-            // Just highlight the product on the current page
-           
             searchResultsDropdown.style.display = 'none';
             searchInput.value = product.name;
+            if (window.openProductPopup) {
+              window.openProductPopup(product);
+            }
           }
         });
         
@@ -377,4 +377,4 @@ function removeFromUserWishlist(productId) {
 function isInUserWishlist(productId) {
   const wishlist = getUserWishlist();
   return wishlist.some(item => item.id === productId.toString());
-} 
+}

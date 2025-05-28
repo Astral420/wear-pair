@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('products.js loaded and running');
 
+    
+
     // Check URL hash for category filtering from index.html links
     function checkUrlForCategoryFilter() {
         if (window.location.hash) {
@@ -432,10 +434,10 @@ document.addEventListener('DOMContentLoaded', function() {
           image: "https://img.ltwebstatic.com/images3_pi/2024/10/14/99/1728868931407c3634fae039877a61e02cadb58ff6_thumbnail_900x.webp",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fashionable and functional.",
           buyLink: "https://ph.shein.com/DAZY-Men-Solid-Color-Notch-Collar-Single-Breasted-Casual-Blazer-Jacket-Autumn-p-44755202.html?src_identifier=st%3D2%60sc%3Dblazers%60sr%3D0%60ps%3D1&src_module=search&src_tab_page_id=page_goods_detail1748342136811&mallCode=1&pageListType=4&imgRatio=3-4&pageListType=4",
-          category: "blazers",
+          category: 'blazers',
           rating: 4.5,
-          store_name: "SHEIN",
-          store_link: "https://ph.shein.com/"
+          store_name: 'SHEIN',
+          store_link: 'https://ph.shein.com/'
         },
         {
           id: 30,
@@ -479,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function() {
           price: "54.99",
           image: "https://img.ltwebstatic.com/images3_spmp/2023/10/21/56/1697875889051a00da7994797e08ee8e63b3a830a4_thumbnail_900x.webp",
           description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fashionable and functional.",
-          buyLink: "https://ph.shein.com/1pair-Diamond-Rhombus-Cross-Ear-Studs-Unique-European-And-American-High-End-Design-For-Men-And-Women-p-25894981.html?src_identifier=st%3D2%60sc%3Dearings%60sr%3D0%60ps%3D1&src_module=search&src_tab_page_id=page_home1748347431154&mallCode=1&pageListType=4&imgRatio=3-4&pageListType=4",
+          buyLink: "https://ph.shein.com/1pair-Diamond-Rhombus-Cross-Ear-Studs-Unique-European-And-American-High-End-Design-For-Men-And-Women-p-25894981.html?src_identifier=st%3D2%60sc%3Dearings%60sr%3D0%60ps%3D1&src_module=topcat&src_tab_page_id=page_home1748347431154&mallCode=1&pageListType=4&imgRatio=3-4&pageListType=4",
           category: "accessories",
           rating: 4.5,
           store_name: "SHEIN",
@@ -1014,15 +1016,11 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         // Make the result item clickable
-        resultItem.addEventListener('click', function() {
-          console.log(`Clicked on product: ${product.name}`);
-          // For now just highlight the product on the current page
-          // In a real implementation, this could navigate to a product detail page
+        resultItem.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent document click handler from firing
           openProductPopup(product);
           searchResultsDropdown.style.display = 'none';
           searchInput.value = product.name;
-          
-          
         });
         
         searchResultsDropdown.appendChild(resultItem);
@@ -1078,7 +1076,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(productPopup);
     
     // Function to open the popup
-    function openProductPopup(product) {
+     function openProductPopup(product) {
+
+      console.log('productPopup element:', window.productPopup);
+  
+      if (!window.productPopup) {
+        console.error('productPopup element not found!');
+        return;
+      }
+
+
+
       // Update popup content
       window.productPopup.innerHTML = `
         <div class="popup-content">
@@ -1111,6 +1119,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Add close functionality
       window.productPopup.querySelector('.close-popup').addEventListener('click', closeProductPopup);
     }
+    window.openProductPopup = openProductPopup;
     
     // Function to close the popup
     function closeProductPopup() {
@@ -1128,6 +1137,44 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
+    // Check if a product was set for popup from another page
+    function handlePopupFromStorage() {
+      const popupProductId = localStorage.getItem('popupProductId');
+      if (popupProductId) {
+        console.log('Looking for product ID:', popupProductId);
+        
+        // Wait for products to be available
+        const waitForProducts = () => {
+          const all = window.allProducts || window.products || [];
+          console.log('Available products:', all.length);
+          
+          if (all.length > 0) {
+            const fullProduct = all.find(p => String(p.id) === String(popupProductId));
+            
+            if (fullProduct) {
+              console.log('Found full product:', fullProduct);
+              // Make sure openProductPopup is available
+              if (window.openProductPopup) {
+                window.openProductPopup(fullProduct);
+              } else {
+                console.error('openProductPopup function not available');
+              }
+            } else {
+              console.error('Product not found with ID:', popupProductId);
+            }
+            
+            // Clean up
+            localStorage.removeItem('popupProductId');
+          } else {
+            // Products not loaded yet, try again
+            console.log('Products not loaded yet, retrying...');
+            setTimeout(waitForProducts, 100);
+          }
+        };
+        
+        waitForProducts();
+      }
+    }
     // CATEGORY FUNCTIONALITY
     // Add category filtering functionality
     const categoryLinks = document.querySelectorAll('.category-link');
@@ -1402,4 +1449,9 @@ document.addEventListener('DOMContentLoaded', function() {
             resetProductDisplay();
         });
     }
+
+    // Expose allProducts to the window object
+    window.allProducts = allProducts;
+    handlePopupFromStorage();
+    setTimeout(handlePopupFromStorage, 300);
 });

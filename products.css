@@ -1748,7 +1748,7 @@
     overflow: hidden;
     transition: all 0.3s ease;
     opacity: 0;
-    display: none;
+    display: block;
     animation: popup-appear 0.3s forwards;
   }
 
